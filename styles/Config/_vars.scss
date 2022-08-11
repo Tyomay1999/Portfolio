@@ -1,0 +1,18 @@
+$contentColor: rgba(232, 67, 147, 0.98) !default;
+$sectionPadding: 2rem 9% !default;
+
+@mixin head () {
+  .head{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1{
+      font-size: 2.375rem;
+      span{
+        color: red;
+      }
+    }
+  }
+}

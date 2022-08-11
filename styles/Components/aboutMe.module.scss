@@ -1,0 +1,8 @@
+@import "styles/Config/vars";
+.main{
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: #0070f3;
+  @include head();
+}

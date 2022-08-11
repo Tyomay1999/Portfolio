@@ -1,0 +1,47 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+//body {
+//  font-size: $fz;
+//  font-family: $ff;
+//}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.svg__link {
+  line-height: 0;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.app{
+  padding-top: 80px;
+  font-size: 1rem;
+  //color: #0070f3;
+}
+
+@media (max-width:991px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media (max-width:450px) {
+
+  html {
+    font-size: 50%;
+  }
+
+}
