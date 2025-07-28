@@ -11,19 +11,21 @@ import ContactSection from './connect';
 import TestimonialsSection from './testimonials';
 import FAQPhilosophySection from './FAQ';
 import CallToActionSection from './getInTouch';
+import ScrollManager from '../navigation/scrollManager';
 
 const Sections = () => {
     return <div className="story-sections">
-        <HeroSections />
-        <AboutSection />
-        <ProjectsSection />
-        <WorkExperience />
-        <TechStack />
-        <ContactSection />
-        <TestimonialsSection />
-        <FAQPhilosophySection />
-        <CallToActionSection />
-    </div >;
+        <ScrollManager/>
+        <HeroSections/>
+        <AboutSection/>
+        <ProjectsSection/>
+        <WorkExperience/>
+        <TechStack/>
+        <ContactSection/>
+        <TestimonialsSection/>
+        <FAQPhilosophySection/>
+        <CallToActionSection/>
+    </div>;
 };
 
 export default Sections;

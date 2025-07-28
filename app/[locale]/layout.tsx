@@ -23,7 +23,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
-      <body>
+      <body className="bg-white text-black dark:bg-slate-900 dark:text-white transition-colors duration-500">
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>

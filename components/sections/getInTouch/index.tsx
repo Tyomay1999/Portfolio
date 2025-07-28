@@ -4,14 +4,13 @@ import StorySectionWrapper from '../../../HOC/storySectionWrapper';
 
 export default function CallToActionSection() {
     const handleClick = () => {
-        const contactSection = document.querySelector('[data-section="4"]'); // sectionId for contact
+        const contactSection = document.querySelector('[data-section="4"]');
         if (contactSection) {
             const scrollable = contactSection.querySelector('.story-content');
             if (scrollable) scrollable.scrollTop = 0;
         }
 
-        // Trigger scroll transition
-        const showSection = window?.showSection || (() => {}); // fallback
+        const showSection = window?.showSection || (() => {}); 
         if (typeof showSection === 'function') {
             showSection(4);
         }
