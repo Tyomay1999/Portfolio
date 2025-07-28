@@ -1,19 +1,14 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import LanguageSwitcher from './LanguageSwitcher';
+import Root from '../../components/root';
 
 export default function Home() {
   const t = useTranslations();
 
   return (
     <div>
-      <h1>{t('welcome')}</h1>
-      <p>{t('about')}</p>
-      <br />
-      <br />
-      <br />
-      <LanguageSwitcher />
+      <Root />
     </div>
   );
 }

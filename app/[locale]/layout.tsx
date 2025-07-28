@@ -1,7 +1,8 @@
-import { NextIntlClientProvider } from 'next-intl';
 import { ReactNode } from 'react';
+import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { languages } from '../../i18n/settings';
+import './globals.scss';
 
 type Props = {
   children: ReactNode;

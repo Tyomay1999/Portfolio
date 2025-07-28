@@ -12,6 +12,7 @@
     "format:all": "npm run lint && npm run format && npm run check-format"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "dotenv": "^17.2.1",
     "next": "15.4.4",
     "next-init": "^0.7.3",
