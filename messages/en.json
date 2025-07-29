@@ -1,4 +1,173 @@
 {
-  "welcome": "Welcome to our site!",
-  "about": "About us"
+  "welcomeTxt": "Hi, I'm Artyom",
+  "summary": {
+    "aboutMe": "About Me",
+    "intro": "Full-Stack Developer with 5+ years of experience in designing, developing, and deploying scalable web applications.",
+    "specialization": "I specialize in both frontend and backend development using React, Next.js, Node.js, and PostgreSQL, and have strong experience implementing CI/CD pipelines, load-balanced Docker infrastructures, and real-time features.",
+    "experience": {
+      "list1": "Building fault-tolerant backend systems using Nginx and Docker Swarm across multiple IP servers",
+      "list2": "Creating responsive UI with modern frontend frameworks (React, Material-UI, Ant Design)",
+      "list3": "Integrating payment systems (Stripe) and automating PDF invoice generation",
+      "list4": "Managing microservices architecture with Redis and RabbitMQ",
+      "list5": "Writing unit and integration tests with Jest and SuperTest"
+    },
+    "focus": "I focus on clean architecture, performance-driven development, and delivering solutions that grow with the business."
+  },
+  "projects": {
+    "title": "Projects",
+    "viewAll": "View all"
+  },
+  "workExperience": {
+    "title": "Work Experience",
+    "genieWeb": {
+      "position": "Full-Stack Developer",
+      "period": "Mar 2024 – May 2025",
+      "company": "GenieWeb",
+      "details": [
+        "Built real-time dashboards using ReactJS, Redux, and Socket.io to monitor key metrics",
+        "Developed scalable backend architecture using Node.js, Docker, and Nginx with multi-instance deployment across different IPs",
+        "Automated CI/CD pipelines with Jenkins, including rollback strategies",
+        "Integrated Stripe payments and generated PDF receipts using Puppeteer and webhook flows",
+        "Wrote unit and integration tests (Jest, SuperTest) and increased test coverage by 40%",
+        "Enhanced frontend performance via asset optimization and lazy loading"
+      ]
+    },
+    "pixeria": {
+      "position": "Full-Stack Developer",
+      "period": "Sep 2022 – Mar 2024",
+      "company": "Pixeria LAB",
+      "details": [
+        "Created a custom CRM system using Node.js, TypeScript, PostgreSQL, and React",
+        "Developed reusable UI components with Ant Design and Bootstrap",
+        "Designed scalable REST APIs with data indexing and migration strategies",
+        "Maintained robust testing with Jest and SuperTest",
+        "Managed CI/CD deployment and Docker-based architecture"
+      ]
+    },
+    "beeOnCode1": {
+      "position": "Full-Stack Developer",
+      "period": "Jan 2022 – Aug 2022",
+      "company": "BeeOnCode LLC",
+      "details": [
+        "Developed internal admin panels using React, ExpressJS, and MongoDB",
+        "Implemented real-time modules using Socket.io",
+        "Built backend logic with Node.js and designed RESTful API endpoints"
+      ]
+    },
+    "beeOnCode2": {
+      "position": "Frontend Developer",
+      "period": "Oct 2020 – Dec 2021",
+      "company": "BeeOnCode LLC",
+      "details": [
+        "Refactored legacy frontend codebases using modern React patterns",
+        "Developed responsive interfaces with Material-UI, EJS, and SCSS",
+        "Ensured cross-browser compatibility and accessibility compliance",
+        "Collaborated closely with backend developers to integrate API data"
+      ]
+    },
+    "instructor": {
+      "position": "Front-end Instructor",
+      "period": "Jun 2021 – Jul 2022",
+      "company": "Global IT",
+      "details": [
+        "Delivered HTML, CSS, JavaScript, and React training in group sessions",
+        "Created learning projects and provided one-on-one support to junior developers"
+      ]
+    }
+  },
+  "techStack": {
+    "title": "Tech Stack",
+    "all": "All",
+    "tools": "Tools",
+    "frontend": "Frontend",
+    "backend": "Backend"
+  },
+  "callToAction": {
+    "title": "Let's Build Something Together",
+    "subtitle": "Ready to transform your ideas into exceptional digital experiences? Let's collaborate and create something amazing that your users will love.",
+    "button": "Start a Project",
+    "hint": "Or scroll back up to get in touch"
+  },
+  "contactSection": {
+    "title": "Let's Connect",
+    "placeholders": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message"
+    },
+    "button": {
+      "send": "Send Message",
+      "sending": "Sending..."
+    },
+    "alerts": {
+      "fill": "Please fill in all fields.",
+      "thankYou": "Thank you for your message! I'll get back to you soon."
+    },
+    "footer": "© 2024 Davit. All rights reserved."
+  },
+  "testimonialsSection": {
+    "title": "Testimonials",
+    "items": [
+      {
+        "initials": "SM",
+        "name": "Sarah Mitchell",
+        "role": "CEO, TechStart Inc.",
+        "message": "Davit delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise made our launch seamless."
+      },
+      {
+        "initials": "MR",
+        "name": "Marcus Rodriguez",
+        "role": "Product Manager, InnovateLab",
+        "message": "Working with Davit was a game-changer for our team. He transformed our complex requirements into an elegant, user-friendly solution."
+      },
+      {
+        "initials": "EK",
+        "name": "Elena Kim",
+        "role": "Founder, CreativeSpace",
+        "message": "Davit's full-stack expertise and collaborative approach made our project a huge success. I highly recommend him for any development needs."
+      },
+      {
+        "initials": "JL",
+        "name": "James Liu",
+        "role": "CTO, DataFlow Systems",
+        "message": "The analytics dashboard Davit built for us has become the cornerstone of our business intelligence. His code quality and performance optimization skills are outstanding."
+      },
+      {
+        "initials": "AP",
+        "name": "Anna Petrov",
+        "role": "Director, EduTech Solutions",
+        "message": "Davit's learning platform revolutionized how we deliver education. His understanding of user experience and scalable architecture is impressive."
+      }
+    ]
+  },
+  "faqSection": {
+    "title": "Frequently asked questions",
+    "philosophy": "I believe in creating digital experiences that are not just functional, but meaningful. Every line of code should serve a purpose, every design decision should enhance the user's journey, and every project should leave a positive impact.",
+    "faqs": [
+      {
+        "question": "What technologies do you specialize in?",
+        "answer": "I work primarily with React, Node.js, Python, and modern databases like PostgreSQL and MongoDB. I'm also experienced with cloud platforms like AWS and containerization with Docker. I stay current with emerging technologies and choose the best tools for each project's specific needs."
+      },
+      {
+        "question": "How do you approach new projects?",
+        "answer": "I start by deeply understanding your business goals and user needs. Then I create a detailed technical plan, design wireframes, and build iteratively with regular feedback loops. Communication is key - I provide regular updates and involve you in key decisions throughout the development process."
+      },
+      {
+        "question": "What's your typical project timeline?",
+        "answer": "Project timelines vary based on complexity and scope. A simple website might take 2–4 weeks, while a full-stack application could take 2–4 months. I always provide realistic estimates upfront and break projects into milestones so you can track progress and provide feedback along the way."
+      },
+      {
+        "question": "Do you provide ongoing support?",
+        "answer": "Absolutely! I offer various support packages including bug fixes, feature updates, performance monitoring, and technical consultation. I believe in building long-term relationships with my clients and helping their projects evolve as their business grows."
+      },
+      {
+        "question": "How do you ensure code quality?",
+        "answer": "I follow industry best practices including comprehensive testing, code reviews, and documentation. I use modern development tools for linting, formatting, and continuous integration. Every project includes proper error handling, security measures, and performance optimization from the ground up."
+      },
+      {
+        "question": "Can you work with existing teams?",
+        "answer": "Yes! I'm experienced in collaborating with existing development teams, designers, and stakeholders. I adapt to your current workflows, tools, and methodologies. Whether you need additional development capacity or specialized expertise, I integrate seamlessly into your team structure."
+      }
+    ]
+  }
 }

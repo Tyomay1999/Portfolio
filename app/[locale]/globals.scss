@@ -1,7 +1,9 @@
 @use 'tailwindcss' as *;
 @import 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap';
 
-
+.example{
+  min-height: 65vh;
+}
 .story-section {
   position: fixed;
   top: 0;

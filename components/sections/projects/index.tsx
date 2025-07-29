@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '../../../HOC/storySectionWrapper';
 
 const projects = [
@@ -97,6 +98,8 @@ const projects = [
 ];
 
 export default function Projects() {
+  const t = useTranslations('projects');
+
   return (
     <StorySectionWrapper sectionId={1}>
       <div className="max-w-7xl mx-auto px-4">
@@ -105,7 +108,7 @@ export default function Projects() {
           data-en="Selected Projects"
           data-es="Proyectos Seleccionados"
         >
-          Selected Projects
+          {t('title')}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
@@ -147,7 +150,7 @@ export default function Projects() {
             data-en="View All Projects"
             data-es="Ver Todos los Proyectos"
           >
-            View All Projects
+            {t('viewAll')}
           </button>
         </div>
       </div>

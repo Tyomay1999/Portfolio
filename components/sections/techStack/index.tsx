@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import StorySectionWrapper from '../../../HOC/storySectionWrapper';
+import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
+import StorySectionWrapper from '../../../HOC/storySectionWrapper';
 
 type Category = 'all' | 'frontend' | 'backend' | 'tools';
 
@@ -41,6 +42,7 @@ const categories: { label: string; value: Category }[] = [
 
 export default function TechStack() {
   const [selected, setSelected] = useState<Category>('all');
+  const t = useTranslations('techStack');
 
   return (
     <StorySectionWrapper sectionId={3}>
@@ -50,11 +52,24 @@ export default function TechStack() {
           data-en="Tech Stack"
           data-es="Stack Tecnológico"
         >
-          Tech Stack
+          {t('title')}
         </h2>
 
         {/* Filter Buttons */}
-        <div className="flex justify-center mb-8 md:mb-12">
+        <div className="block md:hidden mb-4">
+          <select
+            value={selected}
+            onChange={e => setSelected(e.target.value as Category)}
+            className="w-full px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100"
+          >
+            {categories.map(cat => (
+              <option key={cat.value} value={cat.value}>
+                {t(cat.value)}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="hidden md:flex justify-center mb-8 md:mb-12">
           <div className="flex flex-wrap gap-2 md:gap-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm rounded-full p-2 border border-slate-200 dark:border-slate-700">
             {categories.map(cat => (
               <button
@@ -71,14 +86,14 @@ export default function TechStack() {
                 data-filter={cat.value}
                 aria-pressed={selected === cat.value}
               >
-                {cat.label}
+                {t(cat.value)}
               </button>
             ))}
           </div>
         </div>
 
         {/* Tech Grid */}
-        <div className="tech-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 mb-8 md:mb-12">
+        <div className="example tech-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 mb-8 md:mb-12">
           {techItems
             .filter(item => selected === 'all' || item.category === selected)
             .map((item, idx) => (
