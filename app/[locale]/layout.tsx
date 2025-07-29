@@ -22,8 +22,11 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale}>
-      <body className="bg-white text-black dark:bg-slate-900 dark:text-white transition-colors duration-500">
+    <html
+      lang={locale}
+      className="bg-white text-black dark:bg-slate-900 dark:text-white transition-colors duration-500"
+    >
+      <body className="min-h-screen px-4 md:px-8 py-4 transition-colors duration-500">
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>
