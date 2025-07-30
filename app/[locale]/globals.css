@@ -1,7 +1,10 @@
-@use 'tailwindcss' as *;
-@import 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap';
+/*@import 'tailwindcss';*/
 
-.example{
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.story-section-content-height {
   min-height: 65vh;
 }
 .story-section {
@@ -26,20 +29,7 @@
   opacity: 0;
   transform: translateY(-50px) scale(1.05);
 }
-.story-overlay {
-  background: radial-gradient(circle at center,
-          rgba(255,255,255,0.95) 0%,
-          rgba(255,255,255,0.98) 70%,
-          rgba(255,255,255,1) 100%);
-  position: absolute;
-  inset: 0;
-}
-.dark .story-overlay {
-  background: radial-gradient(circle at center,
-          rgba(15,23,42,0.95) 0%,
-          rgba(15,23,42,0.98) 70%,
-          rgba(15,23,42,1) 100%);
-}
+
 .scroll-indicator {
   position: fixed;
   right: 1rem;
@@ -97,8 +87,10 @@
 .project-card:hover {
   transform: translateY(-8px);
 }
-.hero-parallax {
-  transition: transform 0.1s ease-out;
+@layer components {
+  .hero-parallax {
+    transition: transform 0.1s ease-out;
+  }
 }
 .story-content {
   position: relative;
@@ -152,7 +144,6 @@
 .story-content::-webkit-scrollbar-thumb:hover {
   background: rgba(148, 163, 184, 0.5);
 }
-
 
 @keyframes fade-in {
   from {

@@ -1,14 +1,16 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { getActiveSection, subscribe } from '../lib/sectionStore';
+import { getActiveSection, subscribe } from '@/lib/sectionStore';
 
 export default function StorySectionWrapper({
   children,
   sectionId,
+  innerClassName,
 }: {
   children: React.ReactNode;
   sectionId: number;
+  innerClassName?: string;
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [isActive, setIsActive] = useState(false);
@@ -37,7 +39,7 @@ export default function StorySectionWrapper({
     >
       <div className="story-overlay" />
       <div className="story-content">
-        <div className="story-inner">{children}</div>
+        <div className={`story-inner ${innerClassName || ''}`}>{children}</div>
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ import {
   getActiveSection,
   getCurrentStoryContentElement,
   restoreSectionFromSession,
-} from '../../lib/sectionStore';
+} from '@/lib/sectionStore';
 
 const isContentScrollable = (el: HTMLElement): boolean => el.scrollHeight > el.clientHeight;
 const hasScrolledToBottom = (el: HTMLElement): boolean =>
@@ -64,7 +64,12 @@ const ScrollManager = () => {
       }, 60);
     };
 
-    setActiveSection(-1);
+    setTimeout(() => {
+      const savedSection = sessionStorage.getItem('activeSection') || -1;
+      setTimeout(() => {
+        setActiveSection(Number(savedSection));
+      }, 400);
+    }, 400);
 
     window.addEventListener('wheel', handleWheel, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });

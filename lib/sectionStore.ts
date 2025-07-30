@@ -2,13 +2,9 @@
 
 import { useState, useEffect } from 'react';
 
-// Internal variables
 let listeners: ((id: number) => void)[] = [];
 let currentSection = -1;
 
-/**
- * Subscribes to section changes
- */
 export function subscribe(callback: (id: number) => void) {
   listeners.push(callback);
   return () => {
@@ -16,33 +12,22 @@ export function subscribe(callback: (id: number) => void) {
   };
 }
 
-/**
- * Sets the current active section
- */
 export function setActiveSection(id: number) {
   if (currentSection !== id) {
     currentSection = id;
 
-    // ✅ Сохраняем в sessionStorage
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('activeSection', String(id));
     }
 
-    // Уведомляем подписчиков
     listeners.forEach(fn => fn(id));
   }
 }
 
-/**
- * Gets the current section (sync)
- */
 export function getActiveSection() {
   return currentSection;
 }
 
-/**
- * React hook for listening to section changes
- */
 export function useActiveSection() {
   const [section, setSection] = useState(currentSection);
 

@@ -1,15 +1,13 @@
 'use client';
 
 import React from 'react';
-import { setActiveSection, useActiveSection } from '../../lib/sectionStore';
+import { setActiveSection, useActiveSection } from '@/lib/sectionStore';
 
 const Navigation = () => {
   const activeSection = useActiveSection();
   const sectionCount = 9;
 
-  const handleDotClick = (index: number) => {
-    setActiveSection(index);
-  };
+  const handleDotClick = (index: number) => setActiveSection(index);
 
   return (
     <div className="scroll-indicator fixed top-1/2 right-4 transform -translate-y-1/2 z-50 flex flex-col gap-2">

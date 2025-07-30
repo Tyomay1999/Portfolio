@@ -1,8 +1,9 @@
 import { ReactNode } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { languages } from '../../i18n/settings';
-import './globals.scss';
+import { languages } from '@/i18n/settings';
+import { Providers } from './provider';
+import './globals.css';
 
 type Props = {
   children: ReactNode;
@@ -22,12 +23,18 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages({ locale });
 
   return (
-    <html
-      lang={locale}
-      className="bg-white text-black dark:bg-slate-900 dark:text-white transition-colors duration-500"
-    >
-      <body className="min-h-screen px-4 md:px-8 py-4 transition-colors duration-500">
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+    <html lang={locale} suppressHydrationWarning>
+      {/*<Head>*/}
+      {/*    <link*/}
+      {/*      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&display=swap"*/}
+      {/*      rel="stylesheet"*/}
+      {/*    />*/}
+      {/*    <title>Portfolio</title>*/}
+      {/*</Head>*/}
+      <body className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 overflow-x-hidden transition-colors duration-300">
+        <Providers>
+          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );

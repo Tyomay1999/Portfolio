@@ -1,23 +1,13 @@
 'use client';
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import StorySectionWrapper from '../../../HOC/storySectionWrapper';
+import { setActiveSection } from '@/lib/sectionStore';
+import StorySectionWrapper from '@/HOC/storySectionWrapper';
 
 export default function CallToActionSection() {
   const t = useTranslations('callToAction');
 
-  const handleClick = () => {
-    const contactSection = document.querySelector('[data-section="4"]');
-    if (contactSection) {
-      const scrollable = contactSection.querySelector('.story-content');
-      if (scrollable) scrollable.scrollTop = 0;
-    }
-
-    const showSection = window?.showSection || (() => {});
-    if (typeof showSection === 'function') {
-      showSection(4);
-    }
-  };
+  const handleClick = () => setActiveSection(4);
 
   return (
     <StorySectionWrapper sectionId={7} innerClassName="max-w-3xl mx-auto text-center px-4">
@@ -42,7 +32,7 @@ export default function CallToActionSection() {
         </p>
       </div>
 
-      <div className="w-12 h-0.5 bg-slate-400 dark:bg-slate-500 mx-auto mt-8 md:mt-12"></div>
+      <div className="w-12 h-0.5 bg-slate-400 dark:bg-slate-500 mx-auto mt-8 md:mt-12" />
     </StorySectionWrapper>
   );
 }
