@@ -1,5 +1,12 @@
 {
   "welcomeTxt": "Hi, I'm Artyom",
+  "typingPhrases": [
+    "Scalable Web Architecture",
+    "Microservices",
+    "CI/CD",
+    "Dockerized Environments",
+    "Load Balancing"
+  ],
   "seo": {
     "home": {
       "title": "Artyom Bordulanyuk | Full-Stack Portfolio",
@@ -176,5 +183,14 @@
         "answer": "Yes! I'm experienced in collaborating with existing development teams, designers, and stakeholders. I adapt to your current workflows, tools, and methodologies. Whether you need additional development capacity or specialized expertise, I integrate seamlessly into your team structure."
       }
     ]
+  },
+  "contactIcons": {
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "phone": "Phone",
+    "telegram": "Telegram",
+    "upwork": "Upwork",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
   }
 }

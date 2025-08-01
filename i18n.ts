@@ -6,7 +6,6 @@ export default getRequestConfig(async ({ locale }) => {
     // console.warn('⚠️ Skipped getRequestConfig: locale is missing or invalid:', locale);
     locale = defaultLocale;
   }
-
   return {
     locale,
     messages: (await import(`./messages/${locale}.json`)).default,

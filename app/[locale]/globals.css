@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.typing-cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .story-section-content-height {
   min-height: 65vh;
 }

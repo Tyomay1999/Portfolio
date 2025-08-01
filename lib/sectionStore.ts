@@ -7,7 +7,6 @@ type SectionChangeCallback = (id: number) => void;
 let listeners: SectionChangeCallback[] = [];
 let currentSection: number = -1;
 
-
 export function subscribe(callback: SectionChangeCallback): () => void {
   listeners.push(callback);
   return () => {

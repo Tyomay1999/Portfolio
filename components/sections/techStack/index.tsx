@@ -4,115 +4,9 @@ import React, { useState, ChangeEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
+import { Category, techItems, categories } from './utils';
 
-type Category = 'all' | 'frontend' | 'backend' | 'tools';
 
-interface TechItem {
-  name: string;
-  emoji: string;
-  category: Category;
-  colorClass: string;
-}
-
-const techItems: TechItem[] = [
-  {
-    name: 'React',
-    emoji: '⚛️',
-    category: 'frontend',
-    colorClass: 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30',
-  },
-  {
-    name: 'Vue.js',
-    emoji: '💚',
-    category: 'frontend',
-    colorClass: 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30',
-  },
-  {
-    name: 'JavaScript',
-    emoji: '⚡',
-    category: 'frontend',
-    colorClass: 'from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/30',
-  },
-  {
-    name: 'TypeScript',
-    emoji: '🔷',
-    category: 'frontend',
-    colorClass: 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30',
-  },
-  {
-    name: 'Tailwind CSS',
-    emoji: '🎨',
-    category: 'frontend',
-    colorClass: 'from-cyan-100 to-cyan-200 dark:from-cyan-900/30 dark:to-cyan-800/30',
-  },
-  {
-    name: 'React Native',
-    emoji: '📱',
-    category: 'frontend',
-    colorClass: 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/30',
-  },
-  {
-    name: 'Node.js',
-    emoji: '🟢',
-    category: 'backend',
-    colorClass: 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30',
-  },
-  {
-    name: 'Python',
-    emoji: '🐍',
-    category: 'backend',
-    colorClass: 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30',
-  },
-  {
-    name: 'MongoDB',
-    emoji: '🗄️',
-    category: 'backend',
-    colorClass: 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30',
-  },
-  {
-    name: 'PostgreSQL',
-    emoji: '🐘',
-    category: 'backend',
-    colorClass: 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30',
-  },
-  {
-    name: 'Express.js',
-    emoji: '🔥',
-    category: 'backend',
-    colorClass: 'from-red-100 to-red-200 dark:from-red-900/30 dark:to-red-800/30',
-  },
-  {
-    name: 'AWS',
-    emoji: '☁️',
-    category: 'tools',
-    colorClass: 'from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/30',
-  },
-  {
-    name: 'Docker',
-    emoji: '🐳',
-    category: 'tools',
-    colorClass: 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30',
-  },
-  {
-    name: 'Git',
-    emoji: '🔧',
-    category: 'tools',
-    colorClass: 'from-gray-100 to-gray-200 dark:from-gray-900/30 dark:to-gray-800/30',
-  },
-  {
-    name: 'Vercel',
-    emoji: '🚀',
-    category: 'tools',
-    colorClass: 'from-indigo-100 to-indigo-200 dark:from-indigo-900/30 dark:to-indigo-800/30',
-  },
-];
-
-const categories: { label: string; value: Category }[] = [
-  { label: 'All', value: 'all' },
-  { label: 'Frontend', value: 'frontend' },
-  { label: 'Backend', value: 'backend' },
-  { label: 'Tools', value: 'tools' },
-];
 
 const TechStack: React.FC = () => {
   const [selected, setSelected] = useState<Category>('all');
@@ -182,7 +76,11 @@ const TechStack: React.FC = () => {
                       `bg-gradient-to-br ${item.colorClass}`,
                     )}
                   >
-                    <span className="text-xl md:text-2xl">{item.emoji}</span>
+                    <img
+                      src={item.icon}
+                      alt={item.name}
+                      className="h-6 w-6 md:h-8 md:w-8 object-contain transition-transform duration-300 group-hover:scale-110"
+                    />
                   </div>
                   <span className="font-sans text-sm font-medium text-slate-700 transition-colors duration-300 group-hover:text-slate-900 dark:text-slate-300 dark:group-hover:text-white md:text-base">
                     {item.name}

@@ -5,6 +5,7 @@ import { useTheme } from 'next-themes';
 import { usePathname, useRouter } from 'next/navigation';
 
 const supportedLanguages = ['en', 'hy', 'ru'] as const;
+export type SupportedLanguage = (typeof supportedLanguages)[number];
 
 const LanguageThemeToggle: React.FC = () => {
   const router = useRouter();
@@ -14,9 +15,11 @@ const LanguageThemeToggle: React.FC = () => {
   const [language, setLanguage] = useState<string>('en');
   const [mounted, setMounted] = useState<boolean>(false);
 
-  const extractLocaleFromPathname = (path: string): string => {
+  const extractLocaleFromPathname = (path: string): SupportedLanguage => {
     const firstSegment = path.split('/')[1];
-    return supportedLanguages.includes(firstSegment as any) ? firstSegment : 'en';
+    return supportedLanguages.includes(firstSegment as SupportedLanguage)
+      ? (firstSegment as SupportedLanguage)
+      : 'en';
   };
 
   useEffect(() => {

@@ -38,9 +38,9 @@ const WorkExperience: React.FC = () => {
                     {t(`${key}.position`)}
                   </h3>
 
-                  <ul className="font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300 md:text-base list-disc list-inside">
+                  <ul className="list-inside list-disc font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300 md:text-base">
                     {Array.isArray(jobDetails) &&
-                    jobDetails.map((detail, index) => <li key={index}>{detail}</li>)}
+                      jobDetails.map((detail, index) => <li key={index}>{detail}</li>)}
                   </ul>
 
                   <div className="absolute bottom-0 left-1/3 top-0 hidden w-px bg-slate-200 dark:bg-slate-700 md:block" />

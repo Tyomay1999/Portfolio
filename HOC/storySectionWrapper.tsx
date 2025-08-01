@@ -10,10 +10,10 @@ interface StorySectionWrapperProps {
 }
 
 export default function StorySectionWrapper({
-                                              children,
-                                              sectionId,
-                                              innerClassName,
-                                            }: StorySectionWrapperProps): JSX.Element {
+  children,
+  sectionId,
+  innerClassName,
+}: StorySectionWrapperProps): JSX.Element {
   const ref = useRef<HTMLElement | null>(null);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isExiting, setIsExiting] = useState<boolean>(false);

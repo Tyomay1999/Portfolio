@@ -8,13 +8,10 @@ import {
   restoreSectionFromSession,
 } from '@/lib/sectionStore';
 
-
 const isContentScrollable = (el: HTMLElement): boolean => el.scrollHeight > el.clientHeight;
-
 
 const hasScrolledToBottom = (el: HTMLElement): boolean =>
   el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
-
 
 const hasScrolledToTop = (el: HTMLElement): boolean => el.scrollTop <= 2;
 
@@ -48,7 +45,7 @@ const ScrollManager = (): null => {
       const atTop = hasScrolledToTop(storyContent);
       const atBottom = hasScrolledToBottom(storyContent);
 
-      if (isScrollable && !((deltaY > 0 && atBottom) || (deltaY < 0 && atTop))) return
+      if (isScrollable && !((deltaY > 0 && atBottom) || (deltaY < 0 && atTop))) return;
 
       wheelDelta += deltaY;
 
