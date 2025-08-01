@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { languages } from '@/i18n/settings';
 import { Providers } from './provider';
 import './globals.css';
@@ -14,6 +14,44 @@ export async function generateStaticParams() {
   return languages.map(lang => ({ locale: lang }));
 }
 
+export async function generateMetadata(props: { params: { locale?: string } }) {
+  const { params } = props;
+  const fallbackLocale = 'en';
+  const delta = await params;
+
+  const locale = delta?.locale && languages.includes(delta.locale) ? delta.locale : fallbackLocale;
+
+  const t = await getTranslations({ locale });
+
+  return {
+    metadataBase: new URL('https://yourdomain.com'), // 🔥 <-- обязательно!
+    title: t('seo.home.title'),
+    description: t('seo.home.description'),
+    keywords: t('seo.home.keywords'),
+    openGraph: {
+      title: t('seo.home.title'),
+      description: t('seo.home.description'),
+      url: `https://yourdomain.com/${locale}`,
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Artyom Portfolio',
+        },
+      ],
+    },
+    alternates: {
+      canonical: `https://yourdomain.com/${locale}`,
+      languages: {
+        en: 'https://yourdomain.com/en',
+        ru: 'https://yourdomain.com/ru',
+        hy: 'https://yourdomain.com/hy',
+      },
+    },
+  };
+}
+
 export default async function LocaleLayout({ children, params }: Props) {
   const fallbackLocale = 'en';
   const delta = await params;
@@ -24,14 +62,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      {/*<Head>*/}
-      {/*    <link*/}
-      {/*      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&display=swap"*/}
-      {/*      rel="stylesheet"*/}
-      {/*    />*/}
-      {/*    <title>Portfolio</title>*/}
-      {/*</Head>*/}
-      <body className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 overflow-x-hidden transition-colors duration-300">
+      <body className="overflow-x-hidden bg-white text-slate-800 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
         <Providers>
           <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
         </Providers>

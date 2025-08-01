@@ -2,21 +2,27 @@
 
 import React, { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function Index() {
   const router = useRouter();
+  const pathname = usePathname();
   const { theme, setTheme } = useTheme();
 
   const [language, setLanguage] = useState('en');
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
+  const extractLocaleFromPathname = (path: string) => {
+    const firstSegment = path.split('/')[1];
+    return ['en', 'hy', 'ru'].includes(firstSegment) ? firstSegment : 'en';
+  };
 
-    const storedLang = localStorage.getItem('language') || 'en';
-    setLanguage(storedLang);
-  }, []);
+  useEffect(() => {
+    const currentLangFromURL = extractLocaleFromPathname(pathname);
+    setLanguage(currentLangFromURL);
+    localStorage.setItem('language', currentLangFromURL);
+    setMounted(true);
+  }, [pathname]);
 
   const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value;
@@ -35,12 +41,12 @@ export default function Index() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed top-6 right-6 z-50 flex items-center space-x-4">
+    <div className="fixed right-6 top-6 z-50 flex items-center space-x-4">
       <select
         value={language}
         onChange={changeLanguage}
         id="languageSelect"
-        className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+        className="rounded-lg border border-slate-200 bg-white/80 px-3 py-2 text-sm backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-slate-400 dark:border-slate-700 dark:bg-slate-800/80"
       >
         <option value="en">EN</option>
         <option value="hy">HY</option>
@@ -50,10 +56,10 @@ export default function Index() {
       <button
         onClick={toggleTheme}
         id="themeToggle"
-        className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-lg p-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+        className="rounded-lg border border-slate-200 bg-white/80 p-2 backdrop-blur-sm transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800/80 dark:hover:bg-slate-700"
       >
         {theme === 'dark' ? (
-          <svg className="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="hidden h-5 w-5 dark:block" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -61,7 +67,7 @@ export default function Index() {
             />
           </svg>
         ) : (
-          <svg className="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="block h-5 w-5 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
           </svg>
         )}

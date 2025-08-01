@@ -13,6 +13,12 @@ export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const cookieLang = request.cookies.get('language')?.value || 'en';
 
+  const isStaticFile = pathname === '/sitemap.xml' || pathname === '/robots.txt';
+
+  if (isStaticFile) {
+    return NextResponse.next();
+  }
+
   const firstSegment = pathname.split('/')[1];
   const secondSegment = pathname.split('/')[2];
 
@@ -30,5 +36,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next|favicon.ico|api|assets).*)'],
+  matcher: ['/((?!_next|favicon.ico|api|assets|.*\\.xml$|.*\\.txt$).*)'],
 };

@@ -1,5 +1,12 @@
 {
   "welcomeTxt": "Hi, I'm Artyom",
+  "seo": {
+    "home": {
+      "title": "Artyom Bordulanyuk | Full-Stack Portfolio",
+      "description": "Explore Davit's full-stack web development projects with React, Node.js, and more.",
+      "keywords": "Full-Stack, React, Node.js, Portfolio"
+    }
+  },
   "summary": {
     "aboutMe": "About Me",
     "intro": "Full-Stack Developer with 5+ years of experience in designing, developing, and deploying scalable web applications.",

@@ -12,7 +12,7 @@ const projects = [
     tags: ['React', 'Node.js', 'MongoDB'],
     icon: (
       <svg
-        className="w-12 h-12 md:w-16 md:h-16 text-my-light-text/40 dark:text-my-dark-text/40 transition-colors duration-300"
+        className="text-my-light-text/40 dark:text-my-dark-text/40 h-12 w-12 transition-colors duration-300 md:h-16 md:w-16"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -27,7 +27,7 @@ const projects = [
     tags: ['Vue.js', 'Express', 'Socket.io'],
     icon: (
       <svg
-        className="w-12 h-12 md:w-16 md:h-16 text-my-light-text/40 dark:text-my-dark-text/40 transition-colors duration-300"
+        className="text-my-light-text/40 dark:text-my-dark-text/40 h-12 w-12 transition-colors duration-300 md:h-16 md:w-16"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -42,7 +42,7 @@ const projects = [
     tags: ['Next.js', 'Python', 'PostgreSQL'],
     icon: (
       <svg
-        className="w-12 h-12 md:w-16 md:h-16 text-my-light-text/40 dark:text-my-dark-text/40 transition-colors duration-300"
+        className="text-my-light-text/40 dark:text-my-dark-text/40 h-12 w-12 transition-colors duration-300 md:h-16 md:w-16"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -57,27 +57,27 @@ export default function Projects() {
 
   return (
     <StorySectionWrapper sectionId={1} innerClassName={'max-w-7xl mx-auto px-4'}>
-      <h2 className="font-serif text-3xl md:text-4xl lg:text-6xl font-light text-slate-900 dark:text-slate-100 text-center mb-12 md:mb-16">
+      <h2 className="mb-12 text-center font-serif text-3xl font-light text-slate-900 dark:text-slate-100 md:mb-16 md:text-4xl lg:text-6xl">
         {t('title')}
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-12">
         {projects.map((project, index) => (
           <div key={index} className="project-card group cursor-pointer">
-            <div className="bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 aspect-[4/3] rounded-lg mb-4 md:mb-6 flex items-center justify-center shadow-lg">
+            <div className="mb-4 flex aspect-[4/3] items-center justify-center rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 shadow-lg dark:from-slate-800 dark:to-slate-700 md:mb-6">
               {project.icon}
             </div>
-            <h3 className="font-serif text-lg md:text-xl lg:text-2xl font-medium text-slate-900 dark:text-slate-100 mb-2">
+            <h3 className="mb-2 font-serif text-lg font-medium text-slate-900 dark:text-slate-100 md:text-xl lg:text-2xl">
               {project.title}
             </h3>
-            <p className="text-slate-600 dark:text-slate-400 font-sans mb-3 text-sm md:text-base">
+            <p className="mb-3 font-sans text-sm text-slate-600 dark:text-slate-400 md:text-base">
               {project.descEN}
             </p>
             <div className="flex flex-wrap gap-2">
               {project.tags.map(tag => (
                 <span
                   key={tag}
-                  className="px-2 md:px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs rounded-full"
+                  className="rounded-full bg-slate-200 px-2 py-1 text-xs text-slate-700 dark:bg-slate-700 dark:text-slate-300 md:px-3"
                 >
                   {tag}
                 </span>
@@ -87,8 +87,8 @@ export default function Projects() {
         ))}
       </div>
 
-      <div className="text-center mt-12 md:mt-16 pb-8">
-        <button className="font-sans text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-600 px-6 md:px-8 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-300">
+      <div className="mt-12 pb-8 text-center md:mt-16">
+        <button className="rounded-lg border border-slate-300 px-6 py-3 font-sans text-slate-900 transition-colors duration-300 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-800 md:px-8">
           {t('viewAll')}
         </button>
       </div>
