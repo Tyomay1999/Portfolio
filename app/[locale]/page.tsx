@@ -1,7 +1,8 @@
 'use client';
 
+import React from 'react';
 import Root from '../../components/root';
 
-export default function Home() {
-  return <Root />;
-}
+const Home: React.FC = () => <Root />;
+
+export default Home;

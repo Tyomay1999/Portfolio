@@ -5,7 +5,7 @@ import Navigation from '../navigation';
 import LanguageSwitcher from '../languageThemeToggle';
 import Sections from '../sections';
 
-const Root = () => {
+const Root: React.FC = () => {
   return (
     <div>
       <Navigation />

@@ -4,7 +4,15 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 
-const projects = [
+type Project = {
+  title: string;
+  descEN: string;
+  descES: string;
+  tags: string[];
+  icon: React.ReactNode;
+};
+
+const projects: Project[] = [
   {
     title: 'E-Commerce Platform',
     descEN: 'Full-stack marketplace with React & Node.js',
@@ -52,11 +60,11 @@ const projects = [
   },
 ];
 
-export default function Projects() {
+const Projects: React.FC = () => {
   const t = useTranslations('projects');
 
   return (
-    <StorySectionWrapper sectionId={1} innerClassName={'max-w-7xl mx-auto px-4'}>
+    <StorySectionWrapper sectionId={1} innerClassName="max-w-7xl mx-auto px-4">
       <h2 className="mb-12 text-center font-serif text-3xl font-light text-slate-900 dark:text-slate-100 md:mb-16 md:text-4xl lg:text-6xl">
         {t('title')}
       </h2>
@@ -94,4 +102,6 @@ export default function Projects() {
       </div>
     </StorySectionWrapper>
   );
-}
+};
+
+export default Projects;

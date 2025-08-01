@@ -1,5 +1,7 @@
+const { env } = require('@/utils/env') ;
+
 const locales = ['en', 'hy', 'ru'];
-const defaultLocale = 'en';
+const defaultLocale = env.DEFAULT_LOCALE;
 
 module.exports = {
   locales,

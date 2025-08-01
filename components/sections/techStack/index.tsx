@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
@@ -51,7 +51,6 @@ const techItems: TechItem[] = [
     category: 'frontend',
     colorClass: 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/30',
   },
-
   {
     name: 'Node.js',
     emoji: '🟢',
@@ -82,7 +81,6 @@ const techItems: TechItem[] = [
     category: 'backend',
     colorClass: 'from-red-100 to-red-200 dark:from-red-900/30 dark:to-red-800/30',
   },
-
   {
     name: 'AWS',
     emoji: '☁️',
@@ -116,9 +114,13 @@ const categories: { label: string; value: Category }[] = [
   { label: 'Tools', value: 'tools' },
 ];
 
-export default function TechStack() {
+const TechStack: React.FC = () => {
   const [selected, setSelected] = useState<Category>('all');
   const t = useTranslations('techStack');
+
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelected(e.target.value as Category);
+  };
 
   return (
     <StorySectionWrapper sectionId={3} innerClassName="max-w-7xl mx-auto px-4">
@@ -126,11 +128,11 @@ export default function TechStack() {
         {t('title')}
       </h2>
 
-      {/* Filters */}
+      {/* Filters for mobile */}
       <div className="mb-6 block md:hidden">
         <select
           value={selected}
-          onChange={e => setSelected(e.target.value as Category)}
+          onChange={handleChange}
           className="w-full rounded-full border border-slate-300 bg-white px-4 py-2 text-slate-800 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
         >
           {categories.map(cat => (
@@ -141,6 +143,7 @@ export default function TechStack() {
         </select>
       </div>
 
+      {/* Filters for desktop */}
       <div className="mb-12 hidden justify-center md:flex">
         <div className="flex flex-wrap gap-2 rounded-full border border-slate-200 bg-white/50 p-2 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/50 md:gap-4">
           {categories.map(cat => (
@@ -154,7 +157,6 @@ export default function TechStack() {
               )}
               onClick={() => setSelected(cat.value)}
               aria-pressed={selected === cat.value}
-              data-filter={cat.value}
             >
               {t(cat.value)}
             </button>
@@ -194,4 +196,6 @@ export default function TechStack() {
       <div className="mx-auto mt-8 h-0.5 w-24 bg-slate-300 dark:bg-slate-600" />
     </StorySectionWrapper>
   );
-}
+};
+
+export default TechStack;

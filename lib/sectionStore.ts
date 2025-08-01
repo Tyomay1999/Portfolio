@@ -2,17 +2,20 @@
 
 import { useState, useEffect } from 'react';
 
-let listeners: ((id: number) => void)[] = [];
-let currentSection = -1;
+type SectionChangeCallback = (id: number) => void;
 
-export function subscribe(callback: (id: number) => void) {
+let listeners: SectionChangeCallback[] = [];
+let currentSection: number = -1;
+
+
+export function subscribe(callback: SectionChangeCallback): () => void {
   listeners.push(callback);
   return () => {
     listeners = listeners.filter(fn => fn !== callback);
   };
 }
 
-export function setActiveSection(id: number) {
+export function setActiveSection(id: number): void {
   if (currentSection !== id) {
     currentSection = id;
 
@@ -24,12 +27,12 @@ export function setActiveSection(id: number) {
   }
 }
 
-export function getActiveSection() {
+export function getActiveSection(): number {
   return currentSection;
 }
 
-export function useActiveSection() {
-  const [section, setSection] = useState(currentSection);
+export function useActiveSection(): number {
+  const [section, setSection] = useState<number>(currentSection);
 
   useEffect(() => {
     const unsubscribe = subscribe(setSection);
@@ -39,20 +42,18 @@ export function useActiveSection() {
   return section;
 }
 
-export const getCurrentSectionElement = (): HTMLElement | null => {
+export function getCurrentSectionElement(): HTMLElement | null {
   const currentIndex = getActiveSection();
   return document.querySelector(`[data-section="${currentIndex + 1}"]`);
-};
+}
 
-export const getCurrentStoryContentElement = (): HTMLElement | null => {
+export function getCurrentStoryContentElement(): HTMLElement | null {
   const sectionIndex = getActiveSection();
   const section = document.querySelector(`[data-section="${sectionIndex}"]`);
-  if (!section) return null;
+  return section?.querySelector('.story-content') ?? null;
+}
 
-  return section.querySelector('.story-content') as HTMLElement | null;
-};
-
-export function restoreSectionFromSession() {
+export function restoreSectionFromSession(): void {
   if (typeof window === 'undefined') return;
 
   const saved = sessionStorage.getItem('activeSection');

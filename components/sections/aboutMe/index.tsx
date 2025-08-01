@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 
-export default function AboutMe() {
+const AboutMe: React.FC = () => {
   const t = useTranslations('summary');
 
   return (
@@ -13,6 +13,7 @@ export default function AboutMe() {
         <h1 className="mb-8 font-serif text-3xl font-light text-slate-900 dark:text-slate-100 md:mb-12 md:text-4xl lg:text-6xl">
           {t('aboutMe')}
         </h1>
+
         <div className="space-y-6 font-sans text-base leading-relaxed text-slate-700 dark:text-slate-300 md:space-y-8 md:text-lg lg:text-xl">
           <p className="mb-6 text-justify">{t('intro')}</p>
           <p className="mb-6 text-justify">{t('specialization')}</p>
@@ -27,8 +28,11 @@ export default function AboutMe() {
 
           <p className="text-justify italic">{t('focus')}</p>
         </div>
+
         <div className="mx-auto mt-8 h-0.5 w-24 bg-slate-300 dark:bg-slate-600" />
       </div>
     </StorySectionWrapper>
   );
-}
+};
+
+export default AboutMe;

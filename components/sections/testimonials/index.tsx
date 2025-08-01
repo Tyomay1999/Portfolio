@@ -1,17 +1,21 @@
 'use client';
+
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 import clsx from 'clsx';
 
-export default function TestimonialsSection() {
+type Testimonial = {
+  initials: string;
+  name: string;
+  role: string;
+  message: string;
+};
+
+export default function TestimonialsSection(): JSX.Element {
   const t = useTranslations('testimonialsSection');
-  const testimonials = t.raw('items') as {
-    initials: string;
-    name: string;
-    role: string;
-    message: string;
-  }[];
+
+  const testimonials = t.raw('items') as Testimonial[];
 
   return (
     <StorySectionWrapper sectionId={5} innerClassName="max-w-6xl mx-auto px-4">

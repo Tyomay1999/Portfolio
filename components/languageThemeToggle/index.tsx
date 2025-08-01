@@ -4,17 +4,19 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { usePathname, useRouter } from 'next/navigation';
 
-export default function Index() {
+const supportedLanguages = ['en', 'hy', 'ru'] as const;
+
+const LanguageThemeToggle: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
 
-  const [language, setLanguage] = useState('en');
-  const [mounted, setMounted] = useState(false);
+  const [language, setLanguage] = useState<string>('en');
+  const [mounted, setMounted] = useState<boolean>(false);
 
-  const extractLocaleFromPathname = (path: string) => {
+  const extractLocaleFromPathname = (path: string): string => {
     const firstSegment = path.split('/')[1];
-    return ['en', 'hy', 'ru'].includes(firstSegment) ? firstSegment : 'en';
+    return supportedLanguages.includes(firstSegment as any) ? firstSegment : 'en';
   };
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export default function Index() {
     setMounted(true);
   }, [pathname]);
 
-  const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const selected = e.target.value;
     setLanguage(selected);
     localStorage.setItem('language', selected);
@@ -33,7 +35,7 @@ export default function Index() {
     router.push(`/${selected}`);
   };
 
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
   };
@@ -46,16 +48,20 @@ export default function Index() {
         value={language}
         onChange={changeLanguage}
         id="languageSelect"
+        aria-label="Change language"
         className="rounded-lg border border-slate-200 bg-white/80 px-3 py-2 text-sm backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-slate-400 dark:border-slate-700 dark:bg-slate-800/80"
       >
-        <option value="en">EN</option>
-        <option value="hy">HY</option>
-        <option value="ru">RU</option>
+        {supportedLanguages.map(lang => (
+          <option key={lang} value={lang}>
+            {lang.toUpperCase()}
+          </option>
+        ))}
       </select>
 
       <button
         onClick={toggleTheme}
         id="themeToggle"
+        aria-label="Toggle theme"
         className="rounded-lg border border-slate-200 bg-white/80 p-2 backdrop-blur-sm transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800/80 dark:hover:bg-slate-700"
       >
         {theme === 'dark' ? (
@@ -74,4 +80,6 @@ export default function Index() {
       </button>
     </div>
   );
-}
+};
+
+export default LanguageThemeToggle;

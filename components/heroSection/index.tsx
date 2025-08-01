@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 
-const HeroSections = () => {
+const HeroSections: React.FC = () => {
   const t = useTranslations();
 
   return (

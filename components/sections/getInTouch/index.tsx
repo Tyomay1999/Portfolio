@@ -1,13 +1,14 @@
 'use client';
+
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { setActiveSection } from '@/lib/sectionStore';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 
-export default function CallToActionSection() {
+export default function CallToActionSection(): JSX.Element {
   const t = useTranslations('callToAction');
 
-  const handleClick = () => setActiveSection(4);
+  const handleClick = (): void => setActiveSection(4);
 
   return (
     <StorySectionWrapper sectionId={7} innerClassName="max-w-3xl mx-auto text-center px-4">

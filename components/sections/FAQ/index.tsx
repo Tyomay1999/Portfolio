@@ -4,13 +4,15 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 
-export default function FAQPhilosophySection() {
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+export default function FAQPhilosophySection(): JSX.Element {
   const t = useTranslations('faqSection');
 
-  const faqs = t.raw('faqs') as {
-    question: string;
-    answer: string;
-  }[];
+  const faqs = t.raw('faqs') as FAQItem[];
 
   return (
     <StorySectionWrapper sectionId={6} innerClassName="max-w-4xl mx-auto px-4">

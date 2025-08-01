@@ -3,28 +3,29 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getActiveSection, subscribe } from '@/lib/sectionStore';
 
-export default function StorySectionWrapper({
-  children,
-  sectionId,
-  innerClassName,
-}: {
+interface StorySectionWrapperProps {
   children: React.ReactNode;
   sectionId: number;
   innerClassName?: string;
-}) {
+}
+
+export default function StorySectionWrapper({
+                                              children,
+                                              sectionId,
+                                              innerClassName,
+                                            }: StorySectionWrapperProps): JSX.Element {
   const ref = useRef<HTMLElement | null>(null);
-  const [isActive, setIsActive] = useState(false);
-  const [isExiting, setIsExiting] = useState(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isExiting, setIsExiting] = useState<boolean>(false);
 
   useEffect(() => {
-    const unsubscribe = subscribe(id => {
+    const unsubscribe = subscribe((id: number) => {
       const isNowActive = id === sectionId;
       setIsExiting(isActive && !isNowActive);
       setIsActive(isNowActive);
     });
 
-    const current = getActiveSection();
-    if (current === sectionId) {
+    if (getActiveSection() === sectionId) {
       setIsActive(true);
     }
 
@@ -39,7 +40,7 @@ export default function StorySectionWrapper({
     >
       <div className="story-overlay" />
       <div className="story-content">
-        <div className={`story-inner ${innerClassName || ''}`}>{children}</div>
+        <div className={`story-inner ${innerClassName ?? ''}`}>{children}</div>
       </div>
     </section>
   );

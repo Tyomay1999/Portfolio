@@ -4,19 +4,21 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 
-const workKeys = ['genieWeb', 'pixeria', 'beeOnCode1', 'instructor', 'beeOnCode2'];
+const workKeys = ['genieWeb', 'pixeria', 'beeOnCode1', 'instructor', 'beeOnCode2'] as const;
 
-export default function WorkExperience() {
+type WorkKey = (typeof workKeys)[number];
+
+const WorkExperience: React.FC = () => {
   const t = useTranslations('workExperience');
 
   return (
-    <StorySectionWrapper sectionId={2} innerClassName={'max-w-4xl mx-auto px-4'}>
+    <StorySectionWrapper sectionId={2} innerClassName="max-w-4xl mx-auto px-4">
       <h2 className="mb-12 text-center font-serif text-3xl font-light text-slate-900 dark:text-slate-100 md:mb-16 md:text-4xl lg:text-6xl">
         {t('title')}
       </h2>
 
       <div className="space-y-8 md:space-y-12">
-        {workKeys.map((key, i) => {
+        {workKeys.map((key: WorkKey, i: number) => {
           const jobDetails = t.raw(`${key}.details`) as string[];
 
           return (
@@ -36,10 +38,11 @@ export default function WorkExperience() {
                     {t(`${key}.position`)}
                   </h3>
 
-                  <ul className="font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300 md:text-base">
+                  <ul className="font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300 md:text-base list-disc list-inside">
                     {Array.isArray(jobDetails) &&
-                      jobDetails.map((detail, index) => <li key={index}>{detail}</li>)}
+                    jobDetails.map((detail, index) => <li key={index}>{detail}</li>)}
                   </ul>
+
                   <div className="absolute bottom-0 left-1/3 top-0 hidden w-px bg-slate-200 dark:bg-slate-700 md:block" />
                 </div>
               </div>
@@ -53,4 +56,6 @@ export default function WorkExperience() {
       <div className="mx-auto mt-8 h-0.5 w-24 bg-slate-300 dark:bg-slate-600" />
     </StorySectionWrapper>
   );
-}
+};
+
+export default WorkExperience;

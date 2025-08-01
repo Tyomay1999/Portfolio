@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { setActiveSection } from '@/lib/sectionStore';
+
 import HeroSections from '../heroSection';
 import AboutSection from './aboutMe';
 import ProjectsSection from './projects';
@@ -13,9 +14,10 @@ import FAQPhilosophySection from './FAQ';
 import CallToActionSection from './getInTouch';
 import ScrollManager from '../navigation/scrollManager';
 
-const Sections = () => {
+const Sections: React.FC = () => {
   useEffect(() => {
     const savedSection = sessionStorage.getItem('activeSection');
+
     if (savedSection) {
       setTimeout(() => {
         setActiveSection(Number(savedSection));
