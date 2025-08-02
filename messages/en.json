@@ -10,7 +10,7 @@
   "seo": {
     "home": {
       "title": "Artyom Bordulanyuk | Full-Stack Portfolio",
-      "description": "Explore Davit's full-stack web development projects with React, Node.js, and more.",
+      "description": "Explore Artyom's full-stack web development projects with React, Node.js, and more.",
       "keywords": "Full-Stack, React, Node.js, Portfolio"
     }
   },
@@ -117,7 +117,7 @@
       "fill": "Please fill in all fields.",
       "thankYou": "Thank you for your message! I'll get back to you soon."
     },
-    "footer": "© 2024 Davit. All rights reserved."
+    "footer": "© 2024 Artyom. All rights reserved."
   },
   "testimonialsSection": {
     "title": "Testimonials",
@@ -126,31 +126,31 @@
         "initials": "SM",
         "name": "Sarah Mitchell",
         "role": "CEO, TechStart Inc.",
-        "message": "Davit delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise made our launch seamless."
+        "message": "Artyom delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise made our launch seamless."
       },
       {
         "initials": "MR",
         "name": "Marcus Rodriguez",
         "role": "Product Manager, InnovateLab",
-        "message": "Working with Davit was a game-changer for our team. He transformed our complex requirements into an elegant, user-friendly solution."
+        "message": "Working with Artyom was a game-changer for our team. He transformed our complex requirements into an elegant, user-friendly solution."
       },
       {
         "initials": "EK",
         "name": "Elena Kim",
         "role": "Founder, CreativeSpace",
-        "message": "Davit's full-stack expertise and collaborative approach made our project a huge success. I highly recommend him for any development needs."
+        "message": "Artyom's full-stack expertise and collaborative approach made our project a huge success. I highly recommend him for any development needs."
       },
       {
         "initials": "JL",
         "name": "James Liu",
         "role": "CTO, DataFlow Systems",
-        "message": "The analytics dashboard Davit built for us has become the cornerstone of our business intelligence. His code quality and performance optimization skills are outstanding."
+        "message": "The analytics dashboard Artyom built for us has become the cornerstone of our business intelligence. His code quality and performance optimization skills are outstanding."
       },
       {
         "initials": "AP",
         "name": "Anna Petrov",
         "role": "Director, EduTech Solutions",
-        "message": "Davit's learning platform revolutionized how we deliver education. His understanding of user experience and scalable architecture is impressive."
+        "message": "Artyom's learning platform revolutionized how we deliver education. His understanding of user experience and scalable architecture is impressive."
       }
     ]
   },
@@ -192,5 +192,9 @@
     "upwork": "Upwork",
     "linkedin": "LinkedIn",
     "github": "GitHub"
+  },
+  "toast": {
+    "emailCopied": "Email has been copied to clipboard",
+    "phoneCopied": "Phone number has been copied to clipboard"
   }
 }

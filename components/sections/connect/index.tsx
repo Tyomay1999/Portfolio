@@ -115,7 +115,6 @@ export default function ContactSection(): JSX.Element {
       {/*</div>*/}
       <ContactIcons />
 
-
       <div className="mx-auto h-0.5 w-12 bg-slate-400 dark:bg-slate-500" />
       <p className="mt-6 pb-8 font-sans text-xs text-slate-500 dark:text-slate-400 md:mt-8 md:text-sm">
         {t('footer')}

@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌐 Artyom Bordulanyuk – Personal Portfolio
 
-## Getting Started
+Welcome to the source code of my personal portfolio — a high-performance, animated, and multilingual web experience built with the modern web stack.
 
-First, run the development server:
+This project reflects not only my developer skills, but also my design philosophy: clarity, minimalism, and performance.
+
+---
+
+## ✨ Features
+
+- ⚡ **Framework**: Built with [Next.js 15](https://nextjs.org/), the latest version with enhanced routing and performance
+- 💡 **TypeScript**: Strongly typed and scalable architecture
+- 🎨 **Tailwind CSS**: Fully responsive and utility-first styling
+- 🌗 **Dark/Light Mode**: Smooth toggle between themes using `next-themes`
+- 🌍 **Internationalization (i18n)**: Powered by `next-intl` with dynamic locale routing
+- 🎬 **Storytelling Scroll**: Layered section-based navigation with scroll animations
+- 🧩 **Modular Sections**: Each section (About Me, Projects, Tech Stack, Contact) is isolated and reusable
+- 🚀 **SEO Ready**: Dynamic metadata, Open Graph tags, and clean URLs
+- 🛠️ **ESLint + Prettier**: Code quality and formatting enforced
+
+---
+
+## 📁 Folder Structure
+
+root/
+├── components/
+│ ├── sections/ # Modular UI blocks like About, Projects, TechStack
+│ ├── ui/ # Reusable UI components (Buttons, Switches, etc.)
+│ └── navigation/ # Scroll detection, locale switch, etc.
+├── HOC/ # Section wrappers for scroll-based rendering
+├── messages/ # JSON translation files for each locale
+├── public/ # Static assets (icons, images, fonts)
+├── styles/ # Global styles and Tailwind config
+├── app/ # Next.js 15 app directory (routing, layout, etc.)
+├── lib/ # Environment setup, config, and utils
+├── i18n/ # i18n settings and middleware
+└── .env.local # Environment variables
+
+---
+
+## 🧪 Getting Started
+
+1. **Clone the repo:**
 
 ```bash
+git clone https://github.com/Tyomay1999/Portfolio.git
+cd portfolio
+
+Install dependencies:
+
+npm install
+
+Set up environment variables:
+
+Create a .env.local file:
+
+
+NEXT_PUBLIC_SITE_NAME=Any text here
+NEXT_PUBLIC_DEFAULT_LOCALE=en
+NEXT_PUBLIC_TOTAL_SECTIONS=7
+# Contact links:
+NEXT_PUBLIC_CONTACT_GITHUB=https://github.com/your-handle
+NEXT_PUBLIC_CONTACT_LINKEDIN=https://linkedin.com/in/your-profile
+...
+
+Run locally:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+
+🔧 Scripts
+Command	Description
+npm run dev	Start development server
+npm run lint	Run ESLint
+npm run format	Run Prettier formatter
+npm run build	Build project for production
+
+📦 Built With
+Next.js
+
+Tailwind CSS
+
+next-intl
+
+TypeScript
+
+Framer Motion (optional for animation)
+
+ESLint
+
+Prettier
+
+
+🤝 Contact
+If you're interested in collaborating or just want to say hi:
+
+GitHub: https://github.com/Tyomay1999
+
+LinkedIn: https://www.linkedin.com/in/artyom-bordulanyuk-a266071b6/
+
+Email: abordulanyuk@gmail.com
+
+📄 License
+This project is open-source and free to use for learning or inspiration.
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

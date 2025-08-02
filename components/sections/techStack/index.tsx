@@ -1,12 +1,11 @@
 'use client';
 
 import React, { useState, ChangeEvent } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 import { Category, techItems, categories } from './utils';
-
-
 
 const TechStack: React.FC = () => {
   const [selected, setSelected] = useState<Category>('all');
@@ -76,10 +75,12 @@ const TechStack: React.FC = () => {
                       `bg-gradient-to-br ${item.colorClass}`,
                     )}
                   >
-                    <img
+                    <Image
                       src={item.icon}
                       alt={item.name}
-                      className="h-6 w-6 md:h-8 md:w-8 object-contain transition-transform duration-300 group-hover:scale-110"
+                      width={32}
+                      height={32}
+                      className="h-6 w-6 object-contain transition-transform duration-300 group-hover:scale-110 md:h-8 md:w-8"
                     />
                   </div>
                   <span className="font-sans text-sm font-medium text-slate-700 transition-colors duration-300 group-hover:text-slate-900 dark:text-slate-300 dark:group-hover:text-white md:text-base">

@@ -9,12 +9,7 @@ interface TypingOptions {
 
 export default function useTypingAnimation(
   ref: React.RefObject<HTMLSpanElement | null>,
-  {
-    phrases,
-    typingSpeed = 100,
-    deletingSpeed = 50,
-    pauseTime = 1500
-  }: TypingOptions
+  { phrases, typingSpeed = 100, deletingSpeed = 50, pauseTime = 1500 }: TypingOptions,
 ) {
   useEffect(() => {
     if (!ref.current) return;

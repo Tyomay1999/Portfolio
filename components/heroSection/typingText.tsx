@@ -10,10 +10,10 @@ interface TypingTextProps {
 }
 
 const TypingText: React.FC<TypingTextProps> = ({
-                                                 phrases,
-                                                 className = '',
-                                                 cursorClassName = 'typing-cursor',
-                                               }) => {
+  phrases,
+  className = '',
+  cursorClassName = 'typing-cursor',
+}) => {
   const typingRef = useRef<HTMLSpanElement | null>(null);
 
   useTypingAnimation(typingRef, {
