@@ -105,9 +105,17 @@
   "contactSection": {
     "title": "Let's Connect",
     "placeholders": {
-      "name": "Your Name",
-      "email": "Your Email",
-      "message": "Your Message"
+      "name": "First name",
+      "lastName": "Last name",
+      "email": "Email address",
+      "phone": "Phone number",
+      "contactType": "Choose a request type"
+    },
+    "contactTypes": {
+      "consulting": "Consultation",
+      "development": "Web Development",
+      "design": "UI/UX Design",
+      "other": "Other"
     },
     "button": {
       "send": "Send Message",
@@ -115,9 +123,17 @@
     },
     "alerts": {
       "fill": "Please fill in all fields.",
-      "thankYou": "Thank you for your message! I'll get back to you soon."
+      "thankYou": "Thank you for your message! I'll get back to you soon.",
+      "error": "Something went wrong. Please try again later."
     },
-    "footer": "© 2024 Artyom. All rights reserved."
+    "footer": "© 2024 Artyom. All rights reserved.",
+    "errors": {
+      "name": "First name is required",
+      "lastName": "Last name is required",
+      "email": "Enter a valid email address",
+      "phone": "Enter a valid phone number",
+      "contactType": "Select a request type"
+    }
   },
   "testimonialsSection": {
     "title": "Testimonials",
@@ -195,6 +211,9 @@
   },
   "toast": {
     "emailCopied": "Email has been copied to clipboard",
-    "phoneCopied": "Phone number has been copied to clipboard"
+    "phoneCopied": "Phone number has been copied to clipboard",
+    "thankYou": "Thank you for your message!",
+    "error": "Something went wrong. Please try again.",
+    "fill": "Please fill out all required fields"
   }
 }
