@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, {JSX} from 'react';
 import { useTranslations } from 'next-intl';
 import { setActiveSection } from '@/lib/sectionStore';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';

@@ -18,6 +18,9 @@ Thumbs.db
 
 # Env
 .env
+.env.dev
+.env.test
+.env.prod
 .env.*.local
 
 # Logs

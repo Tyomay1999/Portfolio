@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, JSX } from 'react';
 import { getActiveSection, subscribe } from '@/lib/sectionStore';
 
 interface StorySectionWrapperProps {

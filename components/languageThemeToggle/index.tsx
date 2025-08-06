@@ -10,7 +10,7 @@ export type SupportedLanguage = (typeof supportedLanguages)[number];
 const LanguageThemeToggle: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
   const [language, setLanguage] = useState<string>('en');
   const [mounted, setMounted] = useState<boolean>(false);
@@ -67,8 +67,8 @@ const LanguageThemeToggle: React.FC = () => {
         aria-label="Toggle theme"
         className="rounded-lg border border-slate-200 bg-white/80 p-2 backdrop-blur-sm transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800/80 dark:hover:bg-slate-700"
       >
-        {theme === 'dark' ? (
-          <svg className="hidden h-5 w-5 dark:block" fill="currentColor" viewBox="0 0 20 20">
+        {resolvedTheme  === 'dark' ? (
+          <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -76,7 +76,7 @@ const LanguageThemeToggle: React.FC = () => {
             />
           </svg>
         ) : (
-          <svg className="block h-5 w-5 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
           </svg>
         )}

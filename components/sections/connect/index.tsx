@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, JSX } from 'react';
 import axios from 'axios';
 import { useTranslations } from 'next-intl';
-import { env } from '@/utils/env';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 import ContactIcons from '@/components/contact/contactIcons';
 import { useToast } from '@/hooks/useToast';
@@ -114,8 +113,7 @@ export default function ContactSection(): JSX.Element {
 
     setSending(true);
     try {
-      const res = await axios.post(env.CONTACT.API as string, { ...form, language });
-
+      const res = await axios.post(process.env.NEXT_PUBLIC_CONTACT_API as string, { ...form, language });
       if (res.status === 200 || res.status === 201) {
         showToast('thankYou');
         setForm({
