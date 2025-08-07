@@ -12,17 +12,13 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return languages.map((lang) => ({ locale: lang }));
+  return languages.map(lang => ({ locale: lang }));
 }
 
-export async function generateMetadata(
-  { params }: Pick<Props, "params">
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Pick<Props, 'params'>): Promise<Metadata> {
   const fallbackLocale = 'en';
   const resolvedParams = await params;
-  const locale = languages.includes(resolvedParams.locale)
-    ? resolvedParams.locale
-    : fallbackLocale;
+  const locale = languages.includes(resolvedParams.locale) ? resolvedParams.locale : fallbackLocale;
 
   const t = await getTranslations({ locale });
 
@@ -49,8 +45,8 @@ export async function generateMetadata(
         { url: '/favicon.ico' },
         { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
         { url: '/favicon.svg', type: 'image/svg+xml' },
-        { url: '/apple-touch-icon.png', sizes: '180x180', rel: 'apple-touch-icon' }
-      ]
+        { url: '/apple-touch-icon.png', sizes: '180x180', rel: 'apple-touch-icon' },
+      ],
     },
     manifest: '/site.webmanifest',
     alternates: {
@@ -69,21 +65,17 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   const resolvedParams = await params;
 
-  const locale = languages.includes(resolvedParams.locale)
-    ? resolvedParams.locale
-    : fallbackLocale;
+  const locale = languages.includes(resolvedParams.locale) ? resolvedParams.locale : fallbackLocale;
 
   const messages = await getMessages({ locale });
 
   return (
     <html lang={locale} suppressHydrationWarning>
-    <body className="overflow-x-hidden bg-white text-slate-800 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
-    <Providers>
-      <NextIntlClientProvider messages={messages}>
-        {children}
-      </NextIntlClientProvider>
-    </Providers>
-    </body>
+      <body className="overflow-x-hidden bg-white text-slate-800 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
+        <Providers>
+          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        </Providers>
+      </body>
     </html>
   );
 }

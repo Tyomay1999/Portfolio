@@ -67,7 +67,7 @@ const LanguageThemeToggle: React.FC = () => {
         aria-label="Toggle theme"
         className="rounded-lg border border-slate-200 bg-white/80 p-2 backdrop-blur-sm transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800/80 dark:hover:bg-slate-700"
       >
-        {resolvedTheme  === 'dark' ? (
+        {resolvedTheme === 'dark' ? (
           <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"

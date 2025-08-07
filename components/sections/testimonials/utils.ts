@@ -5,10 +5,7 @@ export type Testimonial = {
   message: string;
 };
 
-export const getVisibleTestimonials = (
-  all: Testimonial[],
-  step: 0 | 1
-): Testimonial[] => {
+export const getVisibleTestimonials = (all: Testimonial[], step: 0 | 1): Testimonial[] => {
   if (all.length <= 3) return all;
   return step === 0 ? all.slice(0, 3) : all;
 };
@@ -24,11 +21,10 @@ export const shouldShowTestimonialsButton = (all: Testimonial[]): boolean => {
 export const getTestimonialsButtonLabel = (
   step: 0 | 1,
   total: number,
-  t: (key: string) => string
+  t: (key: string) => string,
 ): string => {
   if (total <= 3) return '';
   return step === 0 ? t('viewAll') : t('viewLess');
 };
 
-export class type {
-}
+export class type {}

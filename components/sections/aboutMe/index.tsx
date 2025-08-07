@@ -9,7 +9,7 @@ const AboutMe: React.FC = () => {
 
   return (
     <StorySectionWrapper sectionId={0}>
-      <div className="text-my-light-text dark:text-my-dark-text mx-auto max-w-3xl px-2 sm:px-4 text-center transition-colors duration-300">
+      <div className="text-my-light-text dark:text-my-dark-text mx-auto max-w-3xl px-2 text-center transition-colors duration-300 sm:px-4">
         <h1 className="mb-8 font-serif text-3xl font-light text-slate-900 dark:text-slate-100 md:mb-12 md:text-4xl lg:text-6xl">
           {t('aboutMe')}
         </h1>
@@ -18,7 +18,7 @@ const AboutMe: React.FC = () => {
           <p className="mb-6 text-justify">{t('intro')}</p>
           <p className="mb-6 text-justify">{t('specialization')}</p>
 
-          <ul className="mb-6 ml-4 sm:ml-6 list-disc space-y-2 pl-5 text-justify">
+          <ul className="mb-6 ml-4 list-disc space-y-2 pl-5 text-justify sm:ml-6">
             <li>{t('experience.list1')}</li>
             <li>{t('experience.list2')}</li>
             <li>{t('experience.list3')}</li>

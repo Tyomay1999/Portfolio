@@ -50,7 +50,7 @@ const WorkExperience: React.FC = () => {
 
                   <ul className="list-inside list-disc font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300 md:text-base">
                     {Array.isArray(jobDetails) &&
-                    jobDetails.map((detail, index) => <li key={index}>{detail}</li>)}
+                      jobDetails.map((detail, index) => <li key={index}>{detail}</li>)}
                   </ul>
 
                   <div className="absolute bottom-0 left-1/3 top-0 hidden w-px bg-slate-200 dark:bg-slate-700 md:block" />
@@ -64,7 +64,7 @@ const WorkExperience: React.FC = () => {
       </div>
 
       {showButton && (
-        <div className="text-center pt-10">
+        <div className="pt-10 text-center">
           <button
             onClick={() => setStep(getNextWorkStep(step))}
             className="rounded-full border border-slate-300 px-6 py-3 font-sans text-slate-900 transition duration-300 hover:bg-slate-50 dark:border-slate-600 dark:text-white dark:hover:bg-slate-800"

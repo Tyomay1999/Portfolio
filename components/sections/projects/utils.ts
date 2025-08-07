@@ -21,10 +21,10 @@ export const getVisibleProjects = (allProjects: Project[], step: 0 | 1 | 2) => {
 export const getNextStep = (currentStep: 0 | 1 | 2, total: number): 0 | 1 | 2 => {
   if (total <= 3) return 0;
   if (total <= 6) return currentStep === 0 ? 2 : 0;
-  return (currentStep + 1) % 3 as 0 | 1 | 2;
+  return ((currentStep + 1) % 3) as 0 | 1 | 2;
 };
 
-export const getButtonLabel = (step: 0 | 1 | 2, total: number, t: any) => {
+export const getButtonLabel = (step: 0 | 1 | 2, total: number, t: (key: string) => string) => {
   if (total <= 3) return '';
   if (total <= 6) {
     return step === 0 ? t('viewAll') : t('viewLess');
@@ -100,4 +100,3 @@ export const projects: Project[] = [
     gitUrl: 'https://github.com/your-org/genieweb-backend',
   },
 ];
-

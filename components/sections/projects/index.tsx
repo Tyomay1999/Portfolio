@@ -4,7 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 import Image from 'next/image';
-import { projects, getVisibleProjects, getNextStep, getButtonLabel, shouldShowButton } from './utils';
+import {
+  projects,
+  getVisibleProjects,
+  getNextStep,
+  getButtonLabel,
+  shouldShowButton,
+} from './utils';
 
 const Projects: React.FC = () => {
   const t = useTranslations('projects');

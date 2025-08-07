@@ -19,7 +19,7 @@ export const shouldShowFaqButton = (faqs: FAQItem[]): boolean => {
 export const getFaqButtonLabel = (
   step: 0 | 1,
   total: number,
-  t: (key: string) => string
+  t: (key: string) => string,
 ): string => {
   if (total <= 2) return '';
   return step === 0 ? t('viewAll') : t('viewLess');

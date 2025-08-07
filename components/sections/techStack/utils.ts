@@ -293,7 +293,6 @@ export const categories: { label: string; value: Category }[] = [
   { label: 'Tools', value: 'tools' },
 ];
 
-
 export const getFilteredItems = (items: TechItem[], category: Category): TechItem[] => {
   return category === 'all' ? items : items.filter(i => i.category === category);
 };
@@ -314,7 +313,7 @@ export const getNextStep = (current: 0 | 1 | 2, total: number): 0 | 1 | 2 => {
 export const getButtonLabel = (
   step: 0 | 1 | 2,
   total: number,
-  t: (key: string) => string
+  t: (key: string) => string,
 ): string => {
   if (total <= 10) return '';
   if (total <= 20) return step === 0 ? t('viewAll') : t('viewLess');

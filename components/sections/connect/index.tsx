@@ -113,7 +113,10 @@ export default function ContactSection(): JSX.Element {
 
     setSending(true);
     try {
-      const res = await axios.post(process.env.NEXT_PUBLIC_CONTACT_API as string, { ...form, language });
+      const res = await axios.post(process.env.NEXT_PUBLIC_CONTACT_API as string, {
+        ...form,
+        language,
+      });
       if (res.status === 200 || res.status === 201) {
         showToast('thankYou');
         setForm({
@@ -199,7 +202,6 @@ export default function ContactSection(): JSX.Element {
           <option value="design">{t('contactTypes.design')}</option>
           <option value="other">{t('contactTypes.other')}</option>
         </select>
-
 
         <button
           type="submit"

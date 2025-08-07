@@ -110,7 +110,7 @@ const TechStack: React.FC = () => {
       </div>
 
       {showButton && (
-        <div className="text-center pb-12">
+        <div className="pb-12 text-center">
           <button
             onClick={() => setStep(getNextStep(step, filtered.length))}
             className="rounded-full border border-slate-300 px-6 py-3 font-sans text-slate-900 transition duration-300 hover:bg-slate-50 dark:border-slate-600 dark:text-white dark:hover:bg-slate-800"
