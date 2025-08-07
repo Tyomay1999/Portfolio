@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, JSX } from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 import clsx from 'clsx';
