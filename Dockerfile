@@ -10,6 +10,7 @@ COPY . .
 
 ENV NODE_ENV=production
 
+COPY .env .env
 RUN npm run build
 
 EXPOSE 3005
