@@ -1,15 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
-
-const workKeys = ['genieWeb', 'pixeria', 'beeOnCode1', 'instructor', 'beeOnCode2'] as const;
+import {
+  workKeys,
+  getVisibleWorkKeys,
+  getNextWorkStep,
+  shouldShowWorkButton,
+  getWorkButtonLabel,
+} from './utils';
 
 type WorkKey = (typeof workKeys)[number];
 
 const WorkExperience: React.FC = () => {
   const t = useTranslations('workExperience');
+  const [step, setStep] = useState<0 | 1>(0);
+
+  const visibleKeys = getVisibleWorkKeys(workKeys, step);
+  const showButton = shouldShowWorkButton(workKeys);
+  const buttonLabel = getWorkButtonLabel(step, workKeys.length, t);
 
   return (
     <StorySectionWrapper sectionId={2} innerClassName="max-w-4xl mx-auto px-4">
@@ -18,7 +28,7 @@ const WorkExperience: React.FC = () => {
       </h2>
 
       <div className="space-y-8 md:space-y-12">
-        {workKeys.map((key: WorkKey, i: number) => {
+        {visibleKeys.map((key: WorkKey, i: number) => {
           const jobDetails = t.raw(`${key}.details`) as string[];
 
           return (
@@ -40,7 +50,7 @@ const WorkExperience: React.FC = () => {
 
                   <ul className="list-inside list-disc font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300 md:text-base">
                     {Array.isArray(jobDetails) &&
-                      jobDetails.map((detail, index) => <li key={index}>{detail}</li>)}
+                    jobDetails.map((detail, index) => <li key={index}>{detail}</li>)}
                   </ul>
 
                   <div className="absolute bottom-0 left-1/3 top-0 hidden w-px bg-slate-200 dark:bg-slate-700 md:block" />
@@ -52,6 +62,17 @@ const WorkExperience: React.FC = () => {
           );
         })}
       </div>
+
+      {showButton && (
+        <div className="text-center pt-10">
+          <button
+            onClick={() => setStep(getNextWorkStep(step))}
+            className="rounded-full border border-slate-300 px-6 py-3 font-sans text-slate-900 transition duration-300 hover:bg-slate-50 dark:border-slate-600 dark:text-white dark:hover:bg-slate-800"
+          >
+            {buttonLabel}
+          </button>
+        </div>
+      )}
 
       <div className="mx-auto mt-8 h-0.5 w-24 bg-slate-300 dark:bg-slate-600" />
     </StorySectionWrapper>

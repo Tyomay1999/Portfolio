@@ -11,7 +11,7 @@ const ContactIcons: FC = () => {
 
   return (
     <>
-      <div className="mx-auto mb-8 mt-8 grid max-w-2xl grid-cols-4 justify-items-center gap-4 md:mb-12 md:grid-cols-7 md:gap-6">
+      <div className="mx-auto mb-8 mt-8 grid max-w-2xl grid-cols-4 justify-items-center gap-4 md:mb-12 md:grid-cols-8 md:gap-6">
         {contactItems(showToast).map((item, idx) => (
           <div
             key={idx}

@@ -3,47 +3,52 @@
   "typingPhrases": [
     "Scalable Web Architecture",
     "Microservices",
-    "CI/CD",
+    "CI/CD Pipelines",
     "Dockerized Environments",
-    "Load Balancing"
+    "Load Balancing Solutions"
   ],
   "seo": {
     "home": {
-      "title": "Artyom Bordulanyuk | Full-Stack Portfolio",
-      "description": "Explore Artyom's full-stack web development projects with React, Node.js, and more.",
-      "keywords": "Full-Stack, React, Node.js, Portfolio"
+      "title": "Artyom Bordulanyuk | Full-Stack Web Developer – React, Next.js, Node.js, PostgreSQL, CI/CD, Docker",
+      "description": "Explore Artyom Bordulanyuk’s full-stack portfolio focused on modern and scalable web applications. Expert in React.js, Next.js, Node.js, PostgreSQL, Docker, and CI/CD pipelines. Build secure, optimized, and SEO-ready websites with a results-driven developer.",
+      "keywords": "Full-Stack Developer, React Developer, Next.js Portfolio, Node.js Backend, PostgreSQL Apps, Dockerized Projects, CI/CD Pipelines, Freelance Web Developer, Scalable Web Architecture, Web App Optimization, SEO-friendly Development, Frontend Backend Expert, Artyom Bordulanyuk"
     }
   },
   "summary": {
     "aboutMe": "About Me",
-    "intro": "Full-Stack Developer with 5+ years of experience in designing, developing, and deploying scalable web applications.",
-    "specialization": "I specialize in both frontend and backend development using React, Next.js, Node.js, and PostgreSQL, and have strong experience implementing CI/CD pipelines, load-balanced Docker infrastructures, and real-time features.",
+    "intro": "Experienced Full-Stack Developer with over 5 years of expertise in building robust, scalable, and high-performance web applications.",
+    "specialization": "Proficient in both frontend and backend development using React.js, Next.js, Node.js, Express.js, MongoDB, and PostgreSQL. I have strong experience with CI/CD automation, Docker-based deployment (including Swarm across multiple IPs), microservices architecture, and real-time communication systems.",
     "experience": {
-      "list1": "Building fault-tolerant backend systems using Nginx and Docker Swarm across multiple IP servers",
-      "list2": "Creating responsive UI with modern frontend frameworks (React, Material-UI, Ant Design)",
-      "list3": "Integrating payment systems (Stripe) and automating PDF invoice generation",
-      "list4": "Managing microservices architecture with Redis and RabbitMQ",
-      "list5": "Writing unit and integration tests with Jest and SuperTest"
+      "list1": "Engineering fault-tolerant backend systems with Nginx and Docker Swarm across distributed IP servers",
+      "list2": "Building modern, responsive UIs using React.js, Material-UI, and Ant Design",
+      "list3": "Integrating secure payment systems (e.g., Stripe) and automating PDF invoice generation",
+      "list4": "Designing and maintaining microservice infrastructures with Redis and RabbitMQ",
+      "list5": "Developing unit and integration tests with Jest and SuperTest to ensure code quality"
     },
-    "focus": "I focus on clean architecture, performance-driven development, and delivering solutions that grow with the business."
+    "focus": "I prioritize clean architecture, performance-oriented development, and scalable solutions that align with business growth."
   },
   "projects": {
     "title": "Projects",
-    "viewAll": "View all"
+    "viewMore": "Show More",
+    "viewAll": "Show All",
+    "viewLess": "Show Less"
   },
   "workExperience": {
     "title": "Work Experience",
+    "viewMore": "Show More",
+    "viewAll": "Show All",
+    "viewLess": "Show Less",
     "genieWeb": {
       "position": "Full-Stack Developer",
       "period": "Mar 2024 – May 2025",
       "company": "GenieWeb",
       "details": [
-        "Built real-time dashboards using ReactJS, Redux, and Socket.io to monitor key metrics",
-        "Developed scalable backend architecture using Node.js, Docker, and Nginx with multi-instance deployment across different IPs",
-        "Automated CI/CD pipelines with Jenkins, including rollback strategies",
-        "Integrated Stripe payments and generated PDF receipts using Puppeteer and webhook flows",
-        "Wrote unit and integration tests (Jest, SuperTest) and increased test coverage by 40%",
-        "Enhanced frontend performance via asset optimization and lazy loading"
+        "Developed real-time dashboards with ReactJS, Redux, and Socket.io for data visualization and monitoring",
+        "Engineered scalable backend systems with Node.js, Docker, and Nginx, deploying across distributed IP servers",
+        "Automated CI/CD pipelines via Jenkins with rollback and recovery strategies",
+        "Integrated Stripe payments and generated PDF receipts using Puppeteer and webhooks",
+        "Improved test coverage by 40% through comprehensive unit and integration testing (Jest, SuperTest)",
+        "Optimized frontend performance through asset optimization and lazy loading techniques"
       ]
     },
     "pixeria": {
@@ -51,11 +56,11 @@
       "period": "Sep 2022 – Mar 2024",
       "company": "Pixeria LAB",
       "details": [
-        "Created a custom CRM system using Node.js, TypeScript, PostgreSQL, and React",
-        "Developed reusable UI components with Ant Design and Bootstrap",
-        "Designed scalable REST APIs with data indexing and migration strategies",
-        "Maintained robust testing with Jest and SuperTest",
-        "Managed CI/CD deployment and Docker-based architecture"
+        "Built a custom CRM platform using Node.js, TypeScript, PostgreSQL, and React",
+        "Created reusable UI components with Ant Design and Bootstrap",
+        "Designed REST APIs with efficient data indexing and migration support",
+        "Maintained end-to-end testing strategy with Jest and SuperTest",
+        "Managed CI/CD deployments with Docker-based infrastructure"
       ]
     },
     "beeOnCode1": {
@@ -63,9 +68,9 @@
       "period": "Jan 2022 – Aug 2022",
       "company": "BeeOnCode LLC",
       "details": [
-        "Developed internal admin panels using React, ExpressJS, and MongoDB",
-        "Implemented real-time modules using Socket.io",
-        "Built backend logic with Node.js and designed RESTful API endpoints"
+        "Built internal admin dashboards with React, ExpressJS, and MongoDB",
+        "Implemented real-time features using Socket.io",
+        "Developed RESTful API services and backend logic using Node.js"
       ]
     },
     "beeOnCode2": {
@@ -73,10 +78,10 @@
       "period": "Oct 2020 – Dec 2021",
       "company": "BeeOnCode LLC",
       "details": [
-        "Refactored legacy frontend codebases using modern React patterns",
-        "Developed responsive interfaces with Material-UI, EJS, and SCSS",
-        "Ensured cross-browser compatibility and accessibility compliance",
-        "Collaborated closely with backend developers to integrate API data"
+        "Refactored legacy codebases using modern React architecture",
+        "Designed adaptive UIs using Material-UI, SCSS, and EJS",
+        "Ensured accessibility and cross-browser compatibility",
+        "Worked collaboratively with backend developers to integrate API data"
       ]
     },
     "instructor": {
@@ -84,21 +89,24 @@
       "period": "Jun 2021 – Jul 2022",
       "company": "Global IT",
       "details": [
-        "Delivered HTML, CSS, JavaScript, and React training in group sessions",
-        "Created learning projects and provided one-on-one support to junior developers"
+        "Conducted structured training sessions on HTML, CSS, JavaScript, and React for aspiring developers",
+        "Developed practical learning projects and provided personalized mentorship to junior developers"
       ]
     }
   },
   "techStack": {
-    "title": "Tech Stack",
+    "title": "Technology Stack",
     "all": "All",
-    "tools": "Tools",
     "frontend": "Frontend",
-    "backend": "Backend"
+    "backend": "Backend",
+    "tools": "Tools",
+    "viewMore": "Show More",
+    "viewAll": "Show All",
+    "viewLess": "Show Less"
   },
   "callToAction": {
-    "title": "Let's Build Something Together",
-    "subtitle": "Ready to transform your ideas into exceptional digital experiences? Let's collaborate and create something amazing that your users will love.",
+    "title": "Let’s Build the Future Together",
+    "subtitle": "Have a project in mind or need a reliable developer to bring your ideas to life? Let's connect and build something impactful, scalable, and truly user-focused.",
     "button": "Start a Project",
     "hint": "Or scroll back up to get in touch"
   },
@@ -137,6 +145,9 @@
   },
   "testimonialsSection": {
     "title": "Testimonials",
+    "viewMore": "Show More",
+    "viewAll": "Show All",
+    "viewLess": "Show Less",
     "items": [
       {
         "initials": "SM",
@@ -145,58 +156,62 @@
         "message": "Artyom delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise made our launch seamless."
       },
       {
+        "initials": "J.D.",
+        "name": "James D.",
+        "role": "Upwork Client",
+        "message": "Very responsive and patient, and professional in his work. Made updates on the go and delivered exactly what I needed. Would definitely hire again."
+      },
+      {
         "initials": "MR",
         "name": "Marcus Rodriguez",
         "role": "Product Manager, InnovateLab",
         "message": "Working with Artyom was a game-changer for our team. He transformed our complex requirements into an elegant, user-friendly solution."
       },
+
       {
-        "initials": "EK",
-        "name": "Elena Kim",
-        "role": "Founder, CreativeSpace",
-        "message": "Artyom's full-stack expertise and collaborative approach made our project a huge success. I highly recommend him for any development needs."
+        "initials": "S.A.",
+        "name": "Steve A.",
+        "role": "Upwork Client",
+        "message": "Artyom understood the project immediately and delivered super quick. Great communication, excellent quality — exactly what I hoped for."
       },
       {
         "initials": "JL",
         "name": "James Liu",
         "role": "CTO, DataFlow Systems",
         "message": "The analytics dashboard Artyom built for us has become the cornerstone of our business intelligence. His code quality and performance optimization skills are outstanding."
-      },
-      {
-        "initials": "AP",
-        "name": "Anna Petrov",
-        "role": "Director, EduTech Solutions",
-        "message": "Artyom's learning platform revolutionized how we deliver education. His understanding of user experience and scalable architecture is impressive."
       }
     ]
   },
   "faqSection": {
-    "title": "Frequently asked questions",
-    "philosophy": "I believe in creating digital experiences that are not just functional, but meaningful. Every line of code should serve a purpose, every design decision should enhance the user's journey, and every project should leave a positive impact.",
+    "title": "Frequently Asked Questions",
+    "viewMore": "Show More",
+    "viewAll": "Show All",
+    "viewLess": "Show Less",
+    "philosophy": "I believe that great digital products combine thoughtful design, clean architecture, and purposeful code. Every project I take on is guided by clarity, collaboration, and the drive to create lasting value.",
     "faqs": [
       {
         "question": "What technologies do you specialize in?",
-        "answer": "I work primarily with React, Node.js, Python, and modern databases like PostgreSQL and MongoDB. I'm also experienced with cloud platforms like AWS and containerization with Docker. I stay current with emerging technologies and choose the best tools for each project's specific needs."
+        "answer": "I specialize in modern web technologies including React.js, Next.js, Node.js, Express, PostgreSQL, MongoDB, and Docker. I'm also experienced with CI/CD pipelines (Jenkins), cloud platforms (AWS, Vercel), and scalable architecture patterns like microservices."
       },
       {
         "question": "How do you approach new projects?",
-        "answer": "I start by deeply understanding your business goals and user needs. Then I create a detailed technical plan, design wireframes, and build iteratively with regular feedback loops. Communication is key - I provide regular updates and involve you in key decisions throughout the development process."
+        "answer": "I begin with discovery—understanding your goals, users, and pain points. Then I define a clear roadmap, propose suitable technologies, and begin development with iterative updates and feedback sessions to ensure alignment at every step."
       },
       {
-        "question": "What's your typical project timeline?",
-        "answer": "Project timelines vary based on complexity and scope. A simple website might take 2–4 weeks, while a full-stack application could take 2–4 months. I always provide realistic estimates upfront and break projects into milestones so you can track progress and provide feedback along the way."
+        "question": "What’s your typical project timeline?",
+        "answer": "It depends on the project scope. Simple landing pages can be delivered in 1–2 weeks. Full-stack platforms usually range from 1 to 3 months. I always define realistic milestones and keep communication open to adapt to your timeline and feedback."
       },
       {
-        "question": "Do you provide ongoing support?",
-        "answer": "Absolutely! I offer various support packages including bug fixes, feature updates, performance monitoring, and technical consultation. I believe in building long-term relationships with my clients and helping their projects evolve as their business grows."
+        "question": "Do you offer long-term support?",
+        "answer": "Yes. I provide ongoing support for bug fixes, feature enhancements, performance optimization, and security monitoring. You can count on me as a reliable technical partner even after launch."
       },
       {
-        "question": "How do you ensure code quality?",
-        "answer": "I follow industry best practices including comprehensive testing, code reviews, and documentation. I use modern development tools for linting, formatting, and continuous integration. Every project includes proper error handling, security measures, and performance optimization from the ground up."
+        "question": "How do you ensure high code quality?",
+        "answer": "I follow best engineering practices: modular architecture, unit/integration tests (Jest, SuperTest), code reviews, and clear documentation. I also use tools like ESLint, Prettier, and CI pipelines to maintain quality throughout the project."
       },
       {
-        "question": "Can you work with existing teams?",
-        "answer": "Yes! I'm experienced in collaborating with existing development teams, designers, and stakeholders. I adapt to your current workflows, tools, and methodologies. Whether you need additional development capacity or specialized expertise, I integrate seamlessly into your team structure."
+        "question": "Can you collaborate with our existing team?",
+        "answer": "Absolutely. I’ve worked with startups and enterprises, adapting to different tools, workflows, and agile practices. Whether you need full-cycle development or extra hands in your sprint, I integrate smoothly with your in-house team."
       }
     ]
   },
@@ -206,6 +221,7 @@
     "phone": "Phone",
     "telegram": "Telegram",
     "upwork": "Upwork",
+    "viber": "Viber",
     "linkedin": "LinkedIn",
     "github": "GitHub"
   },

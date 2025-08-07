@@ -1,21 +1,25 @@
 'use client';
 
-import React, {JSX} from 'react';
+import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 import clsx from 'clsx';
-
-type Testimonial = {
-  initials: string;
-  name: string;
-  role: string;
-  message: string;
-};
+import {
+  getVisibleTestimonials,
+  getNextTestimonialsStep,
+  shouldShowTestimonialsButton,
+  getTestimonialsButtonLabel,
+  Testimonial,
+} from './utils';
 
 export default function TestimonialsSection(): JSX.Element {
   const t = useTranslations('testimonialsSection');
+  const [step, setStep] = useState<0 | 1>(0);
 
-  const testimonials = t.raw('items') as Testimonial[];
+  const allTestimonials = t.raw('items') as Testimonial[];
+  const visible = getVisibleTestimonials(allTestimonials, step);
+  const showButton = shouldShowTestimonialsButton(allTestimonials);
+  const buttonText = getTestimonialsButtonLabel(step, allTestimonials.length, t);
 
   return (
     <StorySectionWrapper sectionId={5} innerClassName="max-w-6xl mx-auto px-4">
@@ -24,7 +28,7 @@ export default function TestimonialsSection(): JSX.Element {
       </h2>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-        {testimonials.map((testimonial, index) => (
+        {visible.map((testimonial, index) => (
           <div
             key={index}
             className={clsx(
@@ -51,6 +55,17 @@ export default function TestimonialsSection(): JSX.Element {
           </div>
         ))}
       </div>
+
+      {showButton && (
+        <div className="text-center pt-10">
+          <button
+            onClick={() => setStep(getNextTestimonialsStep(step))}
+            className="rounded-full border border-slate-300 px-6 py-3 font-sans text-slate-900 transition duration-300 hover:bg-slate-50 dark:border-slate-600 dark:text-white dark:hover:bg-slate-800"
+          >
+            {buttonText}
+          </button>
+        </div>
+      )}
 
       <div className="mx-auto mt-12 h-0.5 w-16 bg-slate-400 dark:bg-slate-500 md:mt-16" />
     </StorySectionWrapper>

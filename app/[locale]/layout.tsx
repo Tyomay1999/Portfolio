@@ -18,7 +18,6 @@ export async function generateStaticParams() {
 export async function generateMetadata(
   { params }: Pick<Props, "params">
 ): Promise<Metadata> {
-
   const fallbackLocale = 'en';
   const resolvedParams = await params;
   const locale = languages.includes(resolvedParams.locale)
@@ -45,6 +44,15 @@ export async function generateMetadata(
         },
       ],
     },
+    icons: {
+      icon: [
+        { url: '/favicon.ico' },
+        { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+        { url: '/apple-touch-icon.png', sizes: '180x180', rel: 'apple-touch-icon' }
+      ]
+    },
+    manifest: '/site.webmanifest',
     alternates: {
       canonical: `https://yourdomain.com/${locale}`,
       languages: {

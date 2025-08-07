@@ -292,3 +292,37 @@ export const categories: { label: string; value: Category }[] = [
   { label: 'Backend', value: 'backend' },
   { label: 'Tools', value: 'tools' },
 ];
+
+
+export const getFilteredItems = (items: TechItem[], category: Category): TechItem[] => {
+  return category === 'all' ? items : items.filter(i => i.category === category);
+};
+
+export const getVisibleItems = (items: TechItem[], step: 0 | 1 | 2): TechItem[] => {
+  if (items.length <= 10) return items;
+  if (step === 0) return items.slice(0, 10);
+  if (step === 1) return items.slice(0, 20);
+  return items;
+};
+
+export const getNextStep = (current: 0 | 1 | 2, total: number): 0 | 1 | 2 => {
+  if (total <= 10) return 0;
+  if (total <= 20) return current === 0 ? 2 : 0;
+  return ((current + 1) % 3) as 0 | 1 | 2;
+};
+
+export const getButtonLabel = (
+  step: 0 | 1 | 2,
+  total: number,
+  t: (key: string) => string
+): string => {
+  if (total <= 10) return '';
+  if (total <= 20) return step === 0 ? t('viewAll') : t('viewLess');
+  if (step === 0) return t('viewMore');
+  if (step === 1) return t('viewAll');
+  return t('viewLess');
+};
+
+export const shouldShowButton = (items: TechItem[]): boolean => {
+  return items.length > 10;
+};

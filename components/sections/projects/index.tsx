@@ -4,16 +4,20 @@ import React, { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 import Image from 'next/image';
-import { projects } from './utils';
+import { projects, getVisibleProjects, getNextStep, getButtonLabel, shouldShowButton } from './utils';
 
 const Projects: React.FC = () => {
   const t = useTranslations('projects');
   const [locale, setLocale] = useState<'en' | 'ru' | 'hy'>('en');
+  const [viewStep, setViewStep] = useState<0 | 1 | 2>(0);
 
   useEffect(() => {
     const langFromUrl = window.location.pathname.split('/')[1] as 'en' | 'ru' | 'hy';
     setLocale(['en', 'ru', 'hy'].includes(langFromUrl) ? langFromUrl : 'en');
   }, []);
+
+  const visibleProjects = getVisibleProjects(projects, viewStep);
+  const showButton = shouldShowButton(projects);
 
   return (
     <StorySectionWrapper sectionId={1} innerClassName="max-w-7xl mx-auto px-4">
@@ -22,9 +26,12 @@ const Projects: React.FC = () => {
       </h2>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-12">
-        {projects.map((project, index) => (
+        {visibleProjects.map((project, index) => (
           <div key={index} className="project-card group cursor-pointer">
-            <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-lg shadow-lg md:mb-6">
+            <div
+              onClick={() => project.url && window.open(project.url, '_blank')}
+              className="relative mb-4 aspect-[4/3] overflow-hidden rounded-lg shadow-lg md:mb-6"
+            >
               <Image
                 src={project.image}
                 alt={project.title}
@@ -52,11 +59,16 @@ const Projects: React.FC = () => {
         ))}
       </div>
 
-      <div className="mt-12 pb-8 text-center md:mt-16">
-        <button className="rounded-lg border border-slate-300 px-6 py-3 font-sans text-slate-900 transition-colors duration-300 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-800 md:px-8">
-          {t('viewAll')}
-        </button>
-      </div>
+      {showButton && (
+        <div className="mt-12 pb-8 text-center md:mt-16">
+          <button
+            onClick={() => setViewStep(getNextStep(viewStep, projects.length))}
+            className="rounded-lg border border-slate-300 px-6 py-3 font-sans text-slate-900 transition-colors duration-300 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-800 md:px-8"
+          >
+            {getButtonLabel(viewStep, projects.length, t)}
+          </button>
+        </div>
+      )}
     </StorySectionWrapper>
   );
 };

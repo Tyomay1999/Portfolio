@@ -189,7 +189,7 @@ export default function ContactSection(): JSX.Element {
           name="contactType"
           value={form.contactType}
           onChange={handleChange}
-          className={`w-full border-0 border-b bg-white px-0 py-3 font-sans text-base text-slate-800 placeholder-slate-400 focus:outline-none dark:bg-slate-900 dark:text-white md:py-4 md:text-lg ${inputClass('contactType')} `}
+          className={`w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-base text-slate-800 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder-slate-400 dark:focus:border-blue-400 dark:focus:ring-blue-400 md:text-lg ${inputClass('contactType')}`}
         >
           <option value="" disabled>
             {t('placeholders.contactType')}
@@ -199,6 +199,7 @@ export default function ContactSection(): JSX.Element {
           <option value="design">{t('contactTypes.design')}</option>
           <option value="other">{t('contactTypes.other')}</option>
         </select>
+
 
         <button
           type="submit"
