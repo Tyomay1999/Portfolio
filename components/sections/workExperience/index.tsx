@@ -28,7 +28,7 @@ const WorkExperience: React.FC = () => {
       </h2>
 
       <div className="space-y-8 md:space-y-12">
-        {visibleKeys.map((key: WorkKey, i: number) => {
+        {(visibleKeys as WorkKey[]).map((key: WorkKey, i: number) => {
           const jobDetails = t.raw(`${key}.details`) as string[];
 
           return (

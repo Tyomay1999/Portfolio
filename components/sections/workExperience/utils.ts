@@ -1,6 +1,9 @@
 export const workKeys = ['genieWeb', 'pixeria', 'beeOnCode1', 'instructor', 'beeOnCode2'] as const;
 
-export const getVisibleWorkKeys = (allKeys: readonly string[], step: 0 | 1): string[] => {
+export const getVisibleWorkKeys = (
+  allKeys: readonly string[],
+  step: 0 | 1
+): readonly string[] => {
   if (allKeys.length <= 2) return allKeys;
   return step === 0 ? allKeys.slice(0, 2) : allKeys;
 };
