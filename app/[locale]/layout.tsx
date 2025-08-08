@@ -73,9 +73,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} suppressHydrationWarning>
       <body className="min-h-[100dvh] overflow-x-hidden bg-white text-slate-800 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
         <Providers>
-          <div className="safe-area-wrapper">
           <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
-          </div>
         </Providers>
       </body>
     </html>
