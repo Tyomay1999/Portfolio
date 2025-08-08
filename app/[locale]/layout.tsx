@@ -23,14 +23,14 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
   const t = await getTranslations({ locale });
 
   return {
-    metadataBase: new URL('https://yourdomain.com'),
+    metadataBase: new URL('https://tyomay.dev'),
     title: t('seo.home.title'),
     description: t('seo.home.description'),
     keywords: t('seo.home.keywords'),
     openGraph: {
       title: t('seo.home.title'),
       description: t('seo.home.description'),
-      url: `https://yourdomain.com/${locale}`,
+      url: `https://tyomay.dev/${locale}`,
       images: [
         {
           url: '/og-image.png',
@@ -50,11 +50,11 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
     },
     manifest: '/site.webmanifest',
     alternates: {
-      canonical: `https://yourdomain.com/${locale}`,
+      canonical: `https://tyomay.dev/${locale}`,
       languages: {
-        en: 'https://yourdomain.com/en',
-        ru: 'https://yourdomain.com/ru',
-        hy: 'https://yourdomain.com/hy',
+        en: 'https://tyomay.dev/en',
+        ru: 'https://tyomay.dev/ru',
+        hy: 'https://tyomay.dev/hy',
       },
     },
   };
@@ -73,7 +73,9 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} suppressHydrationWarning>
       <body className="min-h-[100dvh] overflow-x-hidden bg-white text-slate-800 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
         <Providers>
+          <div className="safe-area-wrapper">
           <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+          </div>
         </Providers>
       </body>
     </html>

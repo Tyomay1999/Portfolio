@@ -16,6 +16,11 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+.safe-area-wrapper {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 .typing-cursor {
   animation: blink 1s infinite;
 }
