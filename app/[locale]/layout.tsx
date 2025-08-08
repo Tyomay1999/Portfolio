@@ -71,7 +71,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className="overflow-x-hidden bg-white text-slate-800 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
+      <body className="min-h-[100dvh] overflow-x-hidden bg-white text-slate-800 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
         <Providers>
           <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
         </Providers>
