@@ -98,7 +98,7 @@ GitHub: https://github.com/Tyomay1999
 
 LinkedIn: https://www.linkedin.com/in/artyom-bordulanyuk-a266071b6/
 
-Email: abordulanyuk@gmail.com
+Email: architect@tyomay.dev
 
 📄 License
 This project is open-source and free to use for learning or inspiration.

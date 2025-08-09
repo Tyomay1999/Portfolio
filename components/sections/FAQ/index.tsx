@@ -48,7 +48,7 @@ export default function FAQPhilosophySection(): JSX.Element {
             <h3 className="mb-4 font-serif text-xl font-medium text-slate-900 dark:text-slate-100 md:text-2xl">
               {faq.question}
             </h3>
-            <p className="font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300 md:text-base">
+            <p className="text-justify font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300 md:text-base">
               {faq.answer}
             </p>
           </div>

@@ -21,7 +21,7 @@
     "experience": {
       "list1": "Engineering fault-tolerant backend systems with Nginx and Docker Swarm across distributed IP servers",
       "list2": "Building modern, responsive UIs using React.js, Material-UI, and Ant Design",
-      "list3": "Integrating secure payment systems (e.g., Stripe) and automating PDF invoice generation",
+      "list3": "Integrating secure payment systems (e.g., Stripe, PayPal) and automating PDF invoice generation",
       "list4": "Designing and maintaining microservice infrastructures with Redis and RabbitMQ",
       "list5": "Developing unit and integration tests with Jest and SuperTest to ensure code quality"
     },
@@ -46,7 +46,7 @@
         "Developed real-time dashboards with ReactJS, Redux, and Socket.io for data visualization and monitoring",
         "Engineered scalable backend systems with Node.js, Docker, and Nginx, deploying across distributed IP servers",
         "Automated CI/CD pipelines via Jenkins with rollback and recovery strategies",
-        "Integrated Stripe payments and generated PDF receipts using Puppeteer and webhooks",
+        "Integrated Stripe, PayPal payments and generated PDF receipts using Puppeteer and webhooks",
         "Improved test coverage by 40% through comprehensive unit and integration testing (Jest, SuperTest)",
         "Optimized frontend performance through asset optimization and lazy loading techniques"
       ]
@@ -228,6 +228,7 @@
   "toast": {
     "emailCopied": "Email has been copied to clipboard",
     "phoneCopied": "Phone number has been copied to clipboard",
+    "viberNumberCopied": "Viber number has been copied to clipboard",
     "thankYou": "Thank you for your message!",
     "error": "Something went wrong. Please try again.",
     "fill": "Please fill out all required fields"

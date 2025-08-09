@@ -23,7 +23,7 @@ export default function CallToActionSection(): JSX.Element {
 
       <button
         onClick={handleClick}
-        className="mb-8 transform rounded-lg bg-slate-900 px-8 py-4 font-sans text-lg text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-slate-800 hover:shadow-xl dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 md:px-12 md:py-5 md:text-xl"
+        className="mx-auto mb-8 max-w-[580px] transform rounded-lg bg-slate-900 px-8 py-4 font-sans text-lg text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-slate-800 hover:shadow-xl dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 md:px-12 md:py-5 md:text-xl"
       >
         {t('button')}
       </button>
