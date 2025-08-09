@@ -8,74 +8,92 @@ import {
   restoreSectionFromSession,
 } from '@/lib/sectionStore';
 
-const isContentScrollable = (el: HTMLElement): boolean => el.scrollHeight > el.clientHeight;
-
-const hasScrolledToBottom = (el: HTMLElement): boolean =>
+const isScrollable = (el: HTMLElement) => el.scrollHeight > el.clientHeight + 1;
+const atTop = (el: HTMLElement) => el.scrollTop <= 2;
+const atBottom = (el: HTMLElement) =>
   el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
 
-const hasScrolledToTop = (el: HTMLElement): boolean => el.scrollTop <= 2;
+const scrollPageTop = () => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  const c = getCurrentStoryContentElement();
+  if (c) c.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+};
 
-const ScrollManager = (): null => {
+export default function ScrollManager(): null {
   useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
     restoreSectionFromSession();
+    setTimeout(scrollPageTop, 0);
 
     let wheelDelta = 0;
-    let timeout: NodeJS.Timeout;
+    let timeout: NodeJS.Timeout | null = null;
     let touchStartY = 0;
 
-    const handleWheel = (e: WheelEvent): void => {
+    const goToSection = (newIndex: number) => {
+      setActiveSection(newIndex);
+      // При каждом переключении секции всегда сбрасываем скролл
+      setTimeout(scrollPageTop, 0);
+    };
+
+    const processScroll = (deltaY: number) => {
+      const content = getCurrentStoryContentElement();
+      if (!content) return;
+
+      const scrollable = isScrollable(content);
+      const top = atTop(content);
+      const bottom = atBottom(content);
+      const current = getActiveSection();
+
+      // Логика:
+      // вверх — листаем, если в самом верху
+      // вниз — листаем, если в самом низу
+      // короткая секция — листаем всегда
+      const shouldSwipe =
+        !scrollable || (deltaY < 0 && top) || (deltaY > 0 && bottom);
+
+      if (!shouldSwipe) return;
+
+      wheelDelta += deltaY;
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        if (Math.abs(wheelDelta) > 50) {
+          if (deltaY > 0) goToSection(current + 1);
+          else if (deltaY < 0) goToSection(current - 1);
+        }
+        wheelDelta = 0;
+      }, 60);
+    };
+
+    const handleWheel = (e: WheelEvent) => {
       processScroll(e.deltaY);
     };
 
-    const handleTouchStart = (e: TouchEvent): void => {
+    const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.touches[0].clientY;
     };
 
-    const handleTouchMove = (e: TouchEvent): void => {
+    const handleTouchMove = (e: TouchEvent) => {
       const touchY = e.touches[0].clientY;
       const deltaY = touchStartY - touchY;
       processScroll(deltaY);
     };
 
-    const processScroll = (deltaY: number): void => {
-      const storyContent = getCurrentStoryContentElement();
-      if (!storyContent) return;
-
-      const isScrollable = isContentScrollable(storyContent);
-      const atTop = hasScrolledToTop(storyContent);
-      const atBottom = hasScrolledToBottom(storyContent);
-
-      if (isScrollable && !((deltaY > 0 && atBottom) || (deltaY < 0 && atTop))) return;
-
-      wheelDelta += deltaY;
-
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        const current = getActiveSection();
-
-        if (Math.abs(wheelDelta) > 50) {
-          if (deltaY > 0 && current < 7) {
-            setActiveSection(current + 1);
-          } else if (deltaY < 0 && current > -1) {
-            setActiveSection(current - 1);
-          }
-        }
-
-        wheelDelta = 0;
-      }, 60);
-    };
-
-    // Восстановление секции из sessionStorage
-    const savedSection = Number(sessionStorage.getItem('activeSection')) || -1;
+    // При открытии восстанавливаем секцию, но сбрасываем скролл внутри неё
+    const savedSection = Number(sessionStorage.getItem('activeSection')) || 0;
     setTimeout(() => {
       setActiveSection(savedSection);
-    }, 400);
+      scrollPageTop();
+    }, 200);
 
     window.addEventListener('wheel', handleWheel, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     return () => {
+      if (timeout) clearTimeout(timeout);
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
@@ -83,6 +101,4 @@ const ScrollManager = (): null => {
   }, []);
 
   return null;
-};
-
-export default ScrollManager;
+}
