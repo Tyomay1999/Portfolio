@@ -36,7 +36,7 @@ export default function StorySectionWrapper({
     <section
       ref={ref}
       data-section={sectionId}
-      className={`story-section ${isActive ? 'active' : ''} ${isExiting ? 'exiting' : ''} pb-[72px] md:pb-0`}
+      className={`story-section ${isActive ? 'active' : ''} ${isExiting ? 'exiting' : ''}`}
     >
       <div className="story-overlay" />
       <div className="story-content">
