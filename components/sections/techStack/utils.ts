@@ -75,7 +75,7 @@ export const techItems: TechItem[] = [
     colorClass: 'from-indigo-100 to-indigo-200 dark:from-indigo-900/30 dark:to-indigo-800/30',
   },
   {
-    name: 'WebRTC (ReactRTC)',
+    name: 'WebRTC',
     icon: '/webrtc.svg',
     category: 'frontend',
     colorClass: 'from-teal-100 to-teal-200 dark:from-teal-900/30 dark:to-teal-800/30',
