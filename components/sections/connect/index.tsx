@@ -136,8 +136,8 @@ export default function ContactSection(): JSX.Element {
       } else {
         showToast('error');
       }
-    } catch (err) {
-      console.error('Send error:', err);
+      // @typescript-eslint/no-unused-vars
+    } catch {
       showToast('error');
     } finally {
       setSending(false);

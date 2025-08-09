@@ -8,10 +8,14 @@ import {
   restoreSectionFromSession,
 } from '@/lib/sectionStore';
 
+const MIN_SECTION = -1;
+const MAX_SECTION = Number(process.env.NEXT_PUBLIC_TOTAL_SECTIONS ?? 7);
+
+export const clamp = (n: number) => Math.min(MAX_SECTION, Math.max(MIN_SECTION, n), MAX_SECTION);
+
 const isScrollable = (el: HTMLElement) => el.scrollHeight > el.clientHeight + 1;
 const atTop = (el: HTMLElement) => el.scrollTop <= 2;
-const atBottom = (el: HTMLElement) =>
-  el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
+const atBottom = (el: HTMLElement) => el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
 
 const scrollPageTop = () => {
   window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -33,9 +37,8 @@ export default function ScrollManager(): null {
     let touchStartY = 0;
 
     const goToSection = (newIndex: number) => {
-      setActiveSection(newIndex);
-      // При каждом переключении секции всегда сбрасываем скролл
-      setTimeout(scrollPageTop, 0);
+      setActiveSection(clamp(newIndex));
+      if (newIndex !== 8) setTimeout(scrollPageTop, 0);
     };
 
     const processScroll = (deltaY: number) => {
@@ -45,15 +48,11 @@ export default function ScrollManager(): null {
       const scrollable = isScrollable(content);
       const top = atTop(content);
       const bottom = atBottom(content);
-      const current = getActiveSection();
+      const currentRaw = getActiveSection();
+      const current = Number.isFinite(currentRaw) ? currentRaw : MIN_SECTION;
 
-      // Логика:
-      // вверх — листаем, если в самом верху
-      // вниз — листаем, если в самом низу
-      // короткая секция — листаем всегда
-      const shouldSwipe =
-        !scrollable || (deltaY < 0 && top) || (deltaY > 0 && bottom);
-
+      // вверх — только с самого верха; вниз — только с самого низа; короткая — всегда
+      const shouldSwipe = !scrollable || (deltaY < 0 && top) || (deltaY > 0 && bottom);
       if (!shouldSwipe) return;
 
       wheelDelta += deltaY;
@@ -67,24 +66,18 @@ export default function ScrollManager(): null {
       }, 60);
     };
 
-    const handleWheel = (e: WheelEvent) => {
-      processScroll(e.deltaY);
-    };
-
+    const handleWheel = (e: WheelEvent) => processScroll(e.deltaY);
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.touches[0].clientY;
     };
-
     const handleTouchMove = (e: TouchEvent) => {
       const touchY = e.touches[0].clientY;
-      const deltaY = touchStartY - touchY;
-      processScroll(deltaY);
+      processScroll(touchStartY - touchY);
     };
 
-    // При открытии восстанавливаем секцию, но сбрасываем скролл внутри неё
-    const savedSection = Number(sessionStorage.getItem('activeSection')) || 0;
+    const saved = sessionStorage.getItem('activeSection') || MIN_SECTION;
     setTimeout(() => {
-      setActiveSection(savedSection);
+      setActiveSection(clamp(saved as number));
       scrollPageTop();
     }, 200);
 

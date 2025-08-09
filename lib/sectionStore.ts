@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { clamp } from '@/components/navigation/scrollManager';
 
 type SectionChangeCallback = (id: number) => void;
 
@@ -63,7 +64,7 @@ export function restoreSectionFromSession(): void {
         const el = document.querySelector(`[data-section="${sectionId}"]`);
         if (el) {
           el.scrollIntoView({ behavior: 'instant', block: 'start' });
-          setActiveSection(sectionId);
+          setActiveSection(clamp(sectionId));
         }
       });
     }
