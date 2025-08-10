@@ -7,7 +7,7 @@ import {
   getCurrentStoryContentElement,
   restoreSectionFromSession,
 } from '@/lib/sectionStore';
-
+import { onKeyboardChange, isKeyboardOpenNow } from '@/lib/keyboard';
 const MIN_SECTION = -1;
 const MAX_SECTION = Number(process.env.NEXT_PUBLIC_TOTAL_SECTIONS ?? 7);
 
@@ -18,9 +18,18 @@ const atTop = (el: HTMLElement) => el.scrollTop <= 2;
 const atBottom = (el: HTMLElement) => el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
 
 const scrollPageTop = () => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  window.scrollTo({ top: 5, left: 0, behavior: 'auto' });
   const c = getCurrentStoryContentElement();
-  if (c) c.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  if (c) c.scrollTo({ top: 5, left: 0, behavior: 'auto' });
+};
+
+const hasTextFocus = () => {
+  const el = document.activeElement as HTMLElement | null;
+  return !!el && (
+    el.tagName === 'INPUT' ||
+    el.tagName === 'TEXTAREA' ||
+    el.getAttribute('contenteditable') === 'true'
+  );
 };
 
 export default function ScrollManager(): null {
@@ -35,6 +44,10 @@ export default function ScrollManager(): null {
     let wheelDelta = 0;
     let timeout: NodeJS.Timeout | null = null;
     let touchStartY = 0;
+    let keyboardOpen = isKeyboardOpenNow();
+    const offKeyboard = onKeyboardChange(({ open }) => {
+      keyboardOpen = open;
+    });
 
     const goToSection = (newIndex: number) => {
       setActiveSection(clamp(newIndex));
@@ -42,6 +55,7 @@ export default function ScrollManager(): null {
     };
 
     const processScroll = (deltaY: number) => {
+      if (keyboardOpen || hasTextFocus()) return;
       const content = getCurrentStoryContentElement();
       if (!content) return;
 
@@ -87,6 +101,7 @@ export default function ScrollManager(): null {
 
     return () => {
       if (timeout) clearTimeout(timeout);
+      offKeyboard?.();
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);

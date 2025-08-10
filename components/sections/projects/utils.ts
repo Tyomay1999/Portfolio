@@ -99,4 +99,37 @@ export const projects: Project[] = [
     url: 'https://api.genieweb.org',
     gitUrl: '',
   },
+  {
+    title: 'MTAD Admin Portal',
+    desc: {
+      en: 'Administrative web system for the Ministry of Territorial Administration and Infrastructure of Armenia. I worked mainly on the admin area: data management interfaces, permissions, and analytics. Built with React, Redux Thunk, TypeScript, and SCSS.',
+      ru: 'Административная веб‑система для Министерства территориального управления и инфраструктур РА. Я работал в основном над админ‑частью: интерфейсы управления данными, права доступа и аналитика. Стек: React, Redux Thunk, TypeScript, SCSS.',
+      hy: 'ՀՀ Տարածքային կառավարման և ենթակառուցվածքների նախարարության վարչական վեբ համակարգ։ Աշխատել եմ հիմնականում ադմին հատվածում՝ տվյալների կառավարման ինտերֆեյսներ, մուտքի իրավունքներ և վերլուծություն։ Կառուցված է React, Redux Thunk, TypeScript և SCSS տեխնոլոգիաներով։',
+    },
+    tags: ['React', 'Redux Thunk', 'TypeScript', 'SCSS', 'Admin Panel', 'Data Management'],
+    image: '/mtad.jpg',
+    url: 'https://mtad.am/',
+    gitUrl: '',
+  },
+  {
+    title: '4everstock',
+    desc: {
+      en: 'Creative platform for talented authors from Armenia to showcase and sell their work. Worked on both client and admin sides, implementing UI, data management, and integrations using ReactJS, Redux, Next.js, TypeScript, and SCSS.',
+      ru: 'Креативная платформа для талантливых авторов из Армении, где они могут демонстрировать и продавать свои работы. Работал как над клиентской, так и над админской частью, реализуя интерфейсы, управление данными и интеграции. Использованы ReactJS, Redux, Next.js, TypeScript, SCSS.',
+      hy: 'Ստեղծագործական հարթակ Հայաստանի տաղանդավոր հեղինակների համար՝ իրենց աշխատանքները ներկայացնելու և վաճառելու նպատակով։ Աշխատել եմ և՛ հաճախորդի, և՛ ադմին հատվածում՝ իրականացնելով UI, տվյալների կառավարում և ինտեգրացիաներ ReactJS, Redux, Next.js, TypeScript, SCSS տեխնոլոգիաներով։',
+    },
+    tags: ['React', 'Redux', 'Redux Thunk', 'Next.js', 'TypeScript', 'SCSS', 'Admin Panel', 'Client Side'],
+    image: '/4everstock.jpg',
+    url: 'https://4everstock.com/',
+    gitUrl: '',
+  }
 ];
+
+
+export const matchesProjectName = (input: string) : boolean => {
+  const projects = ['mtad', 'genieweb teacher', 'genieweb ui'];
+
+  return projects.some(project =>
+    input.toLowerCase().includes(project.toLowerCase())
+  );
+}
