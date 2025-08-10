@@ -9,7 +9,7 @@ export default function Toast({ message, onClose }: { message: string; onClose: 
     setVisible(true);
     const timeout = setTimeout(() => {
       setVisible(false);
-      setTimeout(onClose, 30); // Подождать, пока анимация скроется
+      setTimeout(onClose, 30);
     }, 5000);
 
     return () => clearTimeout(timeout);

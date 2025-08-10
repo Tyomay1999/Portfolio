@@ -102,7 +102,6 @@ export default function ContactSection(): JSX.Element {
     setTouched(allTouched);
 
     const errorFields = Object.keys(form).filter(key => hasError(key as keyof ContactForm));
-
     if (errorFields.length > 0) {
       showToast(t('fill') + ': ' + errorFields.map(key => t(`placeholders.${key}`)).join(', '));
       return;
@@ -117,15 +116,10 @@ export default function ContactSection(): JSX.Element {
         ...form,
         language,
       });
+
       if (res.status === 200 || res.status === 201) {
         showToast('thankYou');
-        setForm({
-          name: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          contactType: '',
-        });
+        setForm({ name: '', lastName: '', email: '', phone: '', contactType: '' });
         setTouched({
           name: false,
           lastName: false,
@@ -136,9 +130,20 @@ export default function ContactSection(): JSX.Element {
       } else {
         showToast('error');
       }
-      // @typescript-eslint/no-unused-vars
-    } catch {
-      showToast('error');
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        const status = err.response?.status;
+
+        if (status === 409) {
+          showToast('emailExists');
+        } else if (status === 500) {
+          showToast('error');
+        } else {
+          showToast('networkError');
+        }
+      } else {
+        showToast('error');
+      }
     } finally {
       setSending(false);
     }

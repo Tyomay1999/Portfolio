@@ -45,7 +45,7 @@ export function initKeyboardWatcher() {
 
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', onResize);
-    window.visualViewport.addEventListener('scroll', onResize); // iOS двигает vv.scroll
+    window.visualViewport.addEventListener('scroll', onResize);
   }
   window.addEventListener('resize', onResize);
   window.addEventListener('orientationchange', onResize);

@@ -18,9 +18,9 @@ const atTop = (el: HTMLElement) => el.scrollTop <= 2;
 const atBottom = (el: HTMLElement) => el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
 
 const scrollPageTop = () => {
-  window.scrollTo({ top: 5, left: 0, behavior: 'auto' });
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   const c = getCurrentStoryContentElement();
-  if (c) c.scrollTo({ top: 5, left: 0, behavior: 'auto' });
+  if (c) c.scrollTo({ top: 0, left: 0, behavior: 'auto' });
 };
 
 const hasTextFocus = () => {
@@ -66,7 +66,6 @@ export default function ScrollManager(): null {
       const currentRaw = getActiveSection();
       const current = Number.isFinite(currentRaw) ? currentRaw : MIN_SECTION;
 
-      // вверх — только с самого верха; вниз — только с самого низа; короткая — всегда
       const shouldSwipe = !scrollable || (deltaY < 0 && top) || (deltaY > 0 && bottom);
       if (!shouldSwipe) return;
 

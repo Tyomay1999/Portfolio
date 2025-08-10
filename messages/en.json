@@ -231,6 +231,8 @@
     "viberNumberCopied": "Viber number has been copied to clipboard",
     "thankYou": "Thank you for your message!",
     "error": "Something went wrong. Please try again.",
-    "fill": "Please fill out all required fields"
+    "fill": "Please fill out all required fields",
+    "emailExists": "This email is already registered.",
+    "networkError": "Network error. Please try again."
   }
 }
