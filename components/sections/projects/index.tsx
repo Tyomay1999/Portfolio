@@ -9,7 +9,8 @@ import {
   getVisibleProjects,
   getNextStep,
   getButtonLabel,
-  shouldShowButton, matchesProjectName,
+  shouldShowButton,
+  matchesProjectName,
 } from './utils';
 
 const Projects: React.FC = () => {
@@ -42,7 +43,7 @@ const Projects: React.FC = () => {
                 src={project.image}
                 alt={project.title}
                 fill
-                className={`object-cover ${matchesProjectName(project.title) ? "object-left" : "object-center"} transition-transform duration-300 group-hover:scale-105`}
+                className={`object-cover ${matchesProjectName(project.title) ? 'object-left' : 'object-center'} transition-transform duration-300 group-hover:scale-105`}
               />
             </div>
             <h3 className="mb-2 font-serif text-lg font-medium text-slate-900 dark:text-slate-100 md:text-xl lg:text-2xl">

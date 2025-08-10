@@ -118,18 +118,24 @@ export const projects: Project[] = [
       ru: 'Креативная платформа для талантливых авторов из Армении, где они могут демонстрировать и продавать свои работы. Работал как над клиентской, так и над админской частью, реализуя интерфейсы, управление данными и интеграции. Использованы ReactJS, Redux, Next.js, TypeScript, SCSS.',
       hy: 'Ստեղծագործական հարթակ Հայաստանի տաղանդավոր հեղինակների համար՝ իրենց աշխատանքները ներկայացնելու և վաճառելու նպատակով։ Աշխատել եմ և՛ հաճախորդի, և՛ ադմին հատվածում՝ իրականացնելով UI, տվյալների կառավարում և ինտեգրացիաներ ReactJS, Redux, Next.js, TypeScript, SCSS տեխնոլոգիաներով։',
     },
-    tags: ['React', 'Redux', 'Redux Thunk', 'Next.js', 'TypeScript', 'SCSS', 'Admin Panel', 'Client Side'],
+    tags: [
+      'React',
+      'Redux',
+      'Redux Thunk',
+      'Next.js',
+      'TypeScript',
+      'SCSS',
+      'Admin Panel',
+      'Client Side',
+    ],
     image: '/4everstock.jpg',
     url: 'https://4everstock.com/',
     gitUrl: '',
-  }
+  },
 ];
 
-
-export const matchesProjectName = (input: string) : boolean => {
+export const matchesProjectName = (input: string): boolean => {
   const projects = ['mtad', 'genieweb teacher', 'genieweb ui'];
 
-  return projects.some(project =>
-    input.toLowerCase().includes(project.toLowerCase())
-  );
-}
+  return projects.some(project => input.toLowerCase().includes(project.toLowerCase()));
+};

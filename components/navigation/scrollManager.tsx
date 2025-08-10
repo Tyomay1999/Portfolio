@@ -25,10 +25,11 @@ const scrollPageTop = () => {
 
 const hasTextFocus = () => {
   const el = document.activeElement as HTMLElement | null;
-  return !!el && (
-    el.tagName === 'INPUT' ||
-    el.tagName === 'TEXTAREA' ||
-    el.getAttribute('contenteditable') === 'true'
+  return (
+    !!el &&
+    (el.tagName === 'INPUT' ||
+      el.tagName === 'TEXTAREA' ||
+      el.getAttribute('contenteditable') === 'true')
   );
 };
 

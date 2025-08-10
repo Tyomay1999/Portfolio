@@ -6,19 +6,16 @@ type ContactItem = {
   icon: JSX.Element;
 };
 
-
 const normalizePhone = (raw: string) => {
   const cleaned = raw.replace(/[^\d+]/g, '');
   return cleaned.startsWith('+') ? `%2B${cleaned.slice(1)}` : cleaned;
 };
 
-const isProbablyMobile = () =>
-  /android|iphone|ipad|ipod|mobile/i.test(navigator.userAgent);
+const isProbablyMobile = () => /android|iphone|ipad|ipod|mobile/i.test(navigator.userAgent);
 
 const tryOpenDeepLink = (url: string, onFail: () => void, timeout = 800) => {
   const before = Date.now();
   window.location.href = url;
-
 
   setTimeout(() => {
     const delta = Date.now() - before;
@@ -26,7 +23,6 @@ const tryOpenDeepLink = (url: string, onFail: () => void, timeout = 800) => {
     else if (delta < timeout + 100) onFail();
   }, timeout);
 };
-
 
 export const contactItems = (showToast: (msg: string) => void): ContactItem[] => [
   {
@@ -109,7 +105,6 @@ export const contactItems = (showToast: (msg: string) => void): ContactItem[] =>
 
       tryOpenDeepLink(deepLink, () => {
         navigator.clipboard.writeText(raw).then(() => {
-
           if (isProbablyMobile() && /android/i.test(navigator.userAgent)) {
             window.location.href = `intent://chat?number=${num}#Intent;scheme=viber;package=com.viber.voip;end`;
           }
