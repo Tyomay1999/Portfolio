@@ -36,7 +36,7 @@ export default function JsonLd({ locale }: { locale: string }) {
         'https://www.instagram.com/_tyomay_',
         'https://www.tiktok.com/@_tyomay_',
         'https://www.linkedin.com/in/tyomay',
-        'https://github.com/Tyomay1999'
+        'https://github.com/Tyomay1999',
       ],
     },
     {
@@ -50,8 +50,8 @@ export default function JsonLd({ locale }: { locale: string }) {
       potentialAction: {
         '@type': 'SearchAction',
         target: `${base}/search?q={search_term_string}`,
-        'query-input': 'required name=search_term_string'
-      }
+        'query-input': 'required name=search_term_string',
+      },
     },
     {
       '@context': 'https://schema.org',
@@ -78,10 +78,10 @@ export default function JsonLd({ locale }: { locale: string }) {
           '@type': 'ListItem',
           position: 1,
           name: 'Home',
-          item: pageUrl
-        }
-      ]
-    }
+          item: pageUrl,
+        },
+      ],
+    },
   ];
 
   return (

@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
       title,
       description,
       images: ['/og-image.png'],
-      site: '@_tyomay_',    // заполни, если есть
+      site: '@_tyomay_', // заполни, если есть
       creator: '@_tyomay_', // заполни, если есть
     },
 
@@ -142,7 +142,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className="overflow-x-hidden bg-white text-slate-800 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
-      <JsonLd locale={locale} />
+        <JsonLd locale={locale} />
         <Providers>
           <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
         </Providers>

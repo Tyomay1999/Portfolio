@@ -50,7 +50,9 @@ export default function ScrollManager(): null {
 
     let navLocked = false;
     const NAV_COOLDOWN_MS = 420;
-    const lockNav = () => { navLocked = true; };
+    const lockNav = () => {
+      navLocked = true;
+    };
     const unlockNav = () => {
       navLocked = false;
       samples.length = 0;
@@ -92,7 +94,6 @@ export default function ScrollManager(): null {
       setTimeout(unlockNav, NAV_COOLDOWN_MS);
     };
 
-
     const processScroll = (deltaY: number, kind: 'wheel' | 'touch') => {
       if (keyboardOpen || hasTextFocus()) return;
 
@@ -109,7 +110,6 @@ export default function ScrollManager(): null {
         unlockNav();
       }, NAV_COOLDOWN_MS);
 
-
       const content = getCurrentStoryContentElement();
       if (!content) return;
 
@@ -124,8 +124,7 @@ export default function ScrollManager(): null {
         return;
       }
 
-      const shouldSwipe =
-        !scrollable || (deltaY < 0 ? top : bottom);
+      const shouldSwipe = !scrollable || (deltaY < 0 ? top : bottom);
       if (!shouldSwipe) return;
 
       const now = performance.now();
