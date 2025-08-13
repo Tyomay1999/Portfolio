@@ -8,6 +8,7 @@ import {
   restoreSectionFromSession,
 } from '@/lib/sectionStore';
 import { onKeyboardChange, isKeyboardOpenNow } from '@/lib/keyboard';
+
 const MIN_SECTION = -1;
 const MAX_SECTION = Number(process.env.NEXT_PUBLIC_TOTAL_SECTIONS ?? 7);
 
@@ -18,9 +19,9 @@ const atTop = (el: HTMLElement) => el.scrollTop <= 2;
 const atBottom = (el: HTMLElement) => el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
 
 const scrollPageTop = () => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  window.scrollTo({ top: 5, left: 0, behavior: 'auto' });
   const c = getCurrentStoryContentElement();
-  if (c) c.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  if (c) c.scrollTo({ top: 5, left: 0, behavior: 'auto' });
 };
 
 const hasTextFocus = () => {
@@ -42,21 +43,73 @@ export default function ScrollManager(): null {
     restoreSectionFromSession();
     setTimeout(scrollPageTop, 0);
 
-    let wheelDelta = 0;
-    let timeout: NodeJS.Timeout | null = null;
-    let touchStartY = 0;
+    type Sample = { dy: number; t: number };
+    const samples: Sample[] = [];
+    let lastDir: 1 | -1 | 0 = 0;
+    let inputKind: 'wheel' | 'touch' = 'wheel';
+
+    let navLocked = false;
+    const NAV_COOLDOWN_MS = 420;
+    const lockNav = () => { navLocked = true; };
+    const unlockNav = () => {
+      navLocked = false;
+      samples.length = 0;
+      lastDir = 0;
+    };
+
+    const WHEEL_WINDOW_MS = 80;
+    const WHEEL_THRESHOLD = 110;
+
+    const TOUCH_WINDOW_MS = 90;
+    const TOUCH_THRESHOLD = 120;
+
+    let touchPrevY = 0;
+
+    let pressStartTime = 0;
+
+    let isPressing = false;
+    const PRESS_BLOCK_MS = 120;
+
+    let lastEventTs = 0;
+    let idleTimer: number | undefined;
+
     let keyboardOpen = isKeyboardOpenNow();
     const offKeyboard = onKeyboardChange(({ open }) => {
       keyboardOpen = open;
     });
 
     const goToSection = (newIndex: number) => {
-      setActiveSection(clamp(newIndex));
-      if (newIndex !== 8) setTimeout(scrollPageTop, 0);
+      if (navLocked) return;
+      lockNav();
+
+      const target = clamp(newIndex);
+      setActiveSection(target);
+
+      // Сбросим инерцию браузера к началу контента
+      if (target !== 8) setTimeout(scrollPageTop, 0);
+
+      // Разрешим следующий переход, когда события улягутся
+      setTimeout(unlockNav, NAV_COOLDOWN_MS);
     };
 
-    const processScroll = (deltaY: number) => {
+
+    const processScroll = (deltaY: number, kind: 'wheel' | 'touch') => {
       if (keyboardOpen || hasTextFocus()) return;
+
+      if (isPressing && performance.now() - pressStartTime > PRESS_BLOCK_MS) {
+        return;
+      }
+
+      if (navLocked) return;
+
+      lastEventTs = performance.now();
+      clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(() => {
+        // когда поток событий стих, разрешаем новые свайпы
+        unlockNav();
+      }, NAV_COOLDOWN_MS);
+
+
       const content = getCurrentStoryContentElement();
       if (!content) return;
 
@@ -66,27 +119,89 @@ export default function ScrollManager(): null {
       const currentRaw = getActiveSection();
       const current = Number.isFinite(currentRaw) ? currentRaw : MIN_SECTION;
 
-      const shouldSwipe = !scrollable || (deltaY < 0 && top) || (deltaY > 0 && bottom);
+      if (scrollable && !top && !bottom) {
+        samples.length = 0; // сбросим накопление, чтобы не нести «хвост»
+        return;
+      }
+
+      const shouldSwipe =
+        !scrollable || (deltaY < 0 ? top : bottom);
       if (!shouldSwipe) return;
 
-      wheelDelta += deltaY;
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        if (Math.abs(wheelDelta) > 50) {
-          if (deltaY > 0) goToSection(current + 1);
-          else if (deltaY < 0) goToSection(current - 1);
-        }
-        wheelDelta = 0;
-      }, 60);
+      const now = performance.now();
+      const dir: 1 | -1 = deltaY > 0 ? 1 : -1;
+
+      if (lastDir !== 0 && (dir !== lastDir || kind !== inputKind)) {
+        samples.length = 0;
+      }
+      lastDir = dir;
+      inputKind = kind;
+
+      samples.push({ dy: deltaY, t: now });
+
+      const cap = (v: number) => Math.max(-240, Math.min(240, v));
+      samples[samples.length - 1].dy = cap(samples[samples.length - 1].dy);
+
+      const windowMs = kind === 'touch' ? TOUCH_WINDOW_MS : WHEEL_WINDOW_MS;
+      while (samples.length && now - samples[0].t > windowMs) {
+        samples.shift();
+      }
+
+      const sumAbs = samples.reduce(
+        (acc, s) => (Math.sign(s.dy) === dir ? acc + Math.abs(s.dy) : acc),
+        0,
+      );
+
+      const threshold = kind === 'touch' ? TOUCH_THRESHOLD : WHEEL_THRESHOLD;
+      if (sumAbs >= threshold) {
+        if (dir > 0) goToSection(current + 1);
+        else goToSection(current - 1);
+
+        samples.length = 0;
+        lastDir = 0;
+      }
     };
 
-    const handleWheel = (e: WheelEvent) => processScroll(e.deltaY);
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
+    const handleWheel = (e: WheelEvent) => {
+      processScroll(e.deltaY, 'wheel');
     };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchPrevY = e.touches[0].clientY;
+    };
+
     const handleTouchMove = (e: TouchEvent) => {
-      const touchY = e.touches[0].clientY;
-      processScroll(touchStartY - touchY);
+      const y = e.touches[0].clientY;
+      const dy = touchPrevY - y;
+      touchPrevY = y;
+      processScroll(dy, 'touch');
+    };
+
+    const handleMouseDown = () => {
+      pressStartTime = performance.now();
+      isPressing = true;
+    };
+
+    const handleMouseUp = () => {
+      isPressing = false;
+      pressStartTime = 0;
+
+      samples.length = 0;
+      lastDir = 0;
+    };
+
+    const handleTouchStartPress = (e: TouchEvent) => {
+      touchPrevY = e.touches[0].clientY;
+      pressStartTime = performance.now();
+      isPressing = true;
+    };
+
+    const handleTouchEndPress = () => {
+      isPressing = false;
+      pressStartTime = 0;
+
+      samples.length = 0;
+      lastDir = 0;
     };
 
     const saved = sessionStorage.getItem('activeSection') || MIN_SECTION;
@@ -98,13 +213,20 @@ export default function ScrollManager(): null {
     window.addEventListener('wheel', handleWheel, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('mousedown', handleMouseDown, { passive: true });
+    window.addEventListener('mouseup', handleMouseUp, { passive: true });
+    window.addEventListener('touchstart', handleTouchStartPress, { passive: true });
+    window.addEventListener('touchend', handleTouchEndPress, { passive: true });
 
     return () => {
-      if (timeout) clearTimeout(timeout);
       offKeyboard?.();
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchstart', handleTouchStartPress);
+      window.removeEventListener('touchend', handleTouchEndPress);
     };
   }, []);
 

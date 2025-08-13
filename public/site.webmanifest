@@ -1,21 +1,58 @@
 {
-  "name": "Artyom",
+  "name": "Artyom Bordulanyuk – Official Website",
   "short_name": "tyomay",
+  "description": "Official website of Artyom Bordulanyuk – Full-Stack Web Developer specializing in modern, scalable, SEO-optimized web applications with React.js, Next.js, Node.js, PostgreSQL, Docker, and CI/CD pipelines.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
-      "src": "/public/web-app-manifest-192x192.png",
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/web-app-manifest-maskable-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/public/web-app-manifest-512x512.png",
+      "src": "/web-app-manifest-maskable-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "categories": ["portfolio", "technology", "development", "web"],
+  "screenshots": [
+    {
+      "src": "/screenshots/homepage-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/homepage-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png"
+    }
+  ]
 }
