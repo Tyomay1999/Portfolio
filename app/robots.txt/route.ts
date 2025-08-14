@@ -1,16 +1,16 @@
-const baseUrl = 'https://yourdomain.com'; // твой домен
+export const runtime = 'edge';
 
 export async function GET(): Promise<Response> {
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://tyomay.dev';
+
   const content = `
-User-Agent: *
+User-agent: *
 Allow: /
 
-Sitemap: ${baseUrl}/sitemap.xml
-`;
+Sitemap: ${SITE}/sitemap.xml
+`.trim();
 
-  return new Response(content.trim(), {
-    headers: {
-      'Content-Type': 'text/plain',
-    },
+  return new Response(content, {
+    headers: { 'Content-Type': 'text/plain' },
   });
 }
