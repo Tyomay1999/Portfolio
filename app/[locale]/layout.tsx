@@ -56,8 +56,8 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
     keywords,
     alternates: {
       canonical: url,
-      'x-default': SITE_URL,
       languages: {
+        'x-default': SITE_URL,
         en: `${SITE_URL}/en`,
         ru: `${SITE_URL}/ru`,
         hy: `${SITE_URL}/hy`,
