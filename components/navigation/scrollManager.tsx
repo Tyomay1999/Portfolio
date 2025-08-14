@@ -72,7 +72,7 @@ export default function ScrollManager(): null {
     let isPressing = false;
     const PRESS_BLOCK_MS = 120;
 
-    let lastEventTs = 0;
+    // let lastEventTs = 0;
     let idleTimer: number | undefined;
 
     let keyboardOpen = isKeyboardOpenNow();
@@ -87,10 +87,8 @@ export default function ScrollManager(): null {
       const target = clamp(newIndex);
       setActiveSection(target);
 
-      // Сбросим инерцию браузера к началу контента
       if (target !== 8) setTimeout(scrollPageTop, 0);
 
-      // Разрешим следующий переход, когда события улягутся
       setTimeout(unlockNav, NAV_COOLDOWN_MS);
     };
 
@@ -103,10 +101,9 @@ export default function ScrollManager(): null {
 
       if (navLocked) return;
 
-      lastEventTs = performance.now();
+      // lastEventTs = performance.now();
       clearTimeout(idleTimer);
       idleTimer = window.setTimeout(() => {
-        // когда поток событий стих, разрешаем новые свайпы
         unlockNav();
       }, NAV_COOLDOWN_MS);
 
@@ -120,7 +117,7 @@ export default function ScrollManager(): null {
       const current = Number.isFinite(currentRaw) ? currentRaw : MIN_SECTION;
 
       if (scrollable && !top && !bottom) {
-        samples.length = 0; // сбросим накопление, чтобы не нести «хвост»
+        samples.length = 0;
         return;
       }
 

@@ -105,7 +105,6 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
       },
     },
 
-    // Верификацию подтяни из ENV и добавь сайт в Google Search Console
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
     },

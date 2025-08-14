@@ -17,7 +17,13 @@ export default function JsonLd({ locale }: { locale: string }) {
       '@type': 'Person',
       '@id': ids.person,
       name: 'Artyom Bordulanyuk',
-      alternateName: ['Артём Бордулянюк', 'Tyomay', 'Artyom Bordulanyk', 'Արտյոմ Բորդուլանյուկ'],
+      alternateName: [
+        'Артём Бордулянюк',
+        'Tyomay',
+        'Artyom Bordulanyuk',
+        'Artyom Bordulanyk',
+        'Արտյոմ Բորդուլանյուկ',
+      ],
       givenName: 'Artyom',
       familyName: 'Bordulanyuk',
       jobTitle: 'Full‑Stack Web Engineer',
@@ -47,11 +53,11 @@ export default function JsonLd({ locale }: { locale: string }) {
       url: base,
       inLanguage: locale,
       publisher: { '@id': ids.person },
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: `${base}/search?q={search_term_string}`,
-        'query-input': 'required name=search_term_string',
-      },
+      // potentialAction: {
+      //   '@type': 'SearchAction',
+      //   target: `${base}/search?q={search_term_string}`,
+      //   'query-input': 'required name=search_term_string',
+      // },
     },
     {
       '@context': 'https://schema.org',
