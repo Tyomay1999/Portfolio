@@ -65,8 +65,8 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
     },
 
     openGraph: {
-      type: 'profile', // профиль человека
-      siteName: PERSON.name, // пусть сайт «склеивается» с именем
+      type: 'profile',
+      siteName: PERSON.name,
       title,
       description,
       url,
@@ -89,8 +89,8 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
       title,
       description,
       images: ['/og-image.png'],
-      site: '@_tyomay_', // заполни, если есть
-      creator: '@_tyomay_', // заполни, если есть
+      site: '@_tyomay_',
+      creator: '@_tyomay_',
     },
 
     robots: {
