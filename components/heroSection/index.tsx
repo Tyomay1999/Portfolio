@@ -27,9 +27,9 @@ const HeroSections: React.FC = () => {
             <ContactIcons />
           </div>
           <div className="mx-auto mt-8 h-0.5 w-24 bg-slate-300 dark:bg-slate-600" />
-          <p className="mt-6 font-sans text-lg tracking-wide text-slate-600 dark:text-slate-400 md:text-xl">
-            Full Stack Web Architect
-          </p>
+          <h2 className="mt-6 font-sans text-lg tracking-wide text-slate-600 dark:text-slate-400 md:text-xl">
+            Full-Stack Web Developer (Architect)
+          </h2>
         </div>
       </div>
     </StorySectionWrapper>
