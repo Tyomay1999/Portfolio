@@ -9,9 +9,9 @@
   ],
   "seo": {
     "home": {
-      "title": "Artyom Bordulanyuk (Tyomay)  – Official Website | Full-Stack Web Developer Building Scalable & SEO-Optimized Web Apps – React, Next.js, Node.js, PostgreSQL, CI/CD, Docker",
-      "description": "Official website of Artyom Bordulanyuk – Full-Stack Web Developer specializing in creating modern, scalable, and SEO-optimized web applications. Expert in React.js, Next.js, Node.js, PostgreSQL, Docker, and CI/CD pipelines. Explore secure, high-performance, and results-driven web projects.",
-      "keywords": "Artyom Bordulanyuk, Artyom Bordulanyuk Official Website, Tyomay, Артём Бордулянюк, Արտյոմ Բորդուլանյուկ, Full-Stack Developer, React Developer, Next.js Portfolio, Node.js Backend, PostgreSQL Apps, Dockerized Projects, CI/CD Pipelines, Freelance Web Developer, Scalable Web Architecture, Web App Optimization, SEO-friendly Development, Frontend Backend Expert, Modern Web Applications, High Performance Websites"
+      "title": "Artyom Bordulanyuk (Tyomay) – Full-Stack Web Developer | React.js, Next.js, Node.js",
+      "description": "Official website of Artyom Bordulanyuk (Tyomay) — Full-Stack Web Developer. Building scalable, SEO-optimized web apps with React, Next.js, Node.js, PostgreSQL, Docker.",
+      "keywords": "Artyom Bordulanyuk, Tyomay, Артём Бордулянюк, Արտյոմ Բորդուլանյուկ, Full-Stack Web Developer, React, Next.js, Node.js, PostgreSQL, Docker, CI/CD, Freelance Developer, Scalable Web Apps"
     }
   },
   "summary": {
@@ -187,6 +187,7 @@
     "viewAll": "Show All",
     "viewLess": "Show Less",
     "philosophy": "I believe that great digital products combine thoughtful design, clean architecture, and purposeful code. Every project I take on is guided by clarity, collaboration, and the drive to create lasting value.",
+    "moreA11yHint": "Expand to show more frequently asked questions",
     "faqs": [
       {
         "question": "What technologies do you specialize in?",
@@ -211,6 +212,38 @@
       {
         "question": "Can you collaborate with our existing team?",
         "answer": "Absolutely. I’ve worked with startups and enterprises, adapting to different tools, workflows, and agile practices. Whether you need full-cycle development or extra hands in your sprint, I integrate smoothly with your in-house team."
+      },
+      {
+        "question": "Do you handle SEO and performance optimization?",
+        "answer": "Yes. I implement SEO best practices (meta tags, Open Graph, structured data, sitemap, robots.txt) and optimize Core Web Vitals (LCP, CLS, INP) to ensure fast loading and high Lighthouse scores."
+      },
+      {
+        "question": "What determines the cost of a project?",
+        "answer": "Pricing depends on project complexity, design requirements, integrations, and support needs. I offer both hourly and fixed-price models, always providing a clear estimate before starting."
+      },
+      {
+        "question": "Can we sign an NDA or formal contract?",
+        "answer": "Of course. I often work under NDA and provide contracts for security and clarity. Your intellectual property and business data are fully protected."
+      },
+      {
+        "question": "How do you communicate during the project?",
+        "answer": "I adapt to your preferred channels (Slack, Telegram, WhatsApp, Email). I provide weekly demos, task tracking via Jira/Trello, and accommodate time zones to keep collaboration smooth."
+      },
+      {
+        "question": "Do you handle deployment and DevOps setup?",
+        "answer": "Yes. I prepare Docker containers, configure Nginx/PM2, set up HTTPS certificates, and build CI/CD pipelines (Jenkins, GitHub Actions) for automated and reliable deployments."
+      },
+      {
+        "question": "Do you offer scaling and post-launch growth support?",
+        "answer": "Yes. I help optimize database performance, implement caching/CDN, integrate analytics, and prepare your platform for increasing traffic and new features."
+      },
+      {
+        "question": "What about security and maintenance?",
+        "answer": "I monitor for vulnerabilities, apply security patches, update dependencies, and set up backups. This ensures your system remains stable and secure long-term."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "I work via Upwork, direct contracts, or invoices. Both hourly and fixed-price models are available, depending on what works best for you."
       }
     ]
   },
@@ -222,7 +255,19 @@
     "upwork": "Upwork",
     "viber": "Viber",
     "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "github": "GitHub",
+    "listAriaLabel": "Contact options",
+    "emailAria": "Open email client",
+    "whatsappAria": "Open WhatsApp chat",
+    "phoneAria": "Call this phone number",
+    "telegramAria": "Open Telegram",
+    "upworkAria": "Open Upwork profile",
+    "viberAria": "Open Viber chat",
+    "linkedinAria": "Open LinkedIn profile",
+    "githubAria": "Open GitHub profile",
+    "emailCopied": "Email copied to clipboard",
+    "phoneCopied": "Phone number copied to clipboard",
+    "viberNumberCopied": "Viber number copied to clipboard"
   },
   "toast": {
     "emailCopied": "Email has been copied to clipboard",

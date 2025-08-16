@@ -11,10 +11,17 @@ const ContactIcons: FC = () => {
 
   return (
     <>
-      <div className="mx-auto mb-8 mt-8 grid max-w-2xl grid-cols-4 justify-items-center gap-4 md:mb-12 md:grid-cols-8 md:gap-6">
+      <div
+        role="list"
+        aria-label={t('listAriaLabel')}
+        className="mx-auto mb-8 mt-8 grid max-w-2xl grid-cols-4 justify-items-center gap-4 md:mb-12 md:grid-cols-8 md:gap-6"
+      >
         {contactItems(showToast).map((item, idx) => (
-          <div
+          <button
             key={idx}
+            type="button"
+            role="listitem"
+            aria-label={t(item.ariaLabelKey)}
             className="contact-icon flex cursor-pointer flex-col items-center text-slate-600 transition-colors duration-300 hover:text-blue-500 dark:text-white dark:hover:text-blue-500"
             onClick={item.action}
           >
@@ -24,7 +31,7 @@ const ContactIcons: FC = () => {
             <span className="font-sans text-xs text-slate-600 dark:text-slate-400">
               {t(item.labelKey)}
             </span>
-          </div>
+          </button>
         ))}
       </div>
       {ToastComponent}
