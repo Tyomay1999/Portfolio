@@ -15,8 +15,8 @@ const HeroSections: React.FC = () => {
     <StorySectionWrapper sectionId={-1}>
       <div className="fixed inset-0 flex items-center justify-center">
         <div className="hero-parallax text-center">
-          <h1 className="font-serif text-6xl font-light tracking-wide text-slate-900 drop-shadow-sm dark:text-slate-100 md:text-8xl lg:text-9xl">
-            {t('welcomeTxt')}
+          <h1 className="mb-4 font-serif text-4xl font-light tracking-wide text-slate-900 drop-shadow-sm dark:text-slate-100 md:text-6xl lg:text-7xl">
+            {t('welcomeTxt')} <span className="whitespace-nowrap">( Tyomay )</span>
           </h1>
 
           <div className="mt-4 flex h-8 items-center justify-center md:mt-6 md:h-10">
