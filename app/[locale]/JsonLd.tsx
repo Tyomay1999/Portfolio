@@ -17,7 +17,7 @@ export default function JsonLd({ locale }: { locale: string }) {
       '@type': 'Person',
       '@id': ids.person,
       name: 'Artyom Bordulanyuk',
-      alternateName: ['Артём Бордулянюк', 'Tyomay', 'Artyom Bordulanyuk'],
+      alternateName: ['Артём Бордуланюк', 'Tyomay', 'Artyom Bordulanyuk'],
       givenName: 'Artyom',
       familyName: 'Bordulanyuk',
       jobTitle: 'Full‑Stack Web Engineer',

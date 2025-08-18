@@ -1,5 +1,5 @@
 {
-  "welcomeTxt": "Артём Бордулянюк",
+  "welcomeTxt": "Артём Бордуланюк",
   "typingPhrases": [
     "Масштабируемая веб-архитектура",
     "Микросервисная архитектура",
@@ -9,9 +9,9 @@
   ],
   "seo": {
     "home": {
-      "title": "Артём Бордулянюк (Tyomay) — Full-Stack веб-разработчик | React.js, Next.js, Node.js",
-      "description": "Официальный сайт Артёма Бордулянюка (Tyomay). Full-Stack веб-разработчик: React.js, Next.js, Node.js, PostgreSQL, Docker. Создание современных, быстрых и SEO-оптимизированных веб-приложений.",
-      "keywords": "Артём Бордулянюк, Tyomay, Artyom Bordulanyuk, официальный сайт Артёма Бордулянюка, Արտյոմ Բորդուլանյուկ, Full-Stack разработчик, React разработчик, портфолио Next.js, Node.js backend, PostgreSQL приложения, проекты в Docker, CI/CD пайплайны, фриланс веб-разработчик, масштабируемая архитектура, оптимизация веб-приложений, SEO-оптимизированная разработка, Frontend Backend эксперт"
+      "title": "Артём Бордуланюк (Tyomay) — Full-Stack веб-разработчик | React.js, Next.js, Node.js",
+      "description": "Официальный сайт Артёма Бордуланюка (Tyomay). Full-Stack веб-разработчик: React.js, Next.js, Node.js, PostgreSQL, Docker. Создание современных, быстрых и SEO-оптимизированных веб-приложений.",
+      "keywords": "Артём Бордуланюк, Tyomay, Artyom Bordulanyuk, официальный сайт Артёма Бордуланюка, Արտյոմ Բորդուլանյուկ, Full-Stack разработчик, React разработчик, портфолио Next.js, Node.js backend, PostgreSQL приложения, проекты в Docker, CI/CD пайплайны, фриланс веб-разработчик, масштабируемая архитектура, оптимизация веб-приложений, SEO-оптимизированная разработка, Frontend Backend эксперт"
     }
   },
   "summary": {
