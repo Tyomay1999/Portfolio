@@ -2,37 +2,40 @@ import createMiddleware from 'next-intl/middleware';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+const locales = ['en', 'hy', 'ru'] as const;
 const intlMiddleware = createMiddleware({
-  locales: ['en', 'hy', 'ru'],
+  locales,
   defaultLocale: 'en',
 });
 
-const allowedLocales = ['en', 'hy', 'ru'];
-
 export default function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+  const url = request.nextUrl;
+  const pathname = url.pathname;
   const cookieLang = request.cookies.get('language')?.value || 'en';
 
-  const isStaticFile = pathname === '/sitemap.xml' || pathname === '/robots.txt';
-
-  if (isStaticFile) {
+  if (pathname === '/robots.txt' || pathname === '/sitemap.xml') {
     return NextResponse.next();
   }
 
-  const firstSegment = pathname.split('/')[1];
-  const secondSegment = pathname.split('/')[2];
-
-  const isValid = allowedLocales.includes(firstSegment) && !secondSegment;
-
   if (pathname === '/') {
-    return NextResponse.redirect(new URL(`/${cookieLang}`, request.url));
+    return NextResponse.redirect(new URL(`/${cookieLang}`, url));
   }
 
-  if (!isValid) {
-    return NextResponse.redirect(new URL(`/${cookieLang}`, request.url));
+  const [, first, second, third] = pathname.split('/');
+  const isLocale = locales.includes(first as (typeof locales)[number]);
+
+  if (!isLocale) {
+    return NextResponse.redirect(new URL(`/${cookieLang}`, url));
   }
 
-  return intlMiddleware(request);
+  const isLocaleRoot = isLocale && !second;
+  const isBookingExact = isLocale && second === 'booking' && !third;
+
+  if (isLocaleRoot || isBookingExact) {
+    return intlMiddleware(request);
+  }
+
+  return NextResponse.redirect(new URL(`/${first}`, url));
 }
 
 export const config = {

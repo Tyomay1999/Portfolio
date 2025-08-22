@@ -3,7 +3,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { languages } from '@/i18n/settings';
 import { Providers } from './provider';
-import './globals.css';
+import { headers } from 'next/headers';
+import './styles/globals.css';
 import type { Metadata } from 'next';
 import JsonLd from '@/app/[locale]/JsonLd';
 
@@ -16,7 +17,8 @@ export async function generateStaticParams() {
   return languages.map(lang => ({ locale: lang }));
 }
 
-const SITE_URL = 'https://tyomay.dev';
+const RAW = process.env.NEXT_PUBLIC_SITE_URL || 'https://tyomay.dev';
+const SITE_URL = RAW.replace(/\/+$/, '');
 
 const PERSON = {
   name: 'Artyom Bordulanyuk',
@@ -57,7 +59,7 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
     alternates: {
       canonical: url,
       languages: {
-        'x-default': SITE_URL,
+        'x-default': `${SITE_URL}/en`,
         en: `${SITE_URL}/en`,
         ru: `${SITE_URL}/ru`,
         hy: `${SITE_URL}/hy`,
@@ -107,7 +109,7 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
     },
 
     verification: {
-      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
     },
 
     referrer: 'origin-when-cross-origin',
@@ -138,12 +140,20 @@ export default async function LocaleLayout({ children, params }: Props) {
   const locale = languages.includes(resolvedParams.locale) ? resolvedParams.locale : fallbackLocale;
 
   const messages = await getMessages({ locale });
+  const cookieHeader = (await headers()).get('cookie') ?? '';
+  const themeRaw = /(?:^|;\s*)theme=(dark|light)(?:;|$)/.exec(cookieHeader)?.[1] as
+    | 'dark'
+    | 'light'
+    | undefined;
+
+  const initialTheme: 'light' | 'dark' | 'system' =
+    themeRaw === 'dark' ? 'dark' : themeRaw === 'light' ? 'light' : 'system';
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className="overflow-x-hidden bg-white text-slate-800 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-200">
         <JsonLd locale={locale} />
-        <Providers>
+        <Providers initialTheme={initialTheme}>
           <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
         </Providers>
       </body>

@@ -278,5 +278,120 @@
     "fill": "Please fill out all required fields",
     "emailExists": "This email is already registered.",
     "networkError": "Network error. Please try again."
+  },
+  "bookingCalendar": {
+    "aria": {
+      "prevMonth": "Previous month",
+      "nextMonth": "Next month"
+    },
+    "calendar": {
+      "weekdaysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "halfDay": "½ day",
+      "bookedCount": "{count, plural, one {# booked} other {# booked}}",
+      "weekdaysLong": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "monthsGen": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    },
+    "titles": {
+      "outOfRange": "Date out of allowed range",
+      "closedSunday": "Closed (Sunday)",
+      "openSaturdayHalf": "Open half-day (Saturday)"
+    }
+  },
+  "bookingModal": {
+    "validationFailed": "Validation failed",
+    "bookingExists": "Booking already exists",
+    "serverError": "Server error",
+    "networkError": "Network error",
+    "unexpectedError": "Unexpected error",
+    "requestFailed": "Request failed",
+    "failedToLoad": "Failed to load bookings",
+    "dateTime": "{month} {day} ,{weekday}",
+    "modal": { "title": "Complete Your Booking" },
+    "actions": {
+      "confirm": "Confirm Booking",
+      "cancel": "Cancel",
+      "processing": "Processing..."
+    },
+    "form": {
+      "firstName": "First Name *",
+      "firstNamePh": "Your first name",
+      "lastName": "Last Name *",
+      "lastNamePh": "Your last name",
+      "email": "Email *",
+      "emailPh": "name@example.com",
+      "phone": "Phone *",
+      "phonePh": "+1 555 000 0000",
+      "serviceLabel": "Service Type *",
+      "servicePlaceholder": "Select a service",
+      "consent": "I agree to the Terms & Privacy"
+    },
+    "services": {
+      "consultation": "Free Intro Consultation (15 min)",
+      "onsite": "On-site Setup",
+      "support": "Support Call",
+      "demo": "Product Demo"
+    }
+  },
+  "timeslotsPanel": {
+    "title": "Available Times",
+    "badge": { "saturdayHalf": "Saturday • ½ day" },
+    "notice": { "closedSunday": "Closed on Sundays" },
+    "a11y": {
+      "bookedTitle": "Slot already booked",
+      "selectTitle": "Select this time",
+      "bookedSr": "(already booked)"
+    },
+    "empty": "No time slots available"
+  },
+  "successModal": {
+    "title": "Booking Confirmed",
+    "text": "A confirmation email has been sent to <email>{emailValue}</email>.",
+    "textPrefix": "A confirmation email has been sent to",
+    "textSuffix": "",
+    "actions": { "close": "Close" }
+  },
+  "bookingPage": {
+    "seo": {
+      "title": "Book a Consultation with Artyom Bordulanyuk | Full-Stack Engineer",
+      "description": "Schedule a discovery call or on-site setup with Artyom Bordulanyuk — React/Next.js, Node.js, PostgreSQL & Docker engineer. Choose a day and time to discuss your app, MVP, or technical audit."
+    },
+    "h1": "Book a Meeting with Artyom",
+    "toast": { "alreadyBooked": "This slot is already booked" },
+    "footer": { "copy": "© {year} Artyom Bordulanyuk — Portfolio Booking" }
   }
 }

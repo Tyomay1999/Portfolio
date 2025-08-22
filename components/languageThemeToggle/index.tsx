@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import BookingShortcutButton from '@/components/booking/bookingShortcutButton';
 
 const supportedLanguages = ['en', 'hy', 'ru'] as const;
 export type SupportedLanguage = (typeof supportedLanguages)[number];
@@ -10,16 +11,26 @@ export type SupportedLanguage = (typeof supportedLanguages)[number];
 const LanguageThemeToggle: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const { theme, resolvedTheme, setTheme } = useTheme();
+  const searchParams = useSearchParams();
+  const { resolvedTheme, setTheme } = useTheme();
 
   const [language, setLanguage] = useState<string>('en');
   const [mounted, setMounted] = useState<boolean>(false);
 
   const extractLocaleFromPathname = (path: string): SupportedLanguage => {
-    const firstSegment = path.split('/')[1];
-    return supportedLanguages.includes(firstSegment as SupportedLanguage)
-      ? (firstSegment as SupportedLanguage)
-      : 'en';
+    const m = path.match(/^\/(en|hy|ru)(?=\/|$)/);
+    return m ? (m[1] as SupportedLanguage) : 'en';
+  };
+
+  const buildPathForLocale = (loc: SupportedLanguage) => {
+    const stripped = pathname.replace(/^\/(en|hy|ru)(?=\/|$)/, '');
+    let nextPath = `/${loc}${stripped || '/'}`;
+    const qs = searchParams?.toString();
+    if (qs) nextPath += `?${qs}`;
+    if (typeof window !== 'undefined' && window.location.hash) {
+      nextPath += window.location.hash;
+    }
+    return nextPath;
   };
 
   useEffect(() => {
@@ -33,20 +44,23 @@ const LanguageThemeToggle: React.FC = () => {
     const selected = e.target.value;
     setLanguage(selected);
     localStorage.setItem('language', selected);
-    document.cookie = `language=${selected}; path=/; max-age=31536000`;
-
-    router.push(`/${selected}`);
+    document.cookie = `NEXT_LOCALE=${selected}; Path=/; Max-Age=31536000; SameSite=Lax`;
+    const nextPath = buildPathForLocale(selected as SupportedLanguage);
+    router.push(nextPath);
   };
 
   const toggleTheme = (): void => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
+    const current = resolvedTheme === 'dark' ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    document.cookie = `theme=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;
   };
 
   if (!mounted) return null;
 
   return (
     <div className="fixed right-6 top-6 z-50 flex items-center space-x-4">
+      <BookingShortcutButton />
       <select
         value={language}
         onChange={changeLanguage}

@@ -5,11 +5,17 @@ import { ThemeProvider } from 'next-themes';
 
 interface ProvidersProps {
   children: ReactNode;
+  initialTheme?: 'light' | 'dark' | 'system';
 }
 
-export function Providers({ children }: ProvidersProps) {
+export function Providers({ children, initialTheme = 'system' }: ProvidersProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme={initialTheme}
+      enableSystem
+      disableTransitionOnChange
+    >
       {children}
     </ThemeProvider>
   );

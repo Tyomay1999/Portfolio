@@ -1,33 +1,36 @@
 'use client';
 
+const RAW = process.env.NEXT_PUBLIC_SITE_URL || 'https://tyomay.dev';
+const BASE = RAW.replace(/\/+$/, '');
+
 export default function JsonLd({ locale }: { locale: string }) {
-  const base = 'https://tyomay.dev';
-  const pageUrl = `${base}/${locale}`;
+  const pageUrl = `${BASE}/${locale}`;
   const ids = {
-    person: `${base}/#person`,
-    website: `${base}/#website`,
+    person: `${BASE}/#person`,
+    website: `${BASE}/#website`,
     webpage: `${pageUrl}#webpage`,
-    image: `${base}/#primaryimage`,
+    image: `${BASE}/#primaryimage`,
     breadcrumb: `${pageUrl}#breadcrumb`,
   };
 
+  const published = '2025-08-05';
   const data = [
     {
       '@context': 'https://schema.org',
       '@type': 'Person',
       '@id': ids.person,
       name: 'Artyom Bordulanyuk',
-      alternateName: ['Артём Бордуланюк', 'Tyomay', 'Artyom Bordulanyuk'],
+      alternateName: ['Артём Бордуланюк', 'Tyomay'],
       givenName: 'Artyom',
       familyName: 'Bordulanyuk',
       jobTitle: 'Full‑Stack Web Engineer',
       description:
         'Full‑Stack Web Engineer. React, Next.js, Node.js, PostgreSQL, Docker, CI/CD. Official website and portfolio.',
-      url: base,
+      url: BASE,
       image: {
         '@type': 'ImageObject',
         '@id': ids.image,
-        url: `${base}/og-image.png`,
+        url: `${BASE}/og-image.png`,
         width: 1200,
         height: 630,
         caption: 'Artyom Bordulanyuk — Portfolio cover',
@@ -44,14 +47,9 @@ export default function JsonLd({ locale }: { locale: string }) {
       '@type': 'WebSite',
       '@id': ids.website,
       name: 'Artyom Bordulanyuk',
-      url: base,
+      url: BASE,
       inLanguage: locale,
       publisher: { '@id': ids.person },
-      // potentialAction: {
-      //   '@type': 'SearchAction',
-      //   target: `${base}/search?q={search_term_string}`,
-      //   'query-input': 'required name=search_term_string',
-      // },
     },
     {
       '@context': 'https://schema.org',
@@ -65,22 +63,16 @@ export default function JsonLd({ locale }: { locale: string }) {
       inLanguage: locale,
       isPartOf: { '@id': ids.website },
       primaryImageOfPage: { '@id': ids.image },
-      mainEntityOfPage: { '@id': ids.person },
+      mainEntityOfPage: { '@id': ids.webpage },
       publisher: { '@id': ids.person },
-      datePublished: '2025-08-05',
+      datePublished: published,
+      dateModified: published,
     },
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       '@id': ids.breadcrumb,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: pageUrl,
-        },
-      ],
+      itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: pageUrl }],
     },
   ];
 
