@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { getLocaleFromPath } from './lib/locale';
 import { isBookingPath, toggleBookingPath } from './lib/routes';
@@ -9,6 +9,9 @@ import { HomeIcon, CalendarIcon } from './ui/icons';
 export default function BookingShortcutButton() {
   const router = useRouter();
   const pathname = usePathname() || '/en';
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   const locale = getLocaleFromPath(pathname);
   const onBooking = isBookingPath(pathname);

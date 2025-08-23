@@ -41,16 +41,6 @@ export default function Page() {
   // live updates via socket
   useBookingSocket(setLocalAdds);
 
-  // lock scroll if modal open
-  useEffect(() => {
-    if (!isModalOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [isModalOpen]);
-
   // helpers
   const onSelectDate = (d: Date) => {
     setSelectedDate(d);

@@ -1,6 +1,6 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { useEffectiveSlots } from './hooks/useEffectiveSlots';
+import { Params, useEffectiveSlots } from './hooks/useEffectiveSlots';
 import SlotButton from './ui/slotButton';
 import { SaturdayHalfBadge, EmptyState, ClosedSunday } from './ui/badges';
 
@@ -31,7 +31,7 @@ export default function TimeslotsPanel({
     timeSlots,
     saturdayCutoff,
     minLeadMinutes,
-  });
+  } as Params);
 
   if (!date) return null;
 

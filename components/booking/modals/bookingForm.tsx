@@ -136,13 +136,7 @@ export default function BookingForm(props: BookingFormProps) {
                 setDdOpen(true);
               }
             }}
-            className={
-              'flex w-full items-center justify-between rounded-xl px-4 py-3 text-left ' +
-              'border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800' +
-              'text-slate-900 transition dark:text-slate-100' +
-              'focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500' +
-              (submitting ? ' cursor-not-allowed opacity-60' : '')
-            }
+            className={`flex w-full items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-left text-slate-900 transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:[color-scheme:dark] ${submitting ? 'cursor-not-allowed opacity-60' : ''}`}
           >
             <span className="truncate">
               {selectedService ? t(`services.${selectedService}`) : t('form.servicePlaceholder')}

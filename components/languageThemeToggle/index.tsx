@@ -1,102 +1,19 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React from 'react';
+import LanguageDropdown from './languageDropdown';
+import ThemeToggleButton from './themeToggleButton';
 import BookingShortcutButton from '@/components/booking/bookingShortcutButton';
 
-const supportedLanguages = ['en', 'hy', 'ru'] as const;
-export type SupportedLanguage = (typeof supportedLanguages)[number];
-
-const LanguageThemeToggle: React.FC = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const { resolvedTheme, setTheme } = useTheme();
-
-  const [language, setLanguage] = useState<string>('en');
-  const [mounted, setMounted] = useState<boolean>(false);
-
-  const extractLocaleFromPathname = (path: string): SupportedLanguage => {
-    const m = path.match(/^\/(en|hy|ru)(?=\/|$)/);
-    return m ? (m[1] as SupportedLanguage) : 'en';
-  };
-
-  const buildPathForLocale = (loc: SupportedLanguage) => {
-    const stripped = pathname.replace(/^\/(en|hy|ru)(?=\/|$)/, '');
-    let nextPath = `/${loc}${stripped || '/'}`;
-    const qs = searchParams?.toString();
-    if (qs) nextPath += `?${qs}`;
-    if (typeof window !== 'undefined' && window.location.hash) {
-      nextPath += window.location.hash;
-    }
-    return nextPath;
-  };
-
-  useEffect(() => {
-    const currentLangFromURL = extractLocaleFromPathname(pathname);
-    setLanguage(currentLangFromURL);
-    localStorage.setItem('language', currentLangFromURL);
-    setMounted(true);
-  }, [pathname]);
-
-  const changeLanguage = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const selected = e.target.value;
-    setLanguage(selected);
-    localStorage.setItem('language', selected);
-    document.cookie = `NEXT_LOCALE=${selected}; Path=/; Max-Age=31536000; SameSite=Lax`;
-    const nextPath = buildPathForLocale(selected as SupportedLanguage);
-    router.push(nextPath);
-  };
-
-  const toggleTheme = (): void => {
-    const current = resolvedTheme === 'dark' ? 'dark' : 'light';
-    const next = current === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    document.cookie = `theme=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;
-  };
-
-  if (!mounted) return null;
-
+export default function LanguageThemeToggle() {
   return (
-    <div className="fixed right-6 top-6 z-50 flex items-center space-x-4">
-      <BookingShortcutButton />
-      <select
-        value={language}
-        onChange={changeLanguage}
-        id="languageSelect"
-        aria-label="Change language"
-        className="rounded-lg border border-slate-200 bg-white/80 px-3 py-2 text-sm backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-slate-400 dark:border-slate-700 dark:bg-slate-800/80"
-      >
-        {supportedLanguages.map(lang => (
-          <option key={lang} value={lang}>
-            {lang.toUpperCase()}
-          </option>
-        ))}
-      </select>
+    <div className="fixed left-0 right-0 top-6 z-50 flex items-center justify-between px-6">
+      <LanguageDropdown />
 
-      <button
-        onClick={toggleTheme}
-        id="themeToggle"
-        aria-label="Toggle theme"
-        className="rounded-lg border border-slate-200 bg-white/80 p-2 backdrop-blur-sm transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800/80 dark:hover:bg-slate-700"
-      >
-        {resolvedTheme === 'dark' ? (
-          <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-            />
-          </svg>
-        ) : (
-          <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-          </svg>
-        )}
-      </button>
+      <div className="flex items-center gap-3">
+        <ThemeToggleButton />
+        <BookingShortcutButton />
+      </div>
     </div>
   );
-};
-
-export default LanguageThemeToggle;
+}

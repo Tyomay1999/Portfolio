@@ -38,7 +38,7 @@ export default function BookingModal({
   const months = tCal.raw('calendar.months') as string[];
   const monthsGen = tCal.raw('calendar.monthsGen') as string[];
 
-  // lock page scroll when modal is open
+  // iOS-safe скролл-лок. При закрытии модалки скролл всегда восстанавливается.
   useScrollLock(open);
 
   // form state
@@ -63,12 +63,15 @@ export default function BookingModal({
     return `${label} • ${time}`;
   }, [date, time, t, weekdaysLong, months, monthsGen]);
 
+  // общий сброс полей + ошибок
   const reset = useCallback(() => {
     setEmail('');
     setFirstName('');
     setLastName('');
     setPhone('');
     setConsent(false);
+    setErrorMsg(null);
+    setSubmitting(false);
     onServiceChange(null);
   }, [onServiceChange]);
 
@@ -76,6 +79,16 @@ export default function BookingModal({
     reset();
     onClose();
   }, [reset, onClose]);
+
+  useEffect(() => {
+    if (open) {
+      setErrorMsg(null);
+      setSubmitting(false);
+    } else {
+      // закрыли модалку: страхуемся ещё раз
+      setSubmitting(false);
+    }
+  }, [open]);
 
   const canSubmit =
     !!email &&
@@ -138,7 +151,7 @@ export default function BookingModal({
         await onRefetch?.();
         onConfirm(email);
         reset();
-        handleClose();
+        onClose(); // уже всё очищено, просто закрываем
       } else {
         setErrorMsg(`${t('requestFailed')} (${res.status})`);
       }
@@ -170,67 +183,97 @@ export default function BookingModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="bookingDialogTitle"
-      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
-      onClick={onBackdrop}
+      className="fixed inset-0 z-50 flex items-end justify-center sm:items-center"
     >
-      {/* Mobile bottom-sheet */}
-      <div className="h[90vh] fixed inset-x-0 bottom-0 flex translate-y-0 flex-col overscroll-contain rounded-t-3xl bg-white transition-transform duration-300 dark:bg-slate-900 sm:hidden">
-        <div className="mx-auto mb-4 mt-3 h-1 w-12 rounded-full bg-slate-200 dark:bg-slate-700" />
-        <div className="sticky top-0 border-b border-slate-200 bg-white px-6 py-4 dark:border-slate-700 dark:bg-slate-900">
-          <h3
-            id="bookingDialogTitle"
-            className="text-lg font-semibold text-slate-900 dark:text-slate-100"
-          >
-            {t('modal.title')}
-          </h3>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{dateTimeText}</p>
-        </div>
+      {/* backdrop ниже по z-index и без blur, чтобы не размывать содержимое модалки */}
+      <div className="absolute inset-0 z-40 bg-black/60" onClick={onBackdrop} />
 
+      {/* ===== Mobile bottom-sheet ===== */}
+      <div className="relative z-50 w-full sm:hidden">
         <div
-          className="flex-1 overflow-y-auto px-6 py-6"
-          style={{ WebkitOverflowScrolling: 'touch' }}
+          className="/* шапка / контент / футер */ pointer-events-auto fixed inset-x-0 bottom-0 isolate grid max-h-[90svh] w-full grid-rows-[auto,1fr,auto] overflow-hidden rounded-t-3xl bg-white shadow-xl dark:bg-slate-900"
+          style={{ transform: 'translateZ(0)' }}
         >
-          <BookingForm
-            firstName={firstName}
-            setFirstName={setFirstName}
-            lastName={lastName}
-            setLastName={setLastName}
-            email={email}
-            setEmail={setEmail}
-            phone={phone}
-            setPhone={setPhone}
-            selectedService={selectedService}
-            onServiceChange={onServiceChange}
-            consent={consent}
-            setConsent={setConsent}
-            submitting={submitting}
-          />
-        </div>
+          {/* Drag handle */}
+          <div className="mx-auto mb-2 mt-2 h-1.5 w-12 rounded-full bg-slate-200 dark:bg-slate-700" />
 
-        <div className="sticky bottom-0 space-y-3 border-t border-slate-200 bg-white px-6 py-4 dark:border-slate-700 dark:bg-slate-900">
-          {errorMsg && <div className="text-sm text-red-600 dark:text-red-400">{errorMsg}</div>}
-          <button
-            disabled={!canSubmit || submitting}
-            onClick={handleSubmit}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-4 font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
-            aria-busy={submitting}
+          {/* Header (row 1) */}
+          <div
+            className="sticky top-0 z-30 border-b border-slate-200 bg-white px-6 py-4 dark:border-slate-700 dark:bg-slate-900"
+            style={{ transform: 'translateZ(0)' }}
           >
-            {submitting && <Spinner className="h-5 w-5" />}
-            {submitting ? t('actions.processing') : t('actions.confirm')}
-          </button>
-          <button
-            onClick={handleClose}
-            disabled={submitting}
-            className="w-full py-2 text-center text-slate-500 disabled:opacity-50 dark:text-slate-400"
+            <h3
+              id="bookingDialogTitle"
+              className="text-lg font-semibold text-slate-900 dark:text-slate-100"
+            >
+              {t('modal.title')}
+            </h3>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{dateTimeText}</p>
+          </div>
+
+          {/* Scrollable content (row 2) */}
+          <div
+            className="overflow-y-auto overscroll-contain px-6 py-6"
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              // запас под футер + safe area (чтобы последние поля не прятались)
+              paddingBottom: 'max(28px, env(safe-area-inset-bottom))',
+            }}
           >
-            {t('actions.cancel')}
-          </button>
+            <BookingForm
+              firstName={firstName}
+              setFirstName={setFirstName}
+              lastName={lastName}
+              setLastName={setLastName}
+              email={email}
+              setEmail={setEmail}
+              phone={phone}
+              setPhone={setPhone}
+              selectedService={selectedService}
+              onServiceChange={onServiceChange}
+              consent={consent}
+              setConsent={setConsent}
+              submitting={submitting}
+            />
+            {/* Доп. запас в самом низу на случай крупных клавиатур/зумов */}
+            <div className="h-5 sm:h-0" />
+          </div>
+
+          {/* Footer (row 3) */}
+          <div
+            className="z-30 space-y-3 border-t border-slate-200 bg-white px-6 py-4 dark:border-slate-700 dark:bg-slate-900"
+            style={{
+              transform: 'translateZ(0)',
+              paddingBottom: 'max(16px, env(safe-area-inset-bottom))',
+            }}
+          >
+            {errorMsg && <div className="text-sm text-red-600 dark:text-red-400">{errorMsg}</div>}
+            <button
+              disabled={!canSubmit || submitting}
+              onClick={handleSubmit}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-4 font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+              aria-busy={submitting}
+            >
+              {submitting && <Spinner className="h-5 w-5" />}
+              {submitting ? t('actions.processing') : t('actions.confirm')}
+            </button>
+            <button
+              onClick={handleClose}
+              disabled={submitting}
+              className="w-full py-2 text-center text-slate-500 disabled:opacity-50 dark:text-slate-400"
+            >
+              {t('actions.cancel')}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Desktop modal */}
-      <div className="hidden min-h-screen items-center justify-center p-4 sm:flex">
-        <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900">
+      {/* ===== Desktop modal ===== */}
+      <div className="relative z-50 hidden min-h-screen items-center justify-center p-4 sm:flex">
+        <div
+          className="isolate w-full max-w-lg overflow-hidden rounded-2xl bg-white dark:bg-slate-900"
+          style={{ transform: 'translateZ(0)' }}
+        >
           <div className="border-b border-slate-200 px-6 py-4 dark:border-slate-700">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
               {t('modal.title')}
@@ -238,7 +281,10 @@ export default function BookingModal({
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{dateTimeText}</p>
           </div>
 
-          <div className="px-6 py-6">
+          <div
+            className="max-h-[70vh] overflow-y-auto px-6 py-6"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
             <BookingForm
               firstName={firstName}
               setFirstName={setFirstName}

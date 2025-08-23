@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { combineDateAndTime, formatDateYmd } from '../lib/slotUtils';
 
-type Params = {
+export type Params = {
   date: Date | null;
   bookings: Record<string, string[]>;
   timeSlots: string[];
