@@ -1,4 +1,5 @@
 'use client';
+
 type Props = {
   label: string;
   onPrev: () => void;
@@ -8,6 +9,7 @@ type Props = {
   ariaPrev: string;
   ariaNext: string;
 };
+
 export default function CalendarHeader({
   label,
   onPrev,
@@ -18,8 +20,10 @@ export default function CalendarHeader({
   ariaNext,
 }: Props) {
   const btnBase =
-    'flex h-10 w-10 items-center justify-center rounded-full transition-colors ' +
-    'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100';
+    'flex items-center justify-center rounded-full transition-colors ' +
+    'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100 ' +
+    'h-9 w-9 md:h-10 md:w-10 lg:h-11 lg:w-11';
+
   return (
     <div className="mb-6 flex items-center justify-between">
       <button
@@ -30,13 +34,15 @@ export default function CalendarHeader({
           btnBase,
           disablePrev
             ? 'cursor-not-allowed opacity-40'
-            : 'hover:bg-slate-2 00 dark:hover:bg-slate-700',
+            : 'hover:bg-slate-200 dark:hover:bg-slate-700',
         ].join(' ')}
       >
         ←
       </button>
 
-      <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">{label}</h2>
+      <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 md:text-2xl lg:text-3xl">
+        {label}
+      </h2>
 
       <button
         aria-label={ariaNext}

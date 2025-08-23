@@ -2,7 +2,7 @@
 
 export function SaturdayHalfBadge({ text }: { text: string }) {
   return (
-    <span className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700 dark:bg-blue-950/30 dark:text-blue-300">
+    <span className="ml-2 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-medium text-blue-700 dark:bg-blue-800 dark:text-blue-200 md:text-xs lg:text-sm">
       {text}
     </span>
   );

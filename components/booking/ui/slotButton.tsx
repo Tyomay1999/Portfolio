@@ -18,17 +18,16 @@ export default function SlotButton({
   onSelect,
 }: Props) {
   const base =
-    'w-full rounded-xl px-4 py-3 text-sm font-medium transition border ' +
+    'w-full rounded-xl border transition ' +
     'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 ' +
-    'text-slate-900 dark:text-slate-100';
+    'text-slate-900 dark:text-slate-100 ' +
+    'px-4 py-3 text-sm md:px-5 md:py-3 md:text-base lg:px-6 lg:py-3.5 lg:text-lg';
 
   const available =
     'hover:-translate-y-px hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500';
 
   const bookedCls =
-    'cursor-not-allowed opacity-60 ' +
-    'bg-slate-100 dark:bg-slate-800/60 ' +
-    'text-slate-400 dark:text-slate-500';
+    'cursor-not-allowed opacity-60 bg-slate-100 dark:bg-slate-800/60 text-slate-400 dark:text-slate-500';
 
   return (
     <button
@@ -42,7 +41,7 @@ export default function SlotButton({
       <span className="inline-flex items-center">
         {time}
         {isBooked && (
-          <span className="ml-2 text-xs" aria-hidden>
+          <span className="ml-2 text-xs md:text-sm" aria-hidden>
             🔒
           </span>
         )}

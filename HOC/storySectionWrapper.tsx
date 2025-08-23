@@ -15,8 +15,8 @@ export default function StorySectionWrapper({
   innerClassName,
 }: StorySectionWrapperProps): JSX.Element {
   const ref = useRef<HTMLElement | null>(null);
-  const [isActive, setIsActive] = useState<boolean>(false);
-  const [isExiting, setIsExiting] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
     const unsubscribe = subscribe((id: number) => {
@@ -24,13 +24,17 @@ export default function StorySectionWrapper({
       setIsExiting(isActive && !isNowActive);
       setIsActive(isNowActive);
     });
-
-    if (getActiveSection() === sectionId) {
-      setIsActive(true);
-    }
-
+    if (getActiveSection() === sectionId) setIsActive(true);
     return () => unsubscribe();
   }, [sectionId, isActive]);
+
+  // Симметричные паддинги: слева = справа (умеренно), + небольшой top
+  const safePaddings = [
+    'mx-auto max-w-screen-2xl',
+    'px-4 sm:px-6', // мобилки/планшеты
+    'md:px-12 lg:px-16 xl:px-20', // десктоп: одинаковые отступы по бокам
+    'pt-[calc(env(safe-area-inset-top,0px)+0.5rem)] md:pt-8 lg:pt-10', // немного сверху
+  ].join(' ');
 
   return (
     <section
@@ -40,7 +44,7 @@ export default function StorySectionWrapper({
     >
       <div className="story-overlay" />
       <div className="story-content">
-        <div className={`story-inner ${innerClassName ?? ''}`}>{children}</div>
+        <div className={`story-inner ${safePaddings} ${innerClassName ?? ''}`}>{children}</div>
       </div>
     </section>
   );

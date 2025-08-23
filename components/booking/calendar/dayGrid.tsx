@@ -34,7 +34,7 @@ export default function DayGrid({
   const inAllowedMonths = (d: Date) => d >= minMonthStart && d < maxExclusive;
 
   return (
-    <div id="calendarDays" className="grid grid-cols-7 gap-1">
+    <div id="calendarDays" className="grid grid-cols-7 gap-1 md:gap-2 lg:gap-3">
       {Array.from({ length: firstDay }).map((_, i) => (
         <div key={`e-${i}`} />
       ))}

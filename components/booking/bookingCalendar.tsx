@@ -52,7 +52,7 @@ export default function BookingCalendar({
   }, [currentDate, months]);
 
   return (
-    <div>
+    <div className="mx-auto max-w-sm md:max-w-xl lg:max-w-3xl">
       <CalendarHeader
         label={monthLabel}
         onPrev={goPrev}

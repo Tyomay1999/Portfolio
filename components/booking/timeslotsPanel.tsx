@@ -38,14 +38,16 @@ export default function TimeslotsPanel({
   return (
     <section className="mt-6">
       <div className="mb-2 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{t('title')}</h3>
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 md:text-xl lg:text-2xl">
+          {t('title')}
+        </h3>
         {isSaturday && <SaturdayHalfBadge text={t('badge.saturdayHalf')} />}
       </div>
 
       {isSunday ? (
         <ClosedSunday text={t('notice.closedSunday')} />
       ) : (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-4">
           {effectiveSlots.map(tSlot => (
             <SlotButton
               key={tSlot}
@@ -58,7 +60,11 @@ export default function TimeslotsPanel({
             />
           ))}
 
-          {effectiveSlots.length === 0 && <EmptyState text={t('empty')} />}
+          {effectiveSlots.length === 0 && (
+            <div className="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-5">
+              <EmptyState text={t('empty')} />
+            </div>
+          )}
         </div>
       )}
     </section>

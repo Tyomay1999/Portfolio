@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import StorySectionWrapper from '@/HOC/storySectionWrapper';
 import ContactIcons from '@/components/contact/contactIcons';
 import { useToast } from '@/hooks/useToast';
+import SelectListbox, { SelectOption } from './selectListBox';
 
 type ContactForm = {
   name: string;
@@ -40,11 +41,9 @@ export default function ContactSection(): JSX.Element {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^[+0-9\s()-]{6,20}$/;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
     setForm(prev => ({ ...prev, [name]: value }));
-
     if (!touched[name as keyof ContactForm]) {
       setTouched(prev => ({ ...prev, [name]: true }));
     }
@@ -52,7 +51,6 @@ export default function ContactSection(): JSX.Element {
 
   const hasError = (field: keyof ContactForm): boolean => {
     if (!touched[field]) return false;
-
     switch (field) {
       case 'name':
       case 'lastName':
@@ -67,41 +65,35 @@ export default function ContactSection(): JSX.Element {
         return false;
     }
   };
-
   const isFieldValid = (field: keyof ContactForm): boolean => touched[field] && !hasError(field);
 
   const inputClass = (field: keyof ContactForm): string => {
     if (hasError(field)) {
       return 'border-red-500 focus:border-red-600 dark:border-red-500 dark:focus:border-red-400';
     }
-
     if (isFieldValid(field)) {
       return 'border-green-500 focus:border-green-600 dark:border-green-500 dark:focus:border-green-400';
     }
-
     return 'border-slate-300 focus:border-slate-600 dark:border-slate-600 dark:focus:border-slate-400';
   };
 
-  const isFormValid = (): boolean => {
-    return Object.keys(form).every(key => {
-      const value = form[key as keyof ContactForm];
-      return value.trim() !== '' && !hasError(key as keyof ContactForm);
-    });
-  };
+  const isFormValid = (): boolean =>
+    (Object.keys(form) as (keyof ContactForm)[]).every(k => form[k].trim() !== '' && !hasError(k));
+
+  // options для селекта контактного типа
+  const contactOptions: SelectOption[] = [
+    { value: 'consulting', label: t('contactTypes.consulting') },
+    { value: 'development', label: t('contactTypes.development') },
+    { value: 'design', label: t('contactTypes.design') },
+    { value: 'other', label: t('contactTypes.other') },
+  ];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const allTouched: Record<keyof ContactForm, boolean> = {
-      name: true,
-      lastName: true,
-      email: true,
-      phone: true,
-      contactType: true,
-    };
-    setTouched(allTouched);
+    setTouched({ name: true, lastName: true, email: true, phone: true, contactType: true });
 
-    const errorFields = Object.keys(form).filter(key => hasError(key as keyof ContactForm));
+    const errorFields = (Object.keys(form) as (keyof ContactForm)[]).filter(key => hasError(key));
     if (errorFields.length > 0) {
       showToast(t('fill') + ': ' + errorFields.map(key => t(`placeholders.${key}`)).join(', '));
       return;
@@ -116,7 +108,6 @@ export default function ContactSection(): JSX.Element {
         ...form,
         language,
       });
-
       if (res.status === 200 || res.status === 201) {
         showToast('thankYou');
         setForm({ name: '', lastName: '', email: '', phone: '', contactType: '' });
@@ -130,17 +121,12 @@ export default function ContactSection(): JSX.Element {
       } else {
         showToast('error');
       }
-    } catch (err: unknown) {
+    } catch (err) {
       if (axios.isAxiosError(err)) {
         const status = err.response?.status;
-
-        if (status === 409) {
-          showToast('emailExists');
-        } else if (status === 500) {
-          showToast('error');
-        } else {
-          showToast('networkError');
-        }
+        if (status === 409) showToast('emailExists');
+        else if (status === 500) showToast('error');
+        else showToast('networkError');
       } else {
         showToast('error');
       }
@@ -193,20 +179,19 @@ export default function ContactSection(): JSX.Element {
           className={`w-full border-0 border-b bg-transparent px-0 py-3 font-sans text-base placeholder-slate-400 focus:outline-none md:py-4 md:text-lg ${inputClass('phone')}`}
         />
 
-        <select
-          name="contactType"
-          value={form.contactType}
-          onChange={handleChange}
-          className={`w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-base text-slate-800 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder-slate-400 dark:focus:border-blue-400 dark:focus:ring-blue-400 md:text-lg ${inputClass('contactType')}`}
-        >
-          <option value="" disabled>
-            {t('placeholders.contactType')}
-          </option>
-          <option value="consulting">{t('contactTypes.consulting')}</option>
-          <option value="development">{t('contactTypes.development')}</option>
-          <option value="design">{t('contactTypes.design')}</option>
-          <option value="other">{t('contactTypes.other')}</option>
-        </select>
+        {/* Кастомный селект вместо <select> */}
+        <SelectListbox
+          value={form.contactType || null}
+          onChange={v => {
+            setForm(prev => ({ ...prev, contactType: v }));
+            if (!touched.contactType) setTouched(prev => ({ ...prev, contactType: true }));
+          }}
+          options={contactOptions}
+          placeholder={t('placeholders.contactType')}
+          disabled={sending}
+          invalid={hasError('contactType')}
+          className="mt-2"
+        />
 
         <button
           type="submit"
@@ -215,7 +200,7 @@ export default function ContactSection(): JSX.Element {
             isFormValid()
               ? 'bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200'
               : 'cursor-not-allowed bg-slate-300 text-slate-500 dark:bg-slate-700 dark:text-slate-400'
-          } `}
+          }`}
         >
           {sending ? t('button.sending') : t('button.send')}
         </button>

@@ -59,8 +59,8 @@ export default function ScrollManager(): null {
       lastDir = 0;
     };
 
-    const WHEEL_WINDOW_MS = 80;
-    const WHEEL_THRESHOLD = 110;
+    // const WHEEL_WINDOW_MS = 80;
+    // const WHEEL_THRESHOLD = 110;
 
     const TOUCH_WINDOW_MS = 90;
     const TOUCH_THRESHOLD = 120;
@@ -72,7 +72,6 @@ export default function ScrollManager(): null {
     let isPressing = false;
     const PRESS_BLOCK_MS = 120;
 
-    // let lastEventTs = 0;
     let idleTimer: number | undefined;
 
     let keyboardOpen = isKeyboardOpenNow();
@@ -95,13 +94,23 @@ export default function ScrollManager(): null {
     const processScroll = (deltaY: number, kind: 'wheel' | 'touch') => {
       if (keyboardOpen || hasTextFocus()) return;
 
+      // при удержании мыши/тача — блок
       if (isPressing && performance.now() - pressStartTime > PRESS_BLOCK_MS) {
         return;
       }
 
+      // [CHANGE] колесико/тачпад не должны переключать секции — просто выходим
+      // при этом нативный скролл внутри секции работает сам по себе.
+      if (kind === 'wheel') {
+        // сбрасываем накопленные сэмплы, чтобы не "переезжали" в touch-контекст
+        samples.length = 0;
+        lastDir = 0;
+        return;
+      }
+
+      // начиная отсюда — логика ТОЛЬКО для touch (как раньше)
       if (navLocked) return;
 
-      // lastEventTs = performance.now();
       clearTimeout(idleTimer);
       idleTimer = window.setTimeout(() => {
         unlockNav();
@@ -116,11 +125,13 @@ export default function ScrollManager(): null {
       const currentRaw = getActiveSection();
       const current = Number.isFinite(currentRaw) ? currentRaw : MIN_SECTION;
 
+      // если есть место скроллить внутри — даём скроллиться и ничего не переключаем
       if (scrollable && !top && !bottom) {
         samples.length = 0;
         return;
       }
 
+      // свайпить секцию можно либо когда не скроллится вообще, либо когда упёрлись в край
       const shouldSwipe = !scrollable || (deltaY < 0 ? top : bottom);
       if (!shouldSwipe) return;
 
@@ -138,7 +149,7 @@ export default function ScrollManager(): null {
       const cap = (v: number) => Math.max(-240, Math.min(240, v));
       samples[samples.length - 1].dy = cap(samples[samples.length - 1].dy);
 
-      const windowMs = kind === 'touch' ? TOUCH_WINDOW_MS : WHEEL_WINDOW_MS;
+      const windowMs = TOUCH_WINDOW_MS; // [CHANGE] wheel больше не участвует
       while (samples.length && now - samples[0].t > windowMs) {
         samples.shift();
       }
@@ -148,7 +159,7 @@ export default function ScrollManager(): null {
         0,
       );
 
-      const threshold = kind === 'touch' ? TOUCH_THRESHOLD : WHEEL_THRESHOLD;
+      const threshold = TOUCH_THRESHOLD; // [CHANGE] используем только тач-порог
       if (sumAbs >= threshold) {
         if (dir > 0) goToSection(current + 1);
         else goToSection(current - 1);
@@ -159,6 +170,8 @@ export default function ScrollManager(): null {
     };
 
     const handleWheel = (e: WheelEvent) => {
+      // колесико/тачпад — только нативный скролл внутри секции; навигацию не трогаем
+      // но передадим в processScroll, чтобы он аккуратно сбросил буферы (и мгновенно вышел)
       processScroll(e.deltaY, 'wheel');
     };
 
@@ -181,7 +194,6 @@ export default function ScrollManager(): null {
     const handleMouseUp = () => {
       isPressing = false;
       pressStartTime = 0;
-
       samples.length = 0;
       lastDir = 0;
     };
@@ -195,7 +207,6 @@ export default function ScrollManager(): null {
     const handleTouchEndPress = () => {
       isPressing = false;
       pressStartTime = 0;
-
       samples.length = 0;
       lastDir = 0;
     };

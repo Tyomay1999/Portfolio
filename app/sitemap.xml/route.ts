@@ -7,6 +7,8 @@ const SITE = RAW.replace(/\/+$/, '');
 const staticPaths = ['', 'booking'] as const;
 const locales = ['en', 'ru', 'hy'] as const;
 
+const LASTMOD = new Date().toISOString();
+
 function altLinks(pathSuffix: string) {
   const suffix = pathSuffix ? `/${pathSuffix}` : '';
   const xDefault = `${SITE}/en${suffix}`;
@@ -28,7 +30,7 @@ function urlTag(loc: string, pathSuffix: string, isRoot: boolean) {
     ${altLinks(pathSuffix)}
     <changefreq>monthly</changefreq>
     <priority>${priority}</priority>
-    <lastmod>${new Date().toISOString()}</lastmod>
+    <lastmod>${LASTMOD}</lastmod>
   </url>`;
 }
 
