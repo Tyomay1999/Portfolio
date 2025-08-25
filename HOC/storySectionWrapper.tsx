@@ -28,12 +28,11 @@ export default function StorySectionWrapper({
     return () => unsubscribe();
   }, [sectionId, isActive]);
 
-  // Симметричные паддинги: слева = справа (умеренно), + небольшой top
   const safePaddings = [
     'mx-auto max-w-screen-2xl',
-    'px-4 sm:px-6', // мобилки/планшеты
-    'md:px-12 lg:px-16 xl:px-20', // десктоп: одинаковые отступы по бокам
-    'pt-[calc(env(safe-area-inset-top,0px)+0.5rem)] md:pt-8 lg:pt-10', // немного сверху
+    'px-2 sm:px-6',
+    'md:px-12 lg:px-16 xl:px-20',
+    'pt-[calc(env(safe-area-inset-top,0px)+0.5rem)] md:pt-8 lg:pt-10',
   ].join(' ');
 
   return (

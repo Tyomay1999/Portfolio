@@ -80,7 +80,6 @@ export default function ContactSection(): JSX.Element {
   const isFormValid = (): boolean =>
     (Object.keys(form) as (keyof ContactForm)[]).every(k => form[k].trim() !== '' && !hasError(k));
 
-  // options для селекта контактного типа
   const contactOptions: SelectOption[] = [
     { value: 'consulting', label: t('contactTypes.consulting') },
     { value: 'development', label: t('contactTypes.development') },
@@ -137,7 +136,7 @@ export default function ContactSection(): JSX.Element {
 
   return (
     <StorySectionWrapper sectionId={4} innerClassName="max-w-2xl mx-auto text-center px-4">
-      <h2 className="mb-8 font-serif text-3xl font-light text-slate-900 dark:text-slate-100 md:mb-12 md:text-4xl lg:text-6xl">
+      <h2 className="mb-8 font-serif text-4xl font-light text-slate-900 dark:text-slate-100 md:mb-12 md:text-4xl lg:text-6xl">
         {t('title')}
       </h2>
 
@@ -179,7 +178,6 @@ export default function ContactSection(): JSX.Element {
           className={`w-full border-0 border-b bg-transparent px-0 py-3 font-sans text-base placeholder-slate-400 focus:outline-none md:py-4 md:text-lg ${inputClass('phone')}`}
         />
 
-        {/* Кастомный селект вместо <select> */}
         <SelectListbox
           value={form.contactType || null}
           onChange={v => {

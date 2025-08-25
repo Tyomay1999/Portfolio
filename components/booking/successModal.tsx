@@ -18,12 +18,10 @@ export default function SuccessModal({
 }) {
   const t = useTranslations('successModal');
 
-  // типизация для t.rich
   const tr = t as unknown as {
     rich?: (key: string, values: Record<string, unknown>) => React.ReactNode;
   };
 
-  // a11y / UX хуки
   useScrollLock(open);
   useEscapeToClose(open, onClose);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
@@ -35,7 +33,6 @@ export default function SuccessModal({
     <Modal open={open} onClose={onClose} labelledBy={titleId}>
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 text-center shadow-lg dark:bg-slate-900">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-600">
-          {/* замена ✓ на векторную иконку */}
           <CheckCircle className="h-9 w-9 text-white" />
         </div>
 

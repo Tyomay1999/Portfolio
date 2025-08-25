@@ -4,15 +4,14 @@ import React from 'react';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 import { setActiveSection, useActiveSection } from '@/lib/sectionStore';
 
-const sectionCount = 9; // количество точек (включая спец-страницу -1)
+const sectionCount = 9;
 
 const Navigation: React.FC = () => {
   const activeSection = useActiveSection();
 
-  // индексы: -1, 0, 1, ..., sectionCount-2
   const indices = React.useMemo(() => Array.from({ length: sectionCount }, (_, i) => i - 1), []);
-  const minIndex = indices[0]; // -1
-  const maxIndex = indices[indices.length - 1]; // sectionCount - 2
+  const minIndex = indices[0];
+  const maxIndex = indices[indices.length - 1];
 
   const goPrev = () => {
     const pos = indices.indexOf(activeSection);
@@ -52,16 +51,13 @@ const Navigation: React.FC = () => {
             aria-label={`Scroll to section ${index}`}
             aria-current={isActive ? 'true' : undefined}
             className={[
-              // базовая форма/размер
               'scroll-dot rounded-full transition-all duration-200',
               'h-3 w-3 md:h-3.5 md:w-3.5 lg:h-4 lg:w-4',
-              'p-1 md:p-1.5', // hit area
+              'p-1 md:p-1.5',
 
-              // состояние
               isActive
                 ? [
                     'scale-110',
-                    // контрастный обвод — виден и в light, и в dark
                     'bg-slate-900 dark:bg-slate-100',
                     'ring-2 ring-slate-900/80 dark:ring-slate-100/90',
                     'ring-offset-2 ring-offset-white dark:ring-offset-slate-900',
@@ -69,7 +65,6 @@ const Navigation: React.FC = () => {
                   ].join(' ')
                 : ['bg-slate-300 dark:bg-slate-700', 'opacity-80 hover:opacity-100'].join(' '),
 
-              // доступность при фокусе
               'focus-visible:outline-none focus-visible:ring-2',
               'focus-visible:ring-blue-500 focus-visible:ring-offset-2',
               'focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900',

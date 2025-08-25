@@ -4,11 +4,10 @@ import React from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 
-// Если в utils экспортируется тип — импортируй:  import type { TechItem } from './utils';
 export type TechItem = {
   name: string;
   icon: string;
-  colorClass: string; // tailwind класс для градиента фона
+  colorClass: string;
 };
 
 type Props = { item: TechItem; index: number };

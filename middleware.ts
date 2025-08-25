@@ -1,4 +1,3 @@
-// middleware.ts
 import createMiddleware from 'next-intl/middleware';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -33,18 +32,15 @@ function pickLocale(req: NextRequest): (typeof locales)[number] {
 export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Служебные файлы
   if (pathname === '/robots.txt' || pathname === '/sitemap.xml') {
     return NextResponse.next();
   }
 
-  // Если локаль уже есть в пути — дальше обрабатывает next-intl
   const hasLocale = locales.some(l => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
   if (hasLocale) {
     return intl(req);
   }
 
-  // Нет локали → добавляем, сохранив path + query
   const locale = pickLocale(req);
   const url = req.nextUrl.clone();
   url.pathname = `/${locale}${pathname}`;

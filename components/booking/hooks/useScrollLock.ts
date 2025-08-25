@@ -12,7 +12,6 @@ export function useScrollLock(enabled: boolean) {
       wasEnabled.current = true;
       locks += 1;
 
-      // запоминаем текущий скролл
       savedScrollY = window.scrollY;
 
       const body = document.body;
@@ -21,7 +20,7 @@ export function useScrollLock(enabled: boolean) {
       body.style.left = '0';
       body.style.right = '0';
       body.style.width = '100%';
-      body.style.overflow = 'hidden'; // для десктопов
+      body.style.overflow = 'hidden';
     }
 
     if (!enabled && wasEnabled.current) {
@@ -41,7 +40,6 @@ export function useScrollLock(enabled: boolean) {
     }
 
     return () => {
-      // очистка если размонтировали при включённом lock
       if (wasEnabled.current) {
         wasEnabled.current = false;
         locks = Math.max(0, locks - 1);

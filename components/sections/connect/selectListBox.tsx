@@ -11,7 +11,7 @@ type Props = {
   options: SelectOption[];
   placeholder?: string;
   disabled?: boolean;
-  invalid?: boolean; // для красной обводки при ошибке
+  invalid?: boolean;
   className?: string;
 };
 
@@ -39,7 +39,6 @@ const SelectListbox: React.FC<Props> = ({
   const [activeIdx, setActiveIdx] = useState(selectedIdx);
   useEffect(() => setActiveIdx(selectedIdx), [selectedIdx]);
 
-  // click outside
   useEffect(() => {
     if (!open) return;
     const onDoc = (e: MouseEvent) => {

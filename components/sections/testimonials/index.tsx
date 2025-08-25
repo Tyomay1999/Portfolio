@@ -23,7 +23,7 @@ export default function TestimonialsSection(): JSX.Element {
 
   return (
     <StorySectionWrapper sectionId={5} innerClassName="max-w-6xl mx-auto px-4">
-      <h2 className="mb-12 text-center font-serif text-3xl font-light text-slate-900 dark:text-slate-100 md:mb-16 md:text-4xl lg:text-6xl">
+      <h2 className="mb-12 text-center font-serif text-4xl font-light text-slate-900 dark:text-slate-100 md:mb-16 md:text-4xl lg:text-6xl">
         {t('title')}
       </h2>
 

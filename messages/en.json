@@ -390,8 +390,8 @@
       "title": "Book a Consultation with Artyom Bordulanyuk | Full-Stack Engineer",
       "description": "Schedule a discovery call or on-site setup with Artyom Bordulanyuk — React/Next.js, Node.js, PostgreSQL & Docker engineer. Choose a day and time to discuss your app, MVP, or technical audit."
     },
-    "h1": "Book a Meeting with Artyom",
+    "h1": "Book a Web Development Consultation Online",
     "toast": { "alreadyBooked": "This slot is already booked" },
-    "footer": { "copy": "© {year} Artyom Bordulanyuk — Portfolio Booking" }
+    "footer": { "copy": "© {year} Professional Web Development & Digital Solutions" }
   }
 }

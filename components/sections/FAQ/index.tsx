@@ -29,7 +29,7 @@ export default function FAQPhilosophySection(): JSX.Element {
       <section id="faq" aria-labelledby="faq-title">
         <h2
           id="faq-title"
-          className="mb-8 text-center font-serif text-3xl font-light text-slate-900 dark:text-slate-100 md:mb-12 md:text-4xl lg:text-6xl"
+          className="mb-8 text-center font-serif text-4xl font-light text-slate-900 dark:text-slate-100 md:mb-12 md:text-4xl lg:text-6xl"
         >
           {t('title')}
         </h2>

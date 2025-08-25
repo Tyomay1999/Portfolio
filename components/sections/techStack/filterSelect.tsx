@@ -20,7 +20,6 @@ const FilterSelect: React.FC<Props> = ({ value, onChange, t, disabled }) => {
   const [activeIdx, setActiveIdx] = useState(Math.max(idxByValue, 0));
   useEffect(() => setActiveIdx(Math.max(idxByValue, 0)), [idxByValue]);
 
-  // закрытие по клику вне
   useEffect(() => {
     if (!open) return;
     const onDoc = (e: MouseEvent) => {
@@ -33,7 +32,6 @@ const FilterSelect: React.FC<Props> = ({ value, onChange, t, disabled }) => {
     return () => document.removeEventListener('mousedown', onDoc);
   }, [open]);
 
-  // клавиатура на кнопке
   const onButtonKeyDown: React.KeyboardEventHandler<HTMLButtonElement> = e => {
     if (disabled) return;
     if (e.key === 'Enter' || e.key === ' ') {
@@ -57,7 +55,6 @@ const FilterSelect: React.FC<Props> = ({ value, onChange, t, disabled }) => {
     }
   };
 
-  // клавиатура на списке
   const onListKeyDown: React.KeyboardEventHandler<HTMLDivElement> = e => {
     if (e.key === 'Escape') {
       e.preventDefault();

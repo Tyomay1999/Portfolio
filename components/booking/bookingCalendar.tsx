@@ -24,7 +24,6 @@ export default function BookingCalendar({
   const months = t.raw('calendar.months') as string[];
   const weekdaysShort = t.raw('calendar.weekdaysShort') as string[];
 
-  // clamp to [this month .. this month + 3]
   const now = new Date();
   const minMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
   const maxMonthStart = new Date(now.getFullYear(), now.getMonth() + 3, 1);

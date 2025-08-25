@@ -31,17 +31,13 @@ export default function Page() {
   const [successEmail, setSuccessEmail] = useState<string>('');
   const [, setToast] = useState<string>('');
 
-  // api
   const { bookings: apiList, loading, error, refetch } = useBookings();
   const serverBookingsMap = useMemo(() => toMap(apiList), [apiList]);
 
-  // derived
   const { bookingsMap, setLocalAdds } = useLocalBookings(serverBookingsMap);
 
-  // live updates via socket
   useBookingSocket(setLocalAdds);
 
-  // helpers
   const onSelectDate = (d: Date) => {
     setSelectedDate(d);
     setSelectedTime(null);
@@ -139,8 +135,6 @@ export default function Page() {
         email={successEmail}
         onClose={() => setSuccessEmail('')}
       />
-
-      {/* <Toast onClose={() => setToast('')} message={toast} /> */}
     </div>
   );
 }

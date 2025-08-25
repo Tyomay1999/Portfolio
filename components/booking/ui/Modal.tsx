@@ -4,7 +4,7 @@ import React from 'react';
 type ModalProps = {
   open: boolean;
   onClose: () => void;
-  labelledBy: string; // id заголовка
+  labelledBy: string;
   children: React.ReactNode;
 };
 

@@ -38,21 +38,17 @@ export default function BookingModal({
   const months = tCal.raw('calendar.months') as string[];
   const monthsGen = tCal.raw('calendar.monthsGen') as string[];
 
-  // iOS-safe скролл-лок. При закрытии модалки скролл всегда восстанавливается.
   useScrollLock(open);
 
-  // form state
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
   const [consent, setConsent] = useState(false);
 
-  // request state
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // derived labels
   const dateTimeText = useMemo(() => {
     if (!date || !time) return '';
     const weekday = weekdaysLong[date.getDay()];
@@ -63,7 +59,6 @@ export default function BookingModal({
     return `${label} • ${time}`;
   }, [date, time, t, weekdaysLong, months, monthsGen]);
 
-  // общий сброс полей + ошибок
   const reset = useCallback(() => {
     setEmail('');
     setFirstName('');
@@ -85,7 +80,6 @@ export default function BookingModal({
       setErrorMsg(null);
       setSubmitting(false);
     } else {
-      // закрыли модалку: страхуемся ещё раз
       setSubmitting(false);
     }
   }, [open]);
@@ -100,7 +94,6 @@ export default function BookingModal({
     !!date &&
     !!time;
 
-  // close on backdrop / ESC
   const onBackdrop = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget && !submitting) handleClose();
   };
@@ -111,7 +104,6 @@ export default function BookingModal({
     return () => window.removeEventListener('keydown', onEsc);
   }, [open, submitting, handleClose]);
 
-  // payload
   const buildPayload = () => {
     if (!date || !time || !selectedService) return null;
     const [h, m] = time.split(':').map(Number);
@@ -135,7 +127,6 @@ export default function BookingModal({
     };
   };
 
-  // submit
   const handleSubmit = async () => {
     if (!canSubmit) return;
     setErrorMsg(null);
@@ -151,7 +142,7 @@ export default function BookingModal({
         await onRefetch?.();
         onConfirm(email);
         reset();
-        onClose(); // уже всё очищено, просто закрываем
+        onClose();
       } else {
         setErrorMsg(`${t('requestFailed')} (${res.status})`);
       }
@@ -185,7 +176,7 @@ export default function BookingModal({
       aria-labelledby="bookingDialogTitle"
       className="fixed inset-0 z-50 flex items-end justify-center sm:items-center"
     >
-      {/* backdrop ниже по z-index и без blur, чтобы не размывать содержимое модалки */}
+      {/* backdrop */}
       <div className="absolute inset-0 z-40 bg-black/60" onClick={onBackdrop} />
 
       {/* ===== Mobile bottom-sheet ===== */}
@@ -216,7 +207,6 @@ export default function BookingModal({
             className="overflow-y-auto overscroll-contain px-6 py-6"
             style={{
               WebkitOverflowScrolling: 'touch',
-              // запас под футер + safe area (чтобы последние поля не прятались)
               paddingBottom: 'max(28px, env(safe-area-inset-bottom))',
             }}
           >
@@ -235,7 +225,6 @@ export default function BookingModal({
               setConsent={setConsent}
               submitting={submitting}
             />
-            {/* Доп. запас в самом низу на случай крупных клавиатур/зумов */}
             <div className="h-5 sm:h-0" />
           </div>
 

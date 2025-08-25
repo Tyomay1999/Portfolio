@@ -48,7 +48,6 @@ export default function BookingForm(props: BookingFormProps) {
     'text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 ' +
     'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500';
 
-  // закрытие по клику вне/ESC
   useEffect(() => {
     if (!ddOpen) return;
     const onDoc = (e: MouseEvent) => {
@@ -116,7 +115,6 @@ export default function BookingForm(props: BookingFormProps) {
         />
       </div>
 
-      {/* Service Type */}
       <div ref={ddRef}>
         <label className={labelClass}>{t('form.serviceLabel')}</label>
         <div className="relative">

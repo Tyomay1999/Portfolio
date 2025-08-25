@@ -41,7 +41,7 @@ export function useBookings() {
     try {
       setLoading(true);
       const res = await api.get('/booking');
-      setBookings(res.data?.data ?? []);
+      setBookings(res.data?.bookings ?? []);
       setError(null);
     } catch (err) {
       const staticMessage = 'failedToLoad';

@@ -6,12 +6,10 @@ export type BookingCreatedPayload = {
   service?: string;
 };
 
-// события сервера → клиенту
 export interface ServerToClientEvents {
   'booking:created': (payload: BookingCreatedPayload) => void;
 }
 
-// события клиента → серверу (если нужны комнаты)
 export interface ClientToServerEvents {
   join: (room: string) => void;
   leave: (room: string) => void;

@@ -40,7 +40,6 @@ export default function LanguageDropdown() {
     setMounted(true);
   }, [pathname]);
 
-  // close on click outside
   useEffect(() => {
     if (!ddOpen) return;
     const onDoc = (e: MouseEvent) => {
@@ -50,7 +49,6 @@ export default function LanguageDropdown() {
     return () => document.removeEventListener('mousedown', onDoc);
   }, [ddOpen]);
 
-  // close on ESC
   useEffect(() => {
     if (!ddOpen) return;
     const onEsc = (e: KeyboardEvent) => e.key === 'Escape' && setDdOpen(false);

@@ -3,7 +3,7 @@ import { isSameDay, isSunday, isSaturday } from '../lib/dateUtils';
 
 type Props = {
   date: Date;
-  indexLabel: number; // 1..31
+  indexLabel: number;
   selectedDate: Date | null;
   disabled: boolean;
   outOfRange: boolean;
@@ -33,7 +33,7 @@ export default function DayCell({
 
   let subtitle = sat ? (halfDayLabel ?? '') : '';
   if (bookedCount > 0) {
-    const bookedText = `${bookedCount}×`; // the full i18n string will be composed by parent
+    const bookedText = `${bookedCount}×`;
     subtitle = subtitle ? `${subtitle} • ${bookedText}` : bookedText;
   }
 
